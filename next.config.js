@@ -5,8 +5,8 @@ const { withContentlayer } = require("next-contentlayer");
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: "export",
-  trailingSlash: true,
+  // output: "export",
+  // trailingSlash: true,
 };
 
 module.exports = withContentlayer(nextConfig);

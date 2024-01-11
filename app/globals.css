@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+img {
+  position: inherit;
+}
+
 pre {
   overflow-x: auto;
   padding: 1rem 0;

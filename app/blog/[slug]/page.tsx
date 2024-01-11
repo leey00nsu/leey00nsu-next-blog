@@ -1,7 +1,8 @@
-// app/posts/[slug]/page.tsx
+import parseImagePath from "@/lib/parseImagePath";
 import { allPosts } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import { useMDXComponent } from "next-contentlayer/hooks";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export const generateStaticParams = async () => {
@@ -16,12 +17,27 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   return { title: post.title };
 };
 
+const mdxComponents = (url: string) => {
+  return {
+    Image: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+      <Image
+        alt={props.alt ?? ""}
+        width={Number(props.width ?? 0)}
+        height={Number(props.height ?? 0)}
+        className={props.width ? "h-auto" : "h-auto w-full"}
+        src={parseImagePath(url, props.src ?? "")}
+      />
+    ),
+  };
+};
+
 const PostLayout = ({ params }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post.slug === params.slug);
 
   if (!post) notFound();
 
   const MDXContent = useMDXComponent(post.body.code);
+  const MDXComponents = mdxComponents(post.url);
 
   return (
     <article className="mx-auto max-w-xl py-8">
@@ -32,7 +48,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
         </time>
       </div>
       <div className="prose prose-slate ">
-        <MDXContent />
+        <MDXContent components={MDXComponents} />
       </div>
     </article>
   );
