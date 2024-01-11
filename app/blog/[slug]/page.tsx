@@ -47,7 +47,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
           {format(parseISO(post.date), "LLLL d, yyyy")}
         </time>
       </div>
-      <div className="prose prose-slate ">
+      <div className="prose prose-slate dark:prose-invert ">
         <MDXContent components={MDXComponents} />
       </div>
     </article>
