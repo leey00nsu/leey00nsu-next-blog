@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-img {
-  position: inherit;
-}
-
 pre {
   overflow-x: auto;
   padding: 1rem 0;
@@ -19,24 +15,13 @@ code {
   background-color: #f0f0f0;
   color: #c75b5b !important;
   padding: 0.25rem;
+  border-radius: 0.375rem;
 }
 
-.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  color: var(--tw-prose-code);
-  font-weight: 600;
-  font-size: 0.875em;
+code::after {
+  content: "" !important;
 }
 
-.prose
-  :where(code):not(
-    :where([class~="not-prose"], [class~="not-prose"] *)
-  )::before {
-  content: "";
-}
-
-.prose
-  :where(code):not(
-    :where([class~="not-prose"], [class~="not-prose"] *)
-  )::after {
-  content: "";
+code::before {
+  content: "" !important;
 }
