@@ -1,0 +1,82 @@
+---
+slug: react-infinite-scroll2
+title: 리액트에서 무한스크롤 구현해보기2
+tags:
+  - react2
+  - 무한 스크롤
+description: 리액트에서 무한 스크롤을 구현하는법에 대해 설명합니다.
+date: 2023-05-08
+---
+
+## 무한스크롤의 구현
+
+리스트에 끝에 닿았을 때 , api를 호출하여 리스트를 추가하는것을 구현하고자 한다.
+
+이때 스크롤 이벤트를 감시하여 체크하는 방법과 , 리스트가 뷰포트에 들어왔을때 체크하는 방법(`Intersection Observer API`)이 존재한다.
+
+스크롤 이벤트 방식은 성능 이슈가 발생할 수 있으며 , 요소가 많을 경우 처리하기 힘들기 때문에 후자를 선택하게 되었다.
+
+### 구현방법
+
+`Intersection Observer API`는 브라우저에서 제공하는 자바스크립트 API중 하나로
+
+요소가 뷰포트에 나타나거나 사라질 때 콜백 함수를 호출하여 처리한다.
+
+여기서는 커스텀훅인 useIntersectionObserver를 구현하여 사용하였지만,
+
+`react-intersection-observer` 라이브러리를 사용할 수도 있다.
+
+```jsx
+import { useRef } from "react";
+export default function useIntersectionObserver(callback: () => void) {
+  const observer = useRef(
+    new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            callback();
+          }
+        });
+      },
+      { threshold: 1 }
+    )
+  );
+
+  const observe = (element: any) => {
+    observer.current.observe(element);
+  };
+
+  const unObserve = (element: any) => {
+    observer.current.unobserve(element);
+  };
+
+  return [observe, unObserve];
+}
+```
+
+그 후 `useRef`를 이용해 기준이 될 요소에 ref 속성을 부여한다.
+그리고 이 요소를 만든 커스텀 훅을 통해 등록하면 , 이 요소가 뷰포트에 나타날때마다 콜백 함수가 실행되게 된다.
+
+```jsx
+...
+const infScroll = useRef(null);
+
+
+const [observe, unObserve] = useIntersectionObserver(() => {
+  fetchNextPage(); // 다음 페이지를 fetch해오는 함수이다.
+});
+
+useEffect(() => {
+    observe(infScroll.current);
+}, []);
+
+...
+
+<div ref={infScroll} >
+  ...
+</div>
+```
+
+### 결과
+
+<Image alt="Image1" src="./Image1.gif" width="300" />

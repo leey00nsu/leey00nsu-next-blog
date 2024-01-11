@@ -1,4 +1,4 @@
-import parseImagePath from "@/lib/parseImagePath";
+import parseImagePath from "@/app/lib/parseImagePath";
 import { allPosts } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import { useMDXComponent } from "next-contentlayer/hooks";

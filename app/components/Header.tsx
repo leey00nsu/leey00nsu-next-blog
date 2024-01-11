@@ -1,6 +1,6 @@
 "use client";
 
-import { tw } from "@/lib/tw";
+import { tw } from "@/app/lib/tw";
 import {
   Button,
   Link,
@@ -9,7 +9,6 @@ import {
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
-import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { FaGithub } from "react-icons/fa";
 import { ThemeSwitch } from "./ThemeSwitch";
@@ -20,16 +19,15 @@ const Header = () => {
   return (
     <Navbar isBordered>
       <NavbarBrand>
-        <Link as={NextLink} className="text-foreground font-bold" href="/">
+        <Link className="text-foreground font-bold" href="/">
           LEEY00NSU
         </Link>
       </NavbarBrand>
       <NavbarContent className="flex" justify="center">
         <NavbarItem>
           <Link
-            as={NextLink}
             className={tw(
-              pathname === "/blog" ? "text-primary" : "text-foreground"
+              pathname.startsWith("/blog") ? "text-primary" : "text-foreground"
             )}
             href="/blog"
           >
@@ -38,9 +36,10 @@ const Header = () => {
         </NavbarItem>
         <NavbarItem>
           <Link
-            as={NextLink}
             className={tw(
-              pathname === "/article" ? "text-primary" : "text-foreground"
+              pathname.startsWith("/article")
+                ? "text-primary"
+                : "text-foreground"
             )}
             href="/article"
           >
