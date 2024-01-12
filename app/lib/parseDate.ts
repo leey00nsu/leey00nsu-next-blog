@@ -1,6 +1,6 @@
 const parseDate = (date: string) => {
-  return new Intl.DateTimeFormat("ko", { dateStyle: "full" }).format(
-    new Date(date)
+  return new Intl.DateTimeFormat('ko', { dateStyle: 'full' }).format(
+    new Date(date),
   );
 };
 

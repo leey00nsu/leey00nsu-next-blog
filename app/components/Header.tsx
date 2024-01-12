@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { tw } from "@/app/lib/tw";
+import { tw } from '@/app/lib/tw';
 import {
   Button,
   Link,
@@ -8,10 +8,10 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from "@nextui-org/react";
-import { usePathname } from "next/navigation";
-import { FaGithub } from "react-icons/fa";
-import { ThemeSwitch } from "./ThemeSwitch";
+} from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
+import { FaGithub } from 'react-icons/fa';
+import { ThemeSwitch } from './ThemeSwitch';
 
 const Header = () => {
   const pathname = usePathname();
@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <Navbar isBordered>
       <NavbarBrand>
-        <Link className="text-foreground font-bold" href="/">
+        <Link className="font-bold text-foreground" href="/">
           LEEY00NSU
         </Link>
       </NavbarBrand>
@@ -27,8 +27,8 @@ const Header = () => {
         <NavbarItem>
           <Link
             className={tw(
-              "text-foreground",
-              pathname.startsWith("/blog") && "underline underline-offset-4"
+              'text-foreground',
+              pathname.startsWith('/blog') && 'underline underline-offset-4',
             )}
             href="/blog"
           >
@@ -49,7 +49,7 @@ const Header = () => {
             href="https://github.com/leey00nsu"
             variant="light"
           >
-            <FaGithub className="w-6 h-6" />
+            <FaGithub className="h-6 w-6" />
           </Button>
         </NavbarItem>
       </NavbarContent>

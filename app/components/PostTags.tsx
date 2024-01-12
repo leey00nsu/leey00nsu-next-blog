@@ -1,5 +1,5 @@
-import { PostTag } from "@/app/lib/parseTag";
-import { Button } from "@nextui-org/react";
+import { PostTag } from '@/app/lib/parseTag';
+import { Button } from '@nextui-org/react';
 
 interface PostTagsProps {
   postTags: PostTag[];
@@ -8,7 +8,7 @@ interface PostTagsProps {
 
 const PostTags = ({ postTags, showCount }: PostTagsProps) => {
   return (
-    <div className="flex gap-2 flex-wrap">
+    <div className="flex flex-wrap gap-2">
       {postTags.map((postTag, index) => (
         <Button size="sm" disableRipple variant="flat" key={index}>
           <span>{postTag.tag}</span>

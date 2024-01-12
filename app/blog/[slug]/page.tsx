@@ -1,12 +1,12 @@
-import parseDate from "@/app/lib/parseDate";
-import parseImagePath from "@/app/lib/parseImagePath";
-import { Link } from "@nextui-org/react";
-import { allPosts } from "contentlayer/generated";
-import type { MDXComponents } from "mdx/types";
-import { useMDXComponent } from "next-contentlayer/hooks";
-import Image from "next/image";
-import { notFound } from "next/navigation";
-import { FaLink } from "react-icons/fa";
+import parseDate from '@/app/lib/parseDate';
+import parseImagePath from '@/app/lib/parseImagePath';
+import { Link } from '@nextui-org/react';
+import { allPosts } from 'contentlayer/generated';
+import type { MDXComponents } from 'mdx/types';
+import { useMDXComponent } from 'next-contentlayer/hooks';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import { FaLink } from 'react-icons/fa';
 
 export const generateStaticParams = async () => {
   return allPosts.map((post) => ({ slug: post.slug }));
@@ -34,11 +34,11 @@ const mdxComponents = (url: string): MDXComponents => {
     ),
     Image: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
       <Image
-        alt={props.alt ?? ""}
+        alt={props.alt ?? ''}
         width={Number(props.width ?? 500)}
         height={Number(props.height ?? 500)}
-        className={props.width ? "h-auto" : "h-auto w-full"}
-        src={parseImagePath(url, props.src ?? "")}
+        className={props.width ? 'h-auto' : 'h-auto w-full'}
+        src={parseImagePath(url, props.src ?? '')}
         priority
       />
     ),

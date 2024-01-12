@@ -1,4 +1,4 @@
-import { Post } from "@/.contentlayer/generated";
+import { Post } from '@/.contentlayer/generated';
 
 export interface PostTag {
   tag: string;

@@ -19,9 +19,9 @@ code {
 }
 
 code::after {
-  content: "" !important;
+  content: '' !important;
 }
 
 code::before {
-  content: "" !important;
+  content: '' !important;
 }
