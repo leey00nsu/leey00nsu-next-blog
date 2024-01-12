@@ -27,7 +27,8 @@ const Header = () => {
         <NavbarItem>
           <Link
             className={tw(
-              pathname.startsWith("/blog") ? "text-primary" : "text-foreground"
+              "text-foreground",
+              pathname.startsWith("/blog") && "underline underline-offset-4"
             )}
             href="/blog"
           >
