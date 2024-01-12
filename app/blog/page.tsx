@@ -6,7 +6,7 @@ import { compareDesc } from "date-fns";
 import { useState } from "react";
 import PostCard from "../components/PostCard";
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 5;
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,11 +20,12 @@ export default function Home() {
     (currentPage - 1) * PAGE_SIZE + PAGE_SIZE
   );
 
-  const totalPageLength = Math.floor(posts.length / PAGE_SIZE);
+  const totalPageLength = Math.ceil(posts.length / PAGE_SIZE);
 
   return (
     <div className="mx-auto max-w-xl p-8 flex flex-col gap-4 ">
       {/* <PostTags postTags={parseTag(allPosts)} /> */}
+      <h2>{posts.length}개의 글이 있습니다.</h2>
       {paginatedPosts.map((post, idx) => (
         <PostCard key={idx} {...post} />
       ))}
