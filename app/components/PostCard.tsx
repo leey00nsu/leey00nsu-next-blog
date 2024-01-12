@@ -7,7 +7,7 @@ import PostTags from "./PostTags";
 
 const PostCard = (post: Post) => {
   return (
-    <Link href={post.url} className="w-full">
+    <Link href={post.url} className="w-full hover:scale-105 transition">
       <Card className="py-4 w-full">
         <CardBody className="flex flex-col gap-2">
           <time dateTime={post.date} className="block text-xs text-gray-600">

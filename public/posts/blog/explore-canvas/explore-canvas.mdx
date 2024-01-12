@@ -1,0 +1,118 @@
+---
+slug: explore-canvas
+title: 리액트에서 Canvas 다루기
+tags:
+  - react
+  - canvas
+  - konva
+  - fabric
+description: 리액트에서 Canvas를 다루는 라이브러리에 대해 설명합니다.
+date: "2023-07-05"
+---
+
+## 리액트에서 Canvas 다루기
+
+### Konva.js vs Fabric.js
+
+이번 프로젝트를 진행하면서, 펜으로 그리고 지우는 기능과 이미지 파일을 업로드하고 레이어링하는 기능이 필요했습니다.
+
+물론 canvas API를 통해 모든 기능을 직접 구현할 수 있겠지만, 이미 잘 나와있는 라이브러리를 사용하는 것이 더 안전하고 효율적으로 프로그램을 개발할 수 있기 때문에 라이브러리를 사용하기로 결정했습니다.
+
+konva와 fabric 모두 내가 구현하려는 목적에 부합하기 때문에 어느 쪽을 선택해도 상관 없으므로 간단하게 두 라이브러리를 사용해보고 비교해보겠습니다.
+
+### React에서의 Konva
+
+React에서는 `konva`를 리액트용으로 래핑한 [react-konva](https://github.com/konvajs/react-konva) 라이브러리가 존재합니다.
+
+konva 문서와 동일하게 구현할 수 있지만 리액트스럽게 컴포넌트식으로 구현할 수 있습니다.
+
+만약 물체를 리사이징하려면 따로 transformer라는 구현체를 객체에 붙여서 따로 구현해야 합니다.
+
+<Image alt="Untitled" src="./Untitled.png" />
+
+```jsx
+import { Stage, Layer, Rect } from "react-konva";
+
+const SomeRect = () => {
+  return <Rect x={20} y={20} width={50} height={50} fill="black" />;
+};
+
+const App = () => {
+  return (
+    <Stage width={window.innerWidth} height={window.innerHeight}>
+      <Layer>
+        <SomeRect />
+      </Layer>
+    </Stage>
+  );
+};
+
+export default App;
+```
+
+### React에서의 Fabric
+
+React에서 `fabric`을 리액트용으로 래핑한 라이브러리가 존재는 하지만, 현재 타입스크립트 기반에서 오류가 발생하여.
+
+fabric js를 직접 호출하여 사용해보겠습니다.
+
+또한 기본적으로 객체를 조절하는 transformer나 selectbox가 구현되어 있습니다. (konva에서는 따로 구현해야 합니다.)
+
+[공식 문서가](http://fabricjs.com/) 자세하게 되어있으므로 큰 어려움 없이 구현할 수 있습니다.
+
+<Image alt="Untitled 1" src="./Untitled 1.png" />
+
+```jsx
+import { fabric } from "fabric";
+import { useState, useEffect } from "react";
+
+const App = () => {
+  const [canvas, setCanvas] = (useState < fabric.Canvas) | (null > null);
+
+  const initCanvas = () =>
+    new fabric.Canvas("canvas", {
+      height: 800,
+      width: 800,
+      backgroundColor: "gray",
+    });
+
+  useEffect(() => {
+    const newCanvas = initCanvas();
+    setCanvas(newCanvas);
+
+    return () => {
+      newCanvas.dispose(); // 언마운트 될 때 캔버스를 지웁니다.
+    };
+  }, []);
+
+  const addRect = () => {
+    if (canvas) {
+      const rect = new fabric.Rect({
+        width: 200,
+        height: 200,
+        fill: "yellow",
+      });
+
+      canvas.add(rect);
+      canvas.renderAll();
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={addRect}>Add Rect</button>
+      <canvas id="canvas" />
+    </div>
+  );
+};
+
+export default App;
+```
+
+### 결론
+
+두 방식으로 모두 구현해보았는데, 두 라이브러리 모두 `Canvas API`를 기반으로 하므로 비슷한 기능을 가지고 있습니다.
+
+대신 `fabric`은 기본적으로 `selectbox`, `transformer`를 **큰 수고 없이 구현할 수 있다는 점이 좋은 점중 하나입니다.**
+
+현재 프로젝트는 konva를 사용했지만, 만약 다시 동일한 기능을 구현한다면 fabric으로 구현해보면 좋을 것 같습니다.

@@ -1,0 +1,150 @@
+---
+slug: mock-with-msw
+title: msw로 API 모킹하기
+tags:
+  - react
+  - msw
+  - api
+description: msw 라이브러리를 사용해 API를 모킹하는 법에 대해 알아봅시다.
+date: "2023-08-18"
+---
+
+## msw로 모킹하기
+
+프로젝트를 진행해 나가면서 개발을 시작하기 전 보통 회의를 거쳐 **어떠한 기능을 구현할 지와**
+
+**그 기능에 맞는 데이터를 이야기해보는 시간을 갖게됩니다.**
+
+<Image alt="Untitled" src="./Untitled.png" />
+
+그 결과로 다음과 같이 각 데이터에 접근할 수 있는 API 명세서가 만들어지게 되며 , 프론트엔드 개발자는 이 규칙에 따라 서버에 요청하게 됩니다.
+
+### 왜 모킹해야 할까?
+
+프론트엔드와 백엔드가 속도를 맞춰 함께 개발할 수 있는 이상적인 환경이라면 실제 데이터를 가지고 개발하면 되기 때문에 문제가 없습니다.
+
+하지만 **개발 단계에서 이는 쉽지 않은 조건임을 여러 프로젝트를 거치면서 느낄 수 있었습니다.**
+
+프론트엔드 개발자의 입장에서 백엔드가 구현되지 않았을 때 기다려야 하는 부분이 필연적으로 존재합니다.
+
+따라서 기한내에 완성하기 위해서는 `현재는 없지만 만들어질 API`를 이용하고 테스트하는것이 효율적으로 개발할 수 있는 방식일 것입니다.
+
+### msw 라이브러리의 도입
+
+[`msw`](https://mswjs.io/) 는 이러한 문제점을 해결할 수 있는 라이브러리로 다음과 같이 자신을 소개하고 있습니다.
+
+> Mock by intercepting requests on the network level. Seamlessly reuse the same mock definition for testing, development, and debugging.
+>
+> Mock Service Worker is an API mocking library that uses Service Worker API to intercept actual requests.
+
+설명에 의하면 `Service Worker API`를 사용하여 **네트워크 레벨에서 요청을 가로채어 모킹을 해주는 기능**을 가지고 있습니다.
+
+<Image alt="Untitled1" src="./Untitled1.png" />
+
+### msw 실제 프로젝트에 사용해보기
+
+`msw`를 사용하기 위해서는 서비스 워커를 만들어야하는데 , 관련된 파일을 보통 mocks 폴더 밑에 위치시킵니다.
+
+```jsx
+// mocks/worker.js
+
+import { setupWorker } from "msw";
+import { handlers } from "./handler";
+
+export const worker = setupWorker(...handlers);
+```
+
+이 서비스 워커를 어플리케이션의 최상단에서 구동하기 위해서 , 최상단 진입 컴포넌트에 넣어줍니다.
+
+(제 경우 main.jsx 입니다.)
+
+```jsx
+// src/main.jsx
+
+import { worker } from "./mocks/worker";
+
+// msw Mock 서버를 실행합니다.
+if (process.env.NODE_ENV === "development") {
+  worker.start();
+}
+```
+
+이제 실제 프로젝트에서 적용된 코드를 가지고 예시를 살펴보겠습니다.
+
+`dummyKoPosts`라는 더미데이터를 만들고 , 이를 요청했을 때 응답을 해줄 핸들러를 작성해야 합니다.
+
+```jsx
+
+// 더미 유저 데이터
+export const dummyKoUser1: User = {
+  id: 1,
+  nickname: '일론 머스크',
+  language: 'ko',
+  avatar:
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/225px-Elon_Musk_Royal_Society_%28crop2%29.jpg',
+  followers: 100,
+};
+
+// 더미 게시글 데이터
+export const dummyKoPosts: Post[] = [
+  {
+    id: 1,
+    author: dummyKoUser1,
+    title: '꾸뻬 씨의 사랑 여행',
+    content:
+      '사랑이 없으면 사는 게 얼마나 밋밋하겠어요? 사랑은 우릴 흥분시키고 즐겁게 해주죠. 사랑을 하면 삶은 모험의 연속이 되고, 만남은 순간순간 아찔한 경이가 된답니다. 물론 늘 그런 건 아니지만요. 그래도 전 사랑이 현대 생활의 가장 큰 불행, 즉 권태로부터 우릴 지켜준다고 믿고 있습니다. 우리나라의 경우이긴 하지만 우린 지나칠 정도로 보호받으며 살고 있어요. 그런 우리에게 사랑은 마지막으로 남아 있는 모험이지요. 우릴 늘 젊게 만들어주는 사랑 만세예요.',
+    summary: '사랑으로 인한 모험과 아찔한 순간을 믿는 긍정적인 시각',
+    photos: [],
+    views: 50,
+    likes: 50,
+    comments: [
+      {
+        id: 1,
+        author: dummyKoUser2,
+        content: '잘 봤어요!',
+        created_at: '2023-08-07',
+      },
+      {
+        id: 2,
+        author: dummyKoUser3,
+        content: '정말 공감되는 글이에요',
+        created_at: '2023-08-07',
+      },
+    ],
+    created_at: '2023-08-07',
+    category: 'book',
+  },
+  ...
+];
+
+// mocks/handler.js
+export const handlers = [
+  rest.get(`/ko_post`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(dummyKoPosts));
+  }),
+];
+```
+
+이제 `fetch`나 `axios`와 같은 함수를 이용하여 /ko_post 를 요청하면 **핸들러에 get에 바인딩된 그대로**
+
+**200코드와 함께 dummyKoPosts를 반환하게 됩니다.**
+
+```jsx
+// 더미 게시글 페이지를 받아옵니다.
+export const getKoPostPage = async () => {
+  const response = await axios.get("/ko_post");
+  return response.data;
+};
+```
+
+이 호출 결과를 실제 프로젝트 화면에 나타내면 다음과 같습니다.
+
+<Image alt="Untitled2" src="./Untitled2.png" />
+
+### 결론
+
+단순히 더미 데이터를 사용하다가 `msw`라는 모킹 라이브러리를 발견하게되어 , 프로젝트 초기 단계에서 유용하게 사용하고 있습니다.
+
+또한 네트워크 응답 상태를 직접 조작하여서 `엣지 케이스`들에 대해 쉽게 대응할 수 있다는 장점도 있습니다.
+
+이미 만든 모킹 코드를 이용하여 `Jest`나 `Storybook`과 같은 테스트 도구에 이용하는 방법에 대해서도 공부해보면 좋을 것 같습니다.

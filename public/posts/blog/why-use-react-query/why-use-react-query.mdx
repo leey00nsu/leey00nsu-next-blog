@@ -1,0 +1,126 @@
+---
+slug: why-use-react-query
+title: react-query 도대체 왜 사용하는 걸까?
+tags:
+  - react
+  - react-query
+  - artfolio
+description: react-query 를 사용하여 비동기 함수를 사용하는 방식에 대해 설명합니다.
+date: "2023-08-02"
+---
+
+## react-query 왜 사용할까?
+
+`react-query`를 검색해보면 다음과 같은 라이브러리라고 합니다.
+
+> React Query is **a data-fetching and state management library for React applications that simplifies fetching, caching, and updating data**.
+
+설명에 있듯이 `react-query`는 react 어플리케이션에서 비동기 데이터를 관리하고 캐시하며 상태를 관리하며 갱신하는데 도움을 주는 라이브러리입니다.
+
+이번에`artfolio` 프로젝트를 진행하면서 , 기존에 `useEffect`를 사용하여 비동기를 처리 하던 방식에서 react-query 를 사용하여 관리하는 방식을 채택하였습니다.
+
+기존의 useEffect를 이용한 비동기 처리 코드를 보면 다음과 같습니다.
+
+### useEffect를 사용한 코드
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+function App() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchData()
+      .then((response) => {
+        setData(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setIsLoading(false);
+      });
+  }, []);
+
+  return (
+    <div>
+      {isLoading ? <p>Loading...</p> : null}
+      {error ? <p>Error: {error.message}</p> : null}
+      {data ? <p>Data: {data}</p> : null}
+    </div>
+  );
+}
+
+export default App;
+```
+
+반면 react-query를 사용하면 코드를 더 간결하게 작성할 수 있습니다.
+
+### react-query를 사용한 코드
+
+```jsx
+import React from "react";
+import { useQuery } from "react-query";
+
+function App() {
+  const { data, isLoading, error } = useQuery("data", fetchData);
+
+  return (
+    <div>
+      {isLoading ? <p>Loading...</p> : null}
+      {error ? <p>Error: {error.message}</p> : null}
+      {data ? <p>Data: {data}</p> : null}
+    </div>
+  );
+}
+
+export default App;
+```
+
+`useQuery` 는 react-query에서 제공하는 훅으로써 , 데이터를 비동기적으로 가져오는데 사용됩니다.
+
+```jsx
+const { data, ...options } = useQuery(queryKey, queryFunction, options);
+```
+
+- `queryKey` : 쿼리키는 어떤 데이터를 가져올 지 나타냅니다.
+- `queryFunction` : 데이터를 가져오는 함수이며 `Promise`를 반환해야합니다.
+- `option` : 다양한 옵션을 넣을 수 있습니다.
+
+## useQuery 도입
+
+이제 실제 `artfolio` 프로젝트에서 적용된 예시를 보겠습니다.
+
+<Image alt="Untitled" src="./Untitled.png" width="300" />
+
+위 사진은 경매 상세 정보페이지입니다.
+
+위의 22350원과 , 밑의 22350원은 현재 경매가를 나타내는데 , **현재 경매가는 웹소켓 연동으로 인하여 서버 데이터와 실시간 동기화 되어야 합니다.**
+
+따라서 입찰하기를 누르는 순간 , 현재 경매가가 갱신되며 두 컴포넌트는 같은 값을 나타내야 합니다.
+
+상위 컴포넌트에서 데이터를 받아 props drilling으로 뿌려주는 간단한 일처럼 보이지만
+
+**두 컴포넌트는 상하관계가 아니며 분리되어 있으므로 전역적으로 관리하거나 각각 서버측에 요청을 해야 합니다.**
+
+이때, 서버데이터를 전역상태로 관리하는 것은 좋지 않은 방식이라고 생각했기에 다른 방식을 고려하게 되었습니다.
+
+<br />
+
+이 문제는 `쿼리키` 를 사용해서 , 요청시 같은 쿼리키를 사용함으로써 업데이트되면 다른 한 쪽도 캐싱되어 있는 데이터를 가져옴으로써 같은 데이터를 가지게 하였습니다.
+
+과정을 간단하게 풀어낸다면 다음과 같습니다.
+
+<Image alt="Untitled1" src="./Untitled1.png" />
+
+실제로 적용하면 입찰과 동시에 경매 페이지의 내용(차트)도 함께 변하는 것을 볼 수 있습니다.
+
+<Image alt="Untitled2" src="./Untitled2.gif" width="300" />
+
+## 결론
+
+이 외에도 비동기 함수를 사용할 때 대부분 react-query를 사용하였는데
+
+isLoading,isError와 같은 변수들로 데이터 상태를 추적할 수 있으며 , 쿼리옵션에 따라 데이터를 자동적으로 페칭하거나 유효 기간을 정할 수 있는 등 편리한 요소가 많으므로 앞으로도 사용할 것 같습니다.

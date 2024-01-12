@@ -34,18 +34,6 @@ const Header = () => {
             블로그
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link
-            className={tw(
-              pathname.startsWith("/article")
-                ? "text-primary"
-                : "text-foreground"
-            )}
-            href="/article"
-          >
-            아티클
-          </Link>
-        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>

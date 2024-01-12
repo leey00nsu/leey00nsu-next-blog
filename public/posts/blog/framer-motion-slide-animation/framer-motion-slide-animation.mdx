@@ -1,0 +1,172 @@
+---
+slug: framer-motion-slide-animation
+title: framer-motion으로 슬라이드 애니메이션 구현하기
+tags:
+  - react
+  - framer-motion
+  - AnimatePresence
+description: framer-motion으로 슬라이드 애니메이션을 구현하는것에 대해 설명합니다.
+date: "2023-09-11"
+---
+
+## framer-motion으로 슬라이드 애니메이션 구현하기
+
+`react` 기반의 프로젝트에서 `애니메이션`을 구현할 때 `framer-motion` 을 사용합니다. 이를 기반으로 페이지를 이동시킬 때마다 다른 페이지를 보여줄 때 슬라이드 애니메이션을 구현해보고자 합니다.
+
+### framer-motion?
+
+[framer-motion](https://www.framer.com/motion/)은 다음과 같은 라이브러리로 자신을 소개하고 있습니다.
+
+> Complete documentation of the Framer Motion animation library. A production-ready motion library for React.
+
+react를 위한 **모션 라이브러리**로 `framer` 에 의해 제공됩니다.
+
+라이브러리는 다음과 같이 설치할 수 있습니다.
+
+```jsx
+npm install framer-motion
+```
+
+### 작동 방식
+
+기본적으로 `motion` 이라는 컴포넌트에 리액트 컴포넌트들이 래핑되어 있으므로 , 이를 가져와 사용합니다.
+
+`initial` 값에는 시작되는 스타일 값을 부여할 수 있습니다.
+
+`animate` 옵션에 목표 스타일 값을 부여할 수 있으며 , `framer-motion`이 자동적으로 이 값에 의해 애니메이션 시켜줍니다.
+
+```jsx
+<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} />
+```
+
+예를 들자면 이 컴포넌트는 `initial`이 `opacity: 0`이므로 투명한 상태로 시작하였다가 `animate`에 있는 `opacity:1` 에 의해 보여지게 됩니다.
+
+또한 `transition` 이라는 속성에 딜레이나 애니메이션의 타입 (Tween,Spring) 등을 지정할 수 있으므로 **애니메이션을 원하는대로 조정할 수 있습니다.**
+
+### AnimatePresence와 exit
+
+`framer-motion`에는 이외에도 다양한 옵션들이 존재하며 [공식 문서](https://www.framer.com/motion/)가 예제와 함께 상세히 되어있습니다.
+
+이 글에서 필요로 하는 부분은 위에서 설명한 `initial`,`animate`,그리고 `exit` 옵션입니다.
+
+`exit` 는 주로 `AnimatePresence` 와 함께 쓰이는 옵션입니다.
+
+`AnimatePresence`는 **리액트상에서 컴포넌트가 DOM 트리에서 언마운트될 때 이를 인지한 후 exit 애니메이션이 끝날때까지 언마운트를 지연시킵니다.**
+
+공식 문서에서는 다음과 같은 예제가 있습니다.
+
+```jsx
+import { motion, AnimatePresence } from "framer-motion";
+
+export const MyComponent = ({ isVisible }) => (
+  <AnimatePresence>
+    {isVisible && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      />
+    )}
+  </AnimatePresence>
+);
+```
+
+### react-router와 framer-motion
+
+react는 `SPA` 이므로 주로 **라우트 시스템**을 이용하기 위해 `react-router` 를 사용합니다.
+
+이 글에서 구현하려는 목표 또한 **페이지를 이동시킬 때마다 다른 페이지를 보여줄 때 슬라이드 애니메이션을 보여주는 것입니다.**
+
+react-router의 설정은 생략하고 추가로 설정할 부분에 대해서 설명하겠습니다.
+
+```jsx
+// app.tsx
+
+const location = useLocation();
+const { pageHistory } = useTransitionStore();
+
+...
+<AnimatePresence>
+	<Routes location={location} key={pageHistory + location.pathname}>
+    <Route path="/" element={<MainPage />} />
+    <Route path="/a" element={<Page1 />} />
+    <Route path="/b" element={<Page2 />} />
+	  <Route path="/c" element={<Page3 />} />
+	  <Route path="/d" element={<Page4 />} />
+	</Routes>
+</AnimatePresence>
+```
+
+`AnimatePresence` 바로 아래에 `motion 컴포넌트`가 존재해야 하므로 , 위의 코드와 같이 , `Routes`를 `AnimatePresence`로 감싸주었습니다.
+
+또한 Routes의 key에 pageHistory+location.pathname 을 넘겨주고 있습니다.
+
+**motion 컴포넌트에는 애니메이션을 실행할 객체를 구분하기 위하여 `key`가 필요합니다.**
+
+이 key가 바뀌지 않았다면 애니메이션이 다시 실행되지 않습니다.
+
+key로서 애니메이션 되는 객체를 구분하므로 만약 지나온 경로를 넣지 않으면
+
+a → b → a 로 갈때 a 가 두번 나오므로 **애니메이션이 겹치게 될 수 있습니다.**
+
+따라서 **현재 위치+모든 경로를 key로 부여하는 것입니다**.
+
+<br />
+
+이제 각 페이지 컴포넌트들을 설정해보겠습니다.
+
+페이지 컴포넌트들은 Layout 이라는 컴포넌트로 래핑되어 있습니다.
+
+```jsx
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout = (props: LayoutProps) => {
+  const { currentDirection } = useTransitionStore();
+
+  let initialX = 0;
+  if (currentDirection === "left") initialX = 500;
+  if (currentDirection === "right") initialX = -500;
+
+  const exitX = currentDirection === "left" ? -500 : 500;
+
+  return (
+    <motion.div
+      initial={{ x: initialX }}
+      animate={{ x: 0 }}
+      exit={{ x: exitX }}
+      transition={{ duration: 0.5 }}
+      className="layout"
+    >
+      {props.children}
+    </motion.div>
+  );
+};
+```
+
+`currentDirection`은 현재 슬라이드가 움직일 방향을 담고 있습니다.
+
+만약 뒤로가기를 누르면 `left`로 설정되고 오른쪽에서 왼쪽으로 움직입니다.
+
+다른 페이지를 누르면 `right`로 설정되고 왼쪽에서 오른쪽으로 움직입니다.
+
+현재 페이지의 width가 500px 이므로 500으로 명시해두었습니다.
+
+<Image alt="Untitled" src="./Untitled.png" />
+
+해당 코드는 `framer-motion`에 의해 그림과 같은 순서로 애니메이션 됩니다.
+
+(참고로 layout의 css에서 position:absolute로 해주어야 x 를 이용한 트랜지션을 할 수 있습니다.)
+
+최종 결과는 다음과 같습니다.
+
+<Image alt="Untitled1" src="./Untitled1.gif" width="300" />
+
+### 결론
+
+간단한 애니메이션에서부터 복잡한 애니메이션까지 `framer-motion` 을 이용하면 비교적 간단하게 만들 수 있어서 자주 사용하고 있습니다.
+
+이번에는 슬라이드 애니메이션을 구현해보았는데 , `react-router`와 연동하는 부분이 복잡할 뿐 애니메이션 자체는 간단해서 쉽게 접근할 수 있었습니다.
+
+**프로젝트에서 모바일 뷰로 나타내야 할 때 트랜지션을 넣으면 앱처럼 작동하는 것 같은 느낌을 줄 수 있어서 생각해볼만한 테크닉이라고 생각합니다.**
