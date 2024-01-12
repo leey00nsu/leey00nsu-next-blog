@@ -3,9 +3,9 @@
 import { Switch } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import ThemeIcon from './ThemeIcon';
 
-export function ThemeSwitch() {
+export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -14,6 +14,7 @@ export function ThemeSwitch() {
   }, []);
 
   if (!mounted) return null;
+  if (!theme) return null;
 
   return (
     <Switch
@@ -21,13 +22,7 @@ export function ThemeSwitch() {
       size="lg"
       color="default"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      thumbIcon={({ isSelected, className }) =>
-        theme === 'light' ? (
-          <FaSun className={className} />
-        ) : (
-          <FaMoon className={className} />
-        )
-      }
+      thumbIcon={<ThemeIcon theme={theme} />}
     />
   );
 }

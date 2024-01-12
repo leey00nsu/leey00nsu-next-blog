@@ -1,6 +1,6 @@
 'use client';
 
-import { tw } from '@/app/lib/tw';
+import tw from '@/app/lib/tw';
 import {
   Button,
   Link,
@@ -11,7 +11,7 @@ import {
 } from '@nextui-org/react';
 import { usePathname } from 'next/navigation';
 import { FaGithub } from 'react-icons/fa';
-import { ThemeSwitch } from './ThemeSwitch';
+import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {
   const pathname = usePathname();

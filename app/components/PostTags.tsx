@@ -9,8 +9,8 @@ interface PostTagsProps {
 const PostTags = ({ postTags, showCount }: PostTagsProps) => {
   return (
     <div className="flex flex-wrap gap-2">
-      {postTags.map((postTag, index) => (
-        <Button size="sm" disableRipple variant="flat" key={index}>
+      {postTags.map((postTag) => (
+        <Button size="sm" disableRipple variant="flat" key={postTag.tag}>
           <span>{postTag.tag}</span>
           {showCount && <span>({postTag.count})</span>}
         </Button>

@@ -5,20 +5,20 @@ export interface PostTag {
   count: number;
 }
 
+// 모든 포스트에서 태그를 추출하여 태그와 태그의 개수를 반환하는 함수
 const parseTag = (allPosts: Post[]) => {
   const tags = allPosts.map((post) => post.tags).flat();
   const result: PostTag[] = [];
-  const counts: { [key: string]: number } = {};
+  const counts: Record<string, number> = {};
 
-  // 배열 순회
   tags.forEach((tag) => {
-    // counts 객체에 태그 등장 횟수 기록
     counts[tag] = (counts[tag] || 0) + 1;
   });
 
-  // counts 객체를 배열로 변환하여 결과 배열 생성
   for (const tag in counts) {
-    result.push({ tag: tag, count: counts[tag] });
+    if (Object.hasOwn(counts, tag)) {
+      result.push({ tag, count: counts[tag] });
+    }
   }
 
   return result;

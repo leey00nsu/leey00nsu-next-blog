@@ -8,27 +8,22 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { FaLink } from 'react-icons/fa';
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = () => {
   return allPosts.map((post) => ({ slug: post.slug }));
 };
 
 export const generateMetadata = ({ params }: { params: { slug: string } }) => {
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const currentPost = allPosts.find((post) => post.slug === params.slug);
 
-  if (!post) notFound();
+  if (!currentPost) notFound();
 
-  return { title: post.title };
+  return { title: currentPost.title };
 };
 
 const mdxComponents = (url: string): MDXComponents => {
   return {
     a: ({ href, children }) => (
-      <Link
-        isExternal
-        showAnchorIcon
-        anchorIcon={<FaLink />}
-        href={href as string}
-      >
+      <Link isExternal showAnchorIcon anchorIcon={<FaLink />} href={href}>
         {children}
       </Link>
     ),
@@ -46,19 +41,21 @@ const mdxComponents = (url: string): MDXComponents => {
 };
 
 const PostLayout = ({ params }: { params: { slug: string } }) => {
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const currentPost = allPosts.find((post) => post.slug === params.slug);
 
-  if (!post) notFound();
+  if (!currentPost) notFound();
 
-  const MDXContent = useMDXComponent(post.body.code);
-  const MDXComponents = mdxComponents(post.url);
+  const { body, url, title, date } = currentPost;
+
+  const MDXContent = useMDXComponent(body.code);
+  const MDXComponents = mdxComponents(url);
 
   return (
     <article className="mx-auto max-w-2xl p-8">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold">{post.title}</h1>
-        <time dateTime={post.date} className="block text-xs text-gray-600">
-          {parseDate(post.date)}
+        <h1 className="text-3xl font-bold">{title}</h1>
+        <time dateTime={date} className="block text-xs text-gray-600">
+          {parseDate(date)}
         </time>
       </div>
       <div className="prose prose-slate dark:prose-invert ">

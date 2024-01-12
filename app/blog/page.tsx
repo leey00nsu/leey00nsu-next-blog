@@ -23,7 +23,7 @@ export default function Home() {
   );
 
   const changePageHandler = (page: number) => {
-    router.push('/blog?page=' + page);
+    router.push(`/blog?page=${page}`);
   };
 
   const totalPageLength = Math.ceil(posts.length / PAGE_SIZE);
@@ -31,8 +31,8 @@ export default function Home() {
   return (
     <div className="mx-auto flex max-w-xl flex-col gap-4 p-8 ">
       <h2>{posts.length}개의 글이 있습니다.</h2>
-      {paginatedPosts.map((post, idx) => (
-        <PostCard key={idx} {...post} />
+      {paginatedPosts.map((post) => (
+        <PostCard key={post.slug} {...post} />
       ))}
       <Pagination
         classNames={{

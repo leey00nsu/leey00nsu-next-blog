@@ -12,7 +12,16 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "no-restricted-syntax": "off",
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/unbound-method": "off"
+    "@typescript-eslint/unbound-method": "off",
+    "arrow-body-style": "off",
+    "react/destructuring-assignment": "off",
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": ["arrow-function", "function-declaration"] }
+    ]
   }
 }
