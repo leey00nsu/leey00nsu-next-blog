@@ -17,12 +17,12 @@ export function ThemeSwitch() {
 
   return (
     <Switch
-      defaultSelected
+      isSelected={theme === "dark"}
       size="lg"
       color="default"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       thumbIcon={({ isSelected, className }) =>
-        isSelected ? (
+        theme === "light" ? (
           <FaSun className={className} />
         ) : (
           <FaMoon className={className} />
