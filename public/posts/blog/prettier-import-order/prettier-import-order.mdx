@@ -1,0 +1,61 @@
+---
+slug: prettier-import-order
+title: prettier import 설정하기
+tags:
+  - prettier
+description: prettier를 사용하여 import 순서를 정렬하는 법에 대해 설명합니다.
+date: "2023-11-05"
+---
+
+## Prettier에서 import 순서 정렬하기
+
+프로젝트를 진행하다 보면, import를 할 때 구분없이 쌓이는 경우가 많습니다.
+
+<Image alt="Untitled" src="./Untitled.png" />
+
+**prettier를 이용해서 특정한 순서를 가지고 import 순서를 정렬한다면, 나중에 코드를 볼 때 쉽게 읽힐 것입니다.**
+
+따라서 해당 정렬을 도와주는 라이브러리인 [prettier-plugin-sort-imports](https://www.notion.so/prettier-import-69708ea50cfd45aa93ec83f7d2b9a566?pvs=21)를 설치해보겠습니다.
+
+```jsx
+npm i @trivago/prettier-plugin-sort-imports
+```
+
+설치한 후, 기존에 prettier 설정에 추가하면 됩니다.
+
+제 경우에는 설정 파일이 `.prettierrc` 이므로 해당 파일에 추가하였습니다.
+
+```jsx
+// .prettierrc
+{
+	...
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@/constants/(.*)$",
+    "^@/apis/(.*)$",
+    "^@/store/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/pages/(.*)$",
+    "^@/features/(.*)$",
+    "^@/components/(.*)$",
+    "^@/ui/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+		...
+  ]
+}
+```
+
+`importOrder`에 정렬할 순서를 정규표현식으로 적어줍니다.
+
+여기서, `THIRD_PARTY_MODULES`는, 외부 라이브러리를 의미합니다.
+
+`importOrderSeparation` 를 true로 하면, 작성한 순서마다 한 줄의 공백을 추가합니다.
+
+<Image alt="Untitled 1" src="./Untitled 1.png" />
+
+이제 prettier를 다시 작동시키게 되면 import 순서가 정렬된 것을 볼 수 있습니다.

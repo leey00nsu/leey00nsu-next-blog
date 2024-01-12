@@ -12,10 +12,10 @@ pre [data-line] {
 }
 
 code {
-  background-color: #f0f0f0;
-  color: #c75b5b !important;
-  padding: 0.25rem;
+  background-color: hsl(var(--nextui-default-200));
+  color: hsl(var(--nextui-danger-500)) !important;
   border-radius: 0.375rem;
+  padding: 0.25rem;
 }
 
 code::after {

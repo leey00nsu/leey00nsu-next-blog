@@ -39,7 +39,7 @@ const Header = () => {
         <NavbarItem>
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem className="hidden sm:flex">
           <Button
             isIconOnly
             disableRipple

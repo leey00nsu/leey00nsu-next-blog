@@ -1,0 +1,145 @@
+---
+slug: optimistic-update
+title: react query를 사용한 낙관적 업데이트
+tags:
+  - react-query
+  - optimistic update
+description: react query를 사용해 낙관적 업데이트를 하는 과정에 대해 설명합니다.
+date: "2023-12-19"
+---
+
+## react-query 낙관적 업데이트(Optimistic Update) 하기
+
+프로젝트에 `좋아요` 기능을 추가하려고 합니다.
+
+사용자가 좋아요 버튼을 누르면 `useMutation`을 통해 api를 호출하는 방식입니다.
+
+```jsx
+const { mutate: toggleListLikeMutate } = useMutation({
+    mutationKey: ['toggleListLikeArticle'],
+    retry: false,
+    mutationFn: toggleLikeArticle,
+		...
+})
+```
+
+기본적으로 호출한 결과를 화면에 표시하기 위해서 `onSuccess` 콜백을 통해 해당 `쿼리 키`를 무효화시켜 데이터를 갱신시킬 수 있습니다.
+
+```jsx
+onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['getArticleList'] });
+},
+```
+
+하지만 네트워크 환경에 따라, **서버에서 응답이 오는 시간까지 UI에 변화가 없게 됩니다.**
+
+따라서 UX 개선을 위해 `낙관적 업데이트(Optimistic Update)`를 사용해볼 수 있습니다.
+
+### 낙관적 업데이트
+
+`낙관적 업데이트`는 `mutate`를 성공하였을 때 예상되는 결과로 쿼리 데이터를 **먼저 변화시켜주는 것입니다.**
+
+공식문서: [https://tanstack.com/query/latest/docs/react/guides/optimistic-updates](https://tanstack.com/query/latest/docs/react/guides/optimistic-updates)
+
+좋아요를 예시로 들었을 때, 기존 방식과의 차이는 다음과 같습니다.
+
+```jsx
+낙관적 업데이트 적용 X
+-> 좋아요 클릭
+-> 서버에 요청
+-> 서버 응답
+-> 서버 데이터로 쿼리를 다시 갱신
+-> 클라이언트 UI 변화 (좋아요 수 : 1 , 좋아요 X → 좋아요 수 : 2 , 좋아요 O)
+```
+
+```jsx
+낙관적 업데이트 적용 O
+-> 좋아요 클릭
+-> 서버에 요청
+-> 클라이언트 UI 변화 (좋아요 수 : 1 , 좋아요 X → 좋아요 수 : 2 , 좋아요 O)
+-> 서버 응답
+-> 실제 서버 데이터로 쿼리를 다시 갱신
+```
+
+실제 적용된 코드를 살펴보겠습니다.
+
+```jsx
+const { mutateAsync: toggleLikeMutate } = useMutation({
+    mutationKey: ['toggleLikeArticle'],
+    retry: false,
+    mutationFn: toggleLikeArticle,
+    onMutate: async id => {
+			// 상세 쿼리를 취소한다. (낙관적 업데이트가 덮어쓰지 않도록)
+      await queryClient.cancelQueries({ queryKey: ['getArticle', id] });
+
+      const previousArticle = queryClient.getQueryData<
+        ApiResponse<ListArticle>
+      >(['getArticle', id]);
+
+      // 쿼리 데이터에 대하여 좋아요 상태를 업데이트한다.
+      const uploadArticle = produce(previousArticle, draft => {
+        const article = draft?.data;
+        if (article) {
+          article.isLiked = !article?.isLiked;
+          article.likeCount += article?.isLiked ? 1 : -1;
+        }
+      });
+
+      // 쿼리 데이터를 낙관적 업데이트한다.
+      queryClient.setQueryData(['getArticle', id], uploadArticle);
+
+      return { previousArticle, id };
+    },
+    onError: (err, _, context) => {
+			// 에러 발생시 기존 데이터로 롤백
+			queryClient.setQueryData(
+		        ['getArticle', context?.id],
+		        context?.previousArticle,
+		      );
+    },
+    onSuccess: (err, _, context) => {
+			// 성공 시 쿼리 재요청
+			queryClient.invalidateQueries({ queryKey: ['getArticle', context?.id] });
+    },
+  });
+```
+
+먼저 `onMutate` 콜백에서 `cancelQueries`를 통해 쿼리를 취소합니다.
+
+이 과정을 통하여, **만약 이 mutate 중에 해당 쿼리 키에 대해서 업데이트가 발생해도 반영되지 않습니다.**
+
+그 후, 기존 데이터를 변형시켜 예상되는 결과로 만들어줍니다.
+
+예제 코드에서는 불변성 관리 라이브러리인 `immer`를 사용하여 객체를 변형시켰습니다.
+
+이제 변형시킨 결과를 해당 쿼리 키에 적용시켜주면 **마치 서버에서 응답이 온 것 처럼** 쿼리 키가 업데이트 됩니다.
+
+또한 에러가 발생했을 때는 기존의 쿼리 데이터로 다시 롤백시켜주고, 성공시에는 실제 응답으로 데이터를 덮어쓰면 됩니다.
+
+또는 에러나 성공 모두에 대한 케이스인 `onSettled`를 통해 결과와 상관없이 재요청하도록 하는 방법도 존재합니다.
+
+```jsx
+onSettled: () => {
+      // 응답 시 쿼리 재요청
+      queryClient.invalidateQueries({
+        queryKey: [
+          'getArticleList',
+          currentOrderBy,
+          currentOrder,
+          filter.author,
+        ],
+      });
+    },
+```
+
+### 결과
+
+낙관적 업데이트를 적용한 결과를 브라우저의 mid-tier 네트워크를 통해 `느린 네트워크 상황`에서 확인해보겠습니다.
+
+|                낙관적 업데이트 적용 X                |                낙관적 업데이트 적용 O                |
+| :--------------------------------------------------: | :--------------------------------------------------: |
+| <Image alt='optimistic-X' src='./optimistic-X.gif'/> | <Image alt='optimistic-O' src='./optimistic-O.gif'/> |
+
+한 눈에 봐도 **낙관적 업데이트를 한 쪽의 UI 반영이 더 빠른 것을 알 수 있습니다.**
+
+모든 요청에 대해 낙관적 업데이트를 적용하기는 어렵기 때문에 반영할 수 있는 부분을 고려하면 **좋은 UX**를 구현할 수 있을 것 같습니다.
