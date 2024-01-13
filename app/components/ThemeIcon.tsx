@@ -5,7 +5,11 @@ interface ThemeIconProps {
 }
 
 const ThemeIcon = ({ theme }: ThemeIconProps) => {
-  return theme === 'light' ? <FaSun /> : <FaMoon />;
+  return theme === 'light' ? (
+    <FaSun className="text-zinc-900" />
+  ) : (
+    <FaMoon className="text-zinc-900" />
+  );
 };
 
 export default ThemeIcon;

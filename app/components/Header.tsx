@@ -20,7 +20,7 @@ const Header = () => {
     <Navbar isBordered>
       <NavbarBrand>
         <Link className="font-bold text-foreground" href="/">
-          LEEY00NSU
+          leey00nsu
         </Link>
       </NavbarBrand>
       <NavbarContent className="flex" justify="center">
