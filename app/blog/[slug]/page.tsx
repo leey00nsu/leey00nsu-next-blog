@@ -1,3 +1,4 @@
+import Toc from '@/app/components/Toc';
 import parseDate from '@/app/lib/parseDate';
 import parseImagePath from '@/app/lib/parseImagePath';
 import { Link } from '@nextui-org/react';
@@ -51,16 +52,18 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
   const MDXComponents = mdxComponents(url);
 
   return (
-    <article className="mx-auto max-w-2xl p-8">
+    <article className="mx-auto max-w-2xl p-8 py-20">
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold">{title}</h1>
         <time dateTime={date} className="block text-xs text-gray-600">
           {parseDate(date)}
         </time>
       </div>
-      <div className="prose prose-slate dark:prose-invert ">
+      <div className="toc-content prose prose-slate dark:prose-invert">
         <MDXContent components={MDXComponents} />
       </div>
+
+      <Toc />
     </article>
   );
 };
