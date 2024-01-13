@@ -12,6 +12,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "no-underscore-dangle": "off",
+    "import/no-extraneous-dependencies": "off",
     "no-restricted-syntax": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
