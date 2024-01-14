@@ -1,10 +1,10 @@
-// @ts-nocheck
-
+//@ts-nocheck
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import highlight from 'rehype-highlight';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import imageMetadata from './app/plugins/imageMetadata';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -45,6 +45,7 @@ export default makeSource({
       ],
       highlight,
       rehypeSlug,
+      imageMetadata,
     ],
   },
 });

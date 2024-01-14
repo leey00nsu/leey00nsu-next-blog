@@ -7,7 +7,7 @@ tags:
   - konva
   - fabric
 description: 리액트에서 Canvas를 다루는 라이브러리에 대해 설명합니다.
-date: "2023-07-05"
+date: '2023-07-05'
 ---
 
 ## 리액트에서 Canvas 다루기
@@ -28,10 +28,10 @@ konva 문서와 동일하게 구현할 수 있지만 리액트스럽게 컴포�
 
 만약 물체를 리사이징하려면 따로 transformer라는 구현체를 객체에 붙여서 따로 구현해야 합니다.
 
-<Image alt="Untitled" src="./Untitled.png" />
+![konva-demo](/posts/blog/explore-canvas/konva-demo.png)
 
 ```jsx
-import { Stage, Layer, Rect } from "react-konva";
+import { Stage, Layer, Rect } from 'react-konva';
 
 const SomeRect = () => {
   return <Rect x={20} y={20} width={50} height={50} fill="black" />;
@@ -60,20 +60,20 @@ fabric js를 직접 호출하여 사용해보겠습니다.
 
 [공식 문서가](http://fabricjs.com/) 자세하게 되어있으므로 큰 어려움 없이 구현할 수 있습니다.
 
-<Image alt="Untitled 1" src="./Untitled 1.png" />
+![fabric-demo](/posts/blog/explore-canvas/fabric-demo.png)
 
 ```jsx
-import { fabric } from "fabric";
-import { useState, useEffect } from "react";
+import { fabric } from 'fabric';
+import { useState, useEffect } from 'react';
 
 const App = () => {
   const [canvas, setCanvas] = (useState < fabric.Canvas) | (null > null);
 
   const initCanvas = () =>
-    new fabric.Canvas("canvas", {
+    new fabric.Canvas('canvas', {
       height: 800,
       width: 800,
-      backgroundColor: "gray",
+      backgroundColor: 'gray',
     });
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const App = () => {
       const rect = new fabric.Rect({
         width: 200,
         height: 200,
-        fill: "yellow",
+        fill: 'yellow',
       });
 
       canvas.add(rect);

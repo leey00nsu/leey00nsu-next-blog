@@ -5,7 +5,7 @@ tags:
   - react-query
   - optimistic update
 description: react query를 사용해 낙관적 업데이트를 하는 과정에 대해 설명합니다.
-date: "2023-12-19"
+date: '2023-12-19'
 ---
 
 ## react-query 낙관적 업데이트(Optimistic Update) 하기
@@ -134,9 +134,9 @@ onSettled: () => {
 
 낙관적 업데이트를 적용한 결과를 브라우저의 mid-tier 네트워크를 통해 `느린 네트워크 상황`에서 확인해보겠습니다.
 
-|                낙관적 업데이트 적용 X                |                낙관적 업데이트 적용 O                |
-| :--------------------------------------------------: | :--------------------------------------------------: |
-| <Image alt='optimistic-X' src='./optimistic-X.gif'/> | <Image alt='optimistic-O' src='./optimistic-O.gif'/> |
+|                     낙관적 업데이트 적용 X                      |                     낙관적 업데이트 적용 O                      |
+| :-------------------------------------------------------------: | :-------------------------------------------------------------: |
+| ![optimistic-X](/posts/blog/optimistic-update/optimistic-X.gif) | ![optimistic-O](/posts/blog/optimistic-update/optimistic-O.gif) |
 
 한 눈에 봐도 **낙관적 업데이트를 한 쪽의 UI 반영이 더 빠른 것을 알 수 있습니다.**
 

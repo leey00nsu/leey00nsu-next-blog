@@ -12,6 +12,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "operator-assignment": "off",
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
     "react-hooks/exhaustive-deps": "off",
     "no-underscore-dangle": "off",
     "import/no-extraneous-dependencies": "off",
@@ -20,6 +22,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
     "arrow-body-style": "off",
     "react/destructuring-assignment": "off",
     "react/function-component-definition": [
