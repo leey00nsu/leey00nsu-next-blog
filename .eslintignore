@@ -1,2 +1,2 @@
 *.config.*
-*/plugins/*
+app/plugins/

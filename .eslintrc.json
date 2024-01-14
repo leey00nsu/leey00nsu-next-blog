@@ -12,6 +12,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/no-unsafe-call": "off",
     "operator-assignment": "off",
     "@typescript-eslint/non-nullable-type-assertion-style": "off",
     "react-hooks/exhaustive-deps": "off",
