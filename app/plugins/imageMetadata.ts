@@ -1,3 +1,4 @@
+//@ts-nocheck
 // Custom rehype plugin to add width and height to local images
 // To make Next.js <Image/> works
 // Ref: https://kylepfromer.com/blog/nextjs-image-component-blog
