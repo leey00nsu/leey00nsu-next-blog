@@ -23,7 +23,7 @@ date: '2023-08-02'
 
 ### useEffect를 사용한 코드
 
-```jsx
+```jsx title="useEffect"
 import React, { useState, useEffect } from 'react';
 
 function App() {
@@ -60,7 +60,7 @@ export default App;
 
 ### react-query를 사용한 코드
 
-```jsx
+```jsx title="react-query"
 import React from 'react';
 import { useQuery } from 'react-query';
 
@@ -81,7 +81,7 @@ export default App;
 
 `useQuery` 는 react-query에서 제공하는 훅으로써 , 데이터를 비동기적으로 가져오는데 사용됩니다.
 
-```jsx
+```jsx title="useQuery"
 const { data, ...options } = useQuery(queryKey, queryFunction, options);
 ```
 

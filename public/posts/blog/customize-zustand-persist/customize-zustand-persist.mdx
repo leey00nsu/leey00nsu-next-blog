@@ -5,7 +5,7 @@ tags:
   - zustand
   - indexedDB
 description: zustand persist를 입맛에 맞게 커스터마이징 해봅시다.
-date: "2023-12-15"
+date: '2023-12-15'
 ---
 
 ## Zustand persist 커스텀하기
@@ -18,7 +18,7 @@ zustand [공식 문서](https://docs.pmnd.rs/zustand/integrations/persisting-sto
 
 ### 로컬,세션 스토리지에 저장하기
 
-```jsx
+```jsx title="useBearStore"
 export const useBearStore = create(
   persist(
     (set, get) => ({
@@ -26,13 +26,13 @@ export const useBearStore = create(
       addABear: () => set({ bears: get().bears + 1 }),
     }),
     {
-      name: "food-storage", // 스토리지의 이름
+      name: 'food-storage', // 스토리지의 이름
       storage: createJSONStorage(() => sessionStorage), // 사용할 저장소
       partialize: (state) => ({
         canvasName: state.bears,
       }),
-    }
-  )
+    },
+  ),
 );
 ```
 
@@ -50,7 +50,7 @@ export const useBearStore = create(
 
 이 경우, indexedDB 라이브러리인 [idb-keyval](https://github.com/jakearchibald/idb-keyval) 을 사용해 구현할 수 있습니다.
 
-```jsx
+```jsx title="useBoundStore"
 import { get, set, del } from "idb-keyval";
 
 const storage: StateStorage = {
@@ -89,7 +89,9 @@ export const useBoundStore = create(
 
 따라서, `debounce`를 추가하면 상호작용이 끝난 후의 캔버스의 상태를 저장하도록 해 요청의 수를 줄일 수 있습니다.
 
-```jsx
+사용되는 debounce 함수는 직접 구현하거나 lodash 등의 유틸 라이브러리를 사용할 수 있습니다.
+
+```jsx title="storage debounce"
 // 커스텀 IndexdDB 스토리지
 const IDBstorage: StateStorage = {
   getItem: async (name: string): Promise<string | null> => {
@@ -103,5 +105,3 @@ const IDBstorage: StateStorage = {
   },
 };
 ```
-
-이때 debounce 함수는 lodash를 사용하거나 직접 구현하여도 상관 없습니다.

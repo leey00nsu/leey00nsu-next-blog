@@ -1,6 +1,6 @@
 import Image, { ImageProps } from 'next/image';
 
-const MAX_HEIGHT = 400;
+const MAX_HEIGHT = 600;
 
 const CustomImage = ({
   alt,

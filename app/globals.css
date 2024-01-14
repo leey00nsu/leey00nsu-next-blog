@@ -5,10 +5,17 @@
 pre {
   overflow-x: auto;
   padding: 1rem 0;
+  @apply rounded-b-md rounded-t-none !important;
 }
 
 pre [data-line] {
   padding: 0 1rem;
+}
+
+figcaption {
+  padding: 1rem;
+  background-color: #303446 !important;
+  @apply rounded-t-md border-b-2 border-[#383d52] !important;
 }
 
 code {

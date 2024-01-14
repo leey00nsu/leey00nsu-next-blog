@@ -1,6 +1,5 @@
 //@ts-nocheck
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-import highlight from 'rehype-highlight';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
@@ -40,10 +39,9 @@ export default makeSource({
       [
         rehypePrettyCode,
         {
-          theme: 'slack-dark',
+          theme: 'catppuccin-frappe',
         },
       ],
-      highlight,
       rehypeSlug,
       imageMetadata,
     ],

@@ -24,7 +24,7 @@ date: 2023-05-09
 
 여기서는 커스텀훅인 `useIntersectionObserver`를 직접 구현하여 사용하였지만, `react-intersection-observer`와 같은 커스텀 훅 라이브러리를 사용할 수도 있습니다.
 
-```jsx
+```jsx title="useIntersectionObserver"
 import { useRef } from "react";
 export default function useIntersectionObserver(callback: () => void) {
   const observer = useRef(
@@ -56,7 +56,7 @@ export default function useIntersectionObserver(callback: () => void) {
 
 여기서는 다음 페이지를 fetch해오는 함수를 콜백에 등록시켜보겠습니다.
 
-```jsx
+```jsx title="useRef"
 ...
 const infScroll = useRef(null);
 

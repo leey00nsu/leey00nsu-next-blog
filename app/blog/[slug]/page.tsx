@@ -1,5 +1,6 @@
 import CustomImage from '@/app/components/CustomImage';
 import CustomLink from '@/app/components/CustomLink';
+import CustomSnipet from '@/app/components/CustomSnipet';
 import Toc from '@/app/components/Toc';
 import parseDate from '@/app/lib/parseDate';
 import { allPosts } from 'contentlayer/generated';
@@ -20,9 +21,11 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   return { title: currentPost.title };
 };
 
+// 커스텀 mdx 컴포넌트
 const mdxComponents = {
   a: CustomLink,
   img: CustomImage,
+  figcaption: CustomSnipet,
 };
 
 const PostLayout = ({ params }: { params: { slug: string } }) => {

@@ -12,6 +12,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-call": "off",
     "operator-assignment": "off",
     "@typescript-eslint/non-nullable-type-assertion-style": "off",

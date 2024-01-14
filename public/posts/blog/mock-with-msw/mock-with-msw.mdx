@@ -45,9 +45,7 @@ date: '2023-08-18'
 
 `msw`를 사용하기 위해서는 서비스 워커를 만들어야하는데 , 관련된 파일을 보통 mocks 폴더 밑에 위치시킵니다.
 
-```jsx
-// mocks/worker.js
-
+```jsx title="mocks/worker.js"
 import { setupWorker } from 'msw';
 import { handlers } from './handler';
 
@@ -58,9 +56,7 @@ export const worker = setupWorker(...handlers);
 
 (제 경우 main.jsx 입니다.)
 
-```jsx
-// src/main.jsx
-
+```jsx title="src/main.jsx"
 import { worker } from './mocks/worker';
 
 // msw Mock 서버를 실행합니다.
@@ -73,8 +69,7 @@ if (process.env.NODE_ENV === 'development') {
 
 `dummyKoPosts`라는 더미데이터를 만들고 , 이를 요청했을 때 응답을 해줄 핸들러를 작성해야 합니다.
 
-```jsx
-
+```jsx title="더미 데이터"
 // 더미 유저 데이터
 export const dummyKoUser1: User = {
   id: 1,
@@ -116,8 +111,9 @@ export const dummyKoPosts: Post[] = [
   },
   ...
 ];
+```
 
-// mocks/handler.js
+```jsx title="mocks/handler.js"
 export const handlers = [
   rest.get(`/ko_post`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(dummyKoPosts));
@@ -129,7 +125,7 @@ export const handlers = [
 
 **200코드와 함께 dummyKoPosts를 반환하게 됩니다.**
 
-```jsx
+```jsx title="getKoPostPage"
 // 더미 게시글 페이지를 받아옵니다.
 export const getKoPostPage = async () => {
   const response = await axios.get('/ko_post');

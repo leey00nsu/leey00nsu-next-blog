@@ -50,7 +50,7 @@ date: '2023-08-07'
 
 현재 더미데이터는 다음과 같이 구성되어 있습니다.
 
-```jsx
+```jsx title="chartData"
 const chartData = [
   {
     id: 'japan',
@@ -111,7 +111,7 @@ const chartData = [
 
 변경할 데이터에는 x축에 시간이 할당 될 것이므로 다음과 같이 바꿀 수 있습니다.
 
-```jsx
+```jsx title="chartData"
 const chartData = [
   {
     id: 'price',
@@ -151,7 +151,7 @@ point로 지정한 후 axisBottom에서 format을 이용해 , 시간을 `intl`�
 
 ![line-example2](/posts/blog/nivo-chart/line-example2.png)
 
-```jsx
+```jsx title="LineChart"
 const LineChart = () => {
   return (
     <ResponsiveLine
@@ -221,7 +221,7 @@ const LineChart = () => {
 
 ![pie-example2](/posts/blog/nivo-chart/pie-example2.png)
 
-```jsx
+```jsx title="PieChart"
 const PieChart = () => {
   return (
     <ResponsivePie

@@ -14,7 +14,7 @@ date: '2023-12-19'
 
 사용자가 좋아요 버튼을 누르면 `useMutation`을 통해 api를 호출하는 방식입니다.
 
-```jsx
+```jsx title="useMutation"
 const { mutate: toggleListLikeMutate } = useMutation({
     mutationKey: ['toggleListLikeArticle'],
     retry: false,
@@ -25,7 +25,7 @@ const { mutate: toggleListLikeMutate } = useMutation({
 
 기본적으로 호출한 결과를 화면에 표시하기 위해서 `onSuccess` 콜백을 통해 해당 `쿼리 키`를 무효화시켜 데이터를 갱신시킬 수 있습니다.
 
-```jsx
+```jsx title="onSuccess"
 onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: ['getArticleList'] });
 },
@@ -41,8 +41,7 @@ onSuccess: () => {
 
 [공식문서](https://tanstack.com/query/latest/docs/react/guides/optimistic-updates)에 따르면 좋아요를 예시로 들었을 때, 기존 방식과의 차이는 다음과 같습니다.
 
-```jsx
-낙관적 업데이트 적용 X
+```markdown title="낙관적 업데이트 적용 X"
 -> 좋아요 클릭
 -> 서버에 요청
 -> 서버 응답
@@ -50,8 +49,7 @@ onSuccess: () => {
 -> 클라이언트 UI 변화 (좋아요 수 : 1 , 좋아요 X → 좋아요 수 : 2 , 좋아요 O)
 ```
 
-```jsx
-낙관적 업데이트 적용 O
+```markdown title="낙관적 업데이트 적용 O"
 -> 좋아요 클릭
 -> 서버에 요청
 -> 클라이언트 UI 변화 (좋아요 수 : 1 , 좋아요 X → 좋아요 수 : 2 , 좋아요 O)
@@ -61,7 +59,7 @@ onSuccess: () => {
 
 실제 적용된 코드를 살펴보겠습니다.
 
-```jsx
+```jsx title="useToggleLike"
 const { mutateAsync: toggleLikeMutate } = useMutation({
     mutationKey: ['toggleLikeArticle'],
     retry: false,
@@ -116,7 +114,7 @@ const { mutateAsync: toggleLikeMutate } = useMutation({
 
 또는 에러나 성공 모두에 대한 케이스인 `onSettled`를 통해 결과와 상관없이 재요청하도록 하는 방법도 존재합니다.
 
-```jsx
+```jsx title="onSettled"
 onSettled: () => {
       // 응답 시 쿼리 재요청
       queryClient.invalidateQueries({
