@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://blog.leey00nsu.site
+
+# Sitemaps
+Sitemap: https://blog.leey00nsu.site/sitemap.xml
