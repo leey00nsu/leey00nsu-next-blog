@@ -3,7 +3,20 @@
 import { Switch } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import ThemeIcon from './ThemeIcon';
+
+import { FaMoon, FaSun } from 'react-icons/fa';
+
+interface ThemeIconProps {
+  theme: string;
+}
+
+const ThemeIcon = ({ theme }: ThemeIconProps) => {
+  return theme === 'light' ? (
+    <FaSun className="text-zinc-900" />
+  ) : (
+    <FaMoon className="text-zinc-900" />
+  );
+};
 
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);

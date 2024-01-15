@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import tocbot from 'tocbot';
 
-const Toc = () => {
+const PostToc = () => {
   useEffect(() => {
     tocbot.init({
       tocSelector: '.toc',
@@ -24,4 +24,4 @@ const Toc = () => {
   );
 };
 
-export default Toc;
+export default PostToc;

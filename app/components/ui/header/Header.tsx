@@ -17,7 +17,7 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <Navbar isBordered>
+    <Navbar className="bg-background/70">
       <NavbarBrand>
         <Link className="font-bold text-foreground" href="/">
           leey00nsu
@@ -27,8 +27,8 @@ const Header = () => {
         <NavbarItem>
           <Link
             className={tw(
-              'text-foreground',
-              pathname.startsWith('/blog') && 'underline underline-offset-4',
+              'text-lg font-normal text-foreground',
+              pathname.startsWith('/blog') && 'font-bold',
             )}
             href="/blog"
           >

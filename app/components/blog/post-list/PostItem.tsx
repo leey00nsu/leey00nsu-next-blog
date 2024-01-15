@@ -1,11 +1,28 @@
 import { Post } from '@/.contentlayer/generated';
 import parseDate from '@/app/lib/parseDate';
-import { Card, CardBody } from '@nextui-org/react';
+import { Button, Card, CardBody } from '@nextui-org/react';
 import Link from 'next/link';
-import parseTag from '../lib/parseTag';
-import PostTags from './PostTags';
+import parseTag, { PostTag } from '../../../lib/parseTag';
 
-const PostCard = (post: Post) => {
+interface PostTagsProps {
+  postTags: PostTag[];
+  showCount?: boolean;
+}
+
+const PostTags = ({ postTags, showCount }: PostTagsProps) => {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {postTags.map((postTag) => (
+        <Button size="sm" disableRipple variant="flat" key={postTag.tag}>
+          <span>{postTag.tag}</span>
+          {showCount && <span>({postTag.count})</span>}
+        </Button>
+      ))}
+    </div>
+  );
+};
+
+const PostItem = (post: Post) => {
   return (
     <Link href={post.url} className="w-full transition hover:scale-105">
       <Card className="flex w-full flex-row py-4">
@@ -22,4 +39,4 @@ const PostCard = (post: Post) => {
   );
 };
 
-export default PostCard;
+export default PostItem;

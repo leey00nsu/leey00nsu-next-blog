@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Footer from './components/ui/footer/Footer';
+import Header from './components/ui/header/Header';
 import './globals.css';
 import Providers from './providers';
 
@@ -62,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`${pretendard.variable} bg-background font-pretendard text-foreground`}
+        className={`${pretendard.variable} bg-default-100/70 font-pretendard text-foreground`}
       >
         <Providers>
           <Header />
