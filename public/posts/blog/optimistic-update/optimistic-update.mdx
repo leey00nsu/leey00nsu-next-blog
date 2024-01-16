@@ -41,7 +41,7 @@ onSuccess: () => {
 
 [공식문서](https://tanstack.com/query/latest/docs/react/guides/optimistic-updates)에 따르면 좋아요를 예시로 들었을 때, 기존 방식과의 차이는 다음과 같습니다.
 
-```markdown title="낙관적 업데이트 적용 X"
+```markdown {5} title="낙관적 업데이트 적용 X"
 -> 좋아요 클릭
 -> 서버에 요청
 -> 서버 응답
@@ -49,7 +49,7 @@ onSuccess: () => {
 -> 클라이언트 UI 변화 (좋아요 수 : 1 , 좋아요 X → 좋아요 수 : 2 , 좋아요 O)
 ```
 
-```markdown title="낙관적 업데이트 적용 O"
+```markdown {3} title="낙관적 업데이트 적용 O"
 -> 좋아요 클릭
 -> 서버에 요청
 -> 클라이언트 UI 변화 (좋아요 수 : 1 , 좋아요 X → 좋아요 수 : 2 , 좋아요 O)

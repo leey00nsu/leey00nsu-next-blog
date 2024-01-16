@@ -22,7 +22,6 @@ code {
   background-color: hsl(var(--nextui-default-200));
   color: hsl(var(--nextui-danger-500)) !important;
   border-radius: 0.375rem;
-  padding: 0.25rem;
 }
 
 code::after {
@@ -43,4 +42,12 @@ code::before {
 
 .is-collapsible {
   padding-left: 0.5rem;
+}
+
+.prose code span[data-highlighted-line] {
+  @apply !bg-[#ebf3ff];
+}
+
+.prose code span[data-highlighted-line] span {
+  @apply !text-[#303446];
 }
