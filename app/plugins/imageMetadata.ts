@@ -5,9 +5,9 @@
 
 // Similiar structure to:
 // https://github.com/JS-DevTools/rehype-inline-svg/blob/master/src/inline-svg.ts
+import lqip from 'lqip-modern';
 import fs from 'node:fs/promises';
 import path from 'path';
-import { getPlaiceholder } from 'plaiceholder';
 import { Node } from 'unist';
 import { visit } from 'unist-util-visit';
 
@@ -53,13 +53,13 @@ async function addMetadata(node: ImageNode): Promise<void> {
     path.join(process.cwd(), 'public', node.properties.src),
   );
 
-  const { base64, metadata } = await getPlaiceholder(buffer, {
-    size: 10,
-  });
+  // lqip 이미지 라이브러리 plaiceholder 와 lqip-modern 중 lqip-modern가 더 퀄리티기 좋음
+  // const { base64, metadata } = await getPlaiceholder(buffer, { size: 10 });
+  const { metadata } = await lqip(buffer);
 
-  node.properties.width = metadata.width;
-  node.properties.height = metadata.height;
-  node.properties.base64 = base64;
+  node.properties.width = metadata.originalWidth;
+  node.properties.height = metadata.originalHeight;
+  node.properties.base64 = metadata.dataURIBase64;
 }
 
 /**
