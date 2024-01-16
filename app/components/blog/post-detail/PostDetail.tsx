@@ -1,4 +1,6 @@
 import { Post } from '@/.contentlayer/generated';
+import { Divider } from '@nextui-org/react';
+import PostComments from './PostComments';
 import PostContent from './PostContent';
 import PostTitle from './PostTitle';
 import PostToc from './PostToc';
@@ -14,6 +16,8 @@ const PostDetail = ({ post }: PostDetailProps) => {
     <article className="mx-auto max-w-2xl p-8 py-20">
       <PostTitle title={title} date={date} />
       <PostContent body={body} />
+      <Divider className="my-20" />
+      <PostComments />
       <PostToc />
     </article>
   );
