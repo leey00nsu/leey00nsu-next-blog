@@ -50,6 +50,7 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://blog.leey00nsu.site'),
   title: 'leey00nsu 블로그',
   description: 'leey00nsu의 블로그 입니다.',
 };
