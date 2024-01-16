@@ -7,26 +7,32 @@ export const size = {
   height: 630,
 };
 export const contentType = 'image/png';
-export const runtime = 'edge';
 
 export default async function Image({ params }: { params: { slug: string } }) {
   const currentPost = allPosts.find((post) => post.slug === params.slug);
 
   const response = await fetch(
-    new URL('@/app/fonts/Pretendard-SemiBold.woff', import.meta.url),
+    'https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff',
   );
   const pretendardSemiBold = await response.arrayBuffer();
 
   return new ImageResponse(
     (
       <div
-        tw="flex flex-col h-full w-full items-center justify-center bg-[#4a83be] text-white"
+        tw="flex flex-col h-full w-full items-center justify-center text-white"
         style={{
+          background:
+            'linear-gradient(90deg, rgba(74,131,190,1) 0%, rgba(6,182,212,1) 0%, rgba(59,130,246,1) 100%)',
           fontFamily: 'PretendardSemiBold',
         }}
       >
+        <img
+          tw="w-[120px] h-[120px] rounded-full"
+          src="https://avatars.githubusercontent.com/u/101182523?v=4"
+          alt="Rounded avatar"
+        />
         <p tw="flex text-8xl ">leey00nsu 블로그</p>
-        <p tw="flex text-3xl ">{currentPost?.title}</p>
+        <p tw="flex text-4xl ">{currentPost?.title}</p>
       </div>
     ),
     {
