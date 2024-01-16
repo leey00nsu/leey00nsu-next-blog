@@ -16,19 +16,23 @@ export default async function Image() {
   return new ImageResponse(
     (
       <div
-        tw="flex flex-col h-full w-full items-center justify-center text-white"
+        tw="relative flex h-full w-full items-center justify-center text-neutral-800 bg-neutral-100"
         style={{
-          background:
-            'linear-gradient(90deg, rgba(74,131,190,1) 0%, rgba(6,182,212,1) 0%, rgba(59,130,246,1) 100%)',
           fontFamily: 'PretendardSemiBold',
         }}
       >
-        <img
-          tw="w-[120px] h-[120px] rounded-full"
-          src="https://avatars.githubusercontent.com/u/101182523?v=4"
-          alt="Rounded avatar"
-        />
-        <p tw="flex text-8xl ">leey00nsu 블로그</p>
+        <p tw=" text-7xl ">&quot;</p>
+        <p
+          tw=" text-5xl max-w-[1000px] p-2"
+          style={{
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          leey00nsu Blog
+        </p>
+        <p tw=" text-7xl ">&quot;</p>
       </div>
     ),
     {
