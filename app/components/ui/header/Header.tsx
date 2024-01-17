@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <Navbar className="bg-background/70">
       <NavbarBrand>
-        <Link className="font-bold text-foreground" href="/">
+        <Link className="text-personal-blue font-bold" href="/">
           leey00nsu
         </Link>
       </NavbarBrand>
