@@ -1,26 +1,11 @@
 import { Post } from '@/.contentlayer/generated';
-import parseDate from '@/app/lib/parseDate';
-import { Button, Card, CardBody } from '@nextui-org/react';
+import { Card, CardBody } from '@nextui-org/react';
 import Link from 'next/link';
-import parseTag, { PostTag } from '../../../lib/parseTag';
 
-interface PostTagsProps {
-  postTags: PostTag[];
-  showCount?: boolean;
-}
+import parseDate from '@/app/libs/parseDate';
 
-const PostTags = ({ postTags, showCount }: PostTagsProps) => {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {postTags.map((postTag) => (
-        <Button size="sm" disableRipple variant="flat" key={postTag.tag}>
-          <span>{postTag.tag}</span>
-          {showCount && <span>({postTag.count})</span>}
-        </Button>
-      ))}
-    </div>
-  );
-};
+import parseTag from '../../../libs/parseTag';
+import PostTags from './PostTags';
 
 const PostItem = (post: Post) => {
   return (

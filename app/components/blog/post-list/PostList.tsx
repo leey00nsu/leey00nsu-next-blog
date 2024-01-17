@@ -3,6 +3,7 @@
 import { allPosts } from '@/.contentlayer/generated';
 import { compareDesc } from 'date-fns';
 import { useSearchParams } from 'next/navigation';
+
 import PostItem from './PostItem';
 import Pagination from './PostPagination';
 

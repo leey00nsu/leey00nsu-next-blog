@@ -1,6 +1,5 @@
 'use client';
 
-import tw from '@/app/lib/tw';
 import {
   Button,
   Link,
@@ -11,6 +10,9 @@ import {
 } from '@nextui-org/react';
 import { usePathname } from 'next/navigation';
 import { FaGithub } from 'react-icons/fa';
+
+import tw from '@/app/libs/tw';
+
 import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {

@@ -2,7 +2,6 @@
 // Custom rehype plugin to add width and height to local images
 // To make Next.js <Image/> works
 // Ref: https://kylepfromer.com/blog/nextjs-image-component-blog
-
 // Similiar structure to:
 // https://github.com/JS-DevTools/rehype-inline-svg/blob/master/src/inline-svg.ts
 import lqip from 'lqip-modern';

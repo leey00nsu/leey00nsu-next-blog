@@ -1,7 +1,7 @@
-import { PostDetail } from '@/app/components/blog/post-detail';
 import { allPosts } from 'contentlayer/generated';
-
 import { notFound } from 'next/navigation';
+
+import { PostDetail } from '@/app/components/blog/post-detail';
 
 export const generateStaticParams = () => {
   return allPosts.map((post) => ({ slug: post.slug }));

@@ -1,5 +1,6 @@
 import { Post } from '@/.contentlayer/generated';
 import { Divider } from '@nextui-org/react';
+
 import PostComments from './PostComments';
 import PostContent from './PostContent';
 import PostTitle from './PostTitle';

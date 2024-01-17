@@ -1,6 +1,7 @@
 import { MDX } from 'contentlayer/core';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
+
 import { CustomImage, CustomLink, CustomSnipet } from './custom-mdx-components';
 
 interface PostContentProps {

@@ -1,4 +1,4 @@
-import parseDate from "@/app/lib/parseDate";
+import parseDate from '@/app/libs/parseDate';
 
 interface PostTitleProps {
   title: string;
