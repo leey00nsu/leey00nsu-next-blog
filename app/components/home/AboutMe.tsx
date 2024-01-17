@@ -9,9 +9,8 @@ const AboutMe = () => {
   const highlightClasses = 'text-personal-blue text-3xl sm:text-6xl';
 
   return (
-    <article className="flex min-h-[calc(100dvh-128px)] flex-col items-center">
-      <div className="flex max-w-4xl flex-col justify-center gap-8 p-8 py-20">
-        <GithubChart />
+    <article className="flex min-h-[calc(100dvh-128px)] flex-col items-center ">
+      <div className="flex max-w-4xl flex-col justify-center gap-8 p-8 ">
         <section className="flex w-full flex-col justify-start font-bold">
           <h2 className={heading2Classes}>
             <span>안녕하세요</span>
@@ -41,7 +40,7 @@ const AboutMe = () => {
           </h3>
         </section>
 
-        <section className="flex w-full flex-col justify-start text-lg font-light">
+        <section className="mb-10 flex w-full flex-col justify-start text-lg font-light">
           <p className={paragraphClasses}>
             자바스크립트 생태계에 큰 흥미를 느끼고 있습니다.
           </p>
@@ -54,6 +53,8 @@ const AboutMe = () => {
             <span>를 활용한 풀스택 어플리케이션에 관심이 많습니다.</span>
           </p>
         </section>
+
+        <GithubChart />
       </div>
     </article>
   );

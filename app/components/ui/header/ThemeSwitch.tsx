@@ -32,6 +32,7 @@ export default function ThemeSwitch() {
         size="lg"
         color="default"
         thumbIcon={<FaQuestion />}
+        className="invisible"
       />
     );
 

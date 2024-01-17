@@ -15,7 +15,6 @@ const GithubChart = async () => {
       blurDataURL={base64}
       src="https://ghchart.rshah.org/086ab6/leey00nsu"
       alt="leey00nsu github chart"
-      unoptimized
       priority
     />
   );

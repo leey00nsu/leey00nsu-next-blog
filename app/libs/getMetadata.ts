@@ -9,8 +9,10 @@ export default async function getMetadata(imageUrl: string) {
 
   const buffer = await res.arrayBuffer();
 
+  // const { metadata } = await lqip(Buffer.from(buffer));
+  // return { metadata };
   const { base64, metadata } = await getPlaiceholder(Buffer.from(buffer), {
-    size: 20,
+    size: 8,
   });
 
   return { base64, metadata };

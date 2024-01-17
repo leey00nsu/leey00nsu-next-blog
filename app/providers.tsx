@@ -11,7 +11,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <NextUIProvider navigate={router.push}>
-      <ThemeProvider attribute="class" defaultTheme="light">
+      <ThemeProvider attribute="class" enableSystem defaultTheme="light">
         <KBarProviders>{children}</KBarProviders>
       </ThemeProvider>
     </NextUIProvider>
