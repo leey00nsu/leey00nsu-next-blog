@@ -12,6 +12,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/no-unsafe-return": "off",
     "react/no-unknown-property": "off",
     "import/prefer-default-export": "off",
     "@typescript-eslint/no-misused-promises": "off",

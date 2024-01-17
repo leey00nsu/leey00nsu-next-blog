@@ -8,8 +8,9 @@ import {
   NavbarContent,
   NavbarItem,
 } from '@nextui-org/react';
+import { useKBar } from 'kbar';
 import { usePathname } from 'next/navigation';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaSearch } from 'react-icons/fa';
 
 import tw from '@/app/libs/tw';
 
@@ -17,6 +18,7 @@ import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {
   const pathname = usePathname();
+  const { query } = useKBar();
 
   return (
     <Navbar className="bg-background/70">
@@ -39,6 +41,18 @@ const Header = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
+        <NavbarItem className="hidden sm:flex">
+          <Button
+            isIconOnly
+            disableRipple
+            color="default"
+            href="https://github.com/leey00nsu"
+            variant="light"
+            onClick={() => query.toggle()}
+          >
+            <FaSearch className="h-6 w-6" />
+          </Button>
+        </NavbarItem>
         <NavbarItem>
           <ThemeSwitch />
         </NavbarItem>

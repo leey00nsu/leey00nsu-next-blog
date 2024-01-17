@@ -3,7 +3,7 @@
 import { Switch } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaMoon, FaQuestion, FaSun } from 'react-icons/fa';
 
 interface ThemeIconProps {
   theme: string;
@@ -25,8 +25,15 @@ export default function ThemeSwitch() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
-  if (!theme) return null;
+  if (!mounted || !theme)
+    return (
+      <Switch
+        isSelected={false}
+        size="lg"
+        color="default"
+        thumbIcon={<FaQuestion />}
+      />
+    );
 
   return (
     <Switch
