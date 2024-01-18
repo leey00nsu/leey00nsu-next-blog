@@ -52,3 +52,36 @@ code::before {
 .prose code span[data-highlighted-line] span {
   @apply !text-[#303446];
 }
+
+.fade-in {
+  will-change: opacity;
+
+  animation: fade-in 1s;
+  -moz-animation: fade-in 1s; /* Firefox */
+  -webkit-animation: fade-in 1s; /* Safari and Chrome */
+  -o-animation: fade-in 1s; /* Opera */
+}
+.fade-out {
+  will-change: opacity;
+
+  animation: fade-out 1s;
+  -moz-animation: fade-out 1s; /* Firefox */
+  -webkit-animation: fade-out 1s; /* Safari and Chrome */
+  -o-animation: fade-out 1s; /* Opera */
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

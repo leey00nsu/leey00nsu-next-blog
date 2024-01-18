@@ -1,6 +1,6 @@
-import Image from 'next/image';
-
 import getMetadata from '@/app/libs/getMetadata';
+
+import { CustomImage } from '../blog/post-detail/custom-mdx-components';
 
 const GithubChart = async () => {
   const { base64, metadata } = await getMetadata(
@@ -8,15 +8,14 @@ const GithubChart = async () => {
   );
 
   return (
-    <Image
+    <CustomImage
+      alt="leey00nsu github chart"
       width={metadata?.width}
       height={metadata?.height}
-      placeholder={base64 ? 'blur' : 'empty'}
-      blurDataURL={base64}
       src="https://ghchart.rshah.org/086ab6/leey00nsu"
-      alt="leey00nsu github chart"
+      base64={base64}
+      keepBlur={false}
       unoptimized
-      priority
     />
   );
 };
