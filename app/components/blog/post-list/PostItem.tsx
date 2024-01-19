@@ -19,8 +19,10 @@ const PostItem = (post: Post) => {
           {parseDate(post.date)}
         </time>
         <div>
-          <h2 className="truncate text-xl">{post.title}</h2>
-          <h3 className="truncate text-sm text-gray-600">{post.description}</h3>
+          <h2 className="text-base sm:text-xl">{post.title}</h2>
+          <h3 className="truncate text-xs text-gray-600 sm:text-sm">
+            {post.description}
+          </h3>
         </div>
         <PostTags postTags={parseTag([post])} />
       </CardBody>
