@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import PostItem from './PostItem';
 import Pagination from './PostPagination';
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 6;
 
 const PostList = () => {
   const searchParams = useSearchParams();
@@ -25,13 +25,15 @@ const PostList = () => {
   const totalPageLength = Math.ceil(posts.length / PAGE_SIZE);
 
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-4 p-8">
+    <article className="mx-auto flex min-h-[calc(100svh-128px)] max-w-5xl flex-col justify-center gap-8 p-8">
       <h2>{posts.length}개의 글이 있습니다.</h2>
-      {paginatedPosts.map((post) => (
-        <PostItem key={post.slug} {...post} />
-      ))}
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {paginatedPosts.map((post) => (
+          <PostItem key={post.slug} {...post} />
+        ))}
+      </section>
       <Pagination totalPageLength={totalPageLength} currentPage={currentPage} />
-    </div>
+    </article>
   );
 };
 

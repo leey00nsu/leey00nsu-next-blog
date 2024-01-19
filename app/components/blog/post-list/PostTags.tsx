@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react';
+import { Chip } from '@nextui-org/react';
 
 import { PostTag } from '@/app/libs/parseTag';
 
@@ -9,12 +9,12 @@ interface PostTagsProps {
 
 const PostTags = ({ postTags, showCount }: PostTagsProps) => {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex w-full gap-2 truncate ">
       {postTags.map((postTag) => (
-        <Button size="sm" disableRipple variant="flat" key={postTag.tag}>
+        <Chip className="bg-personal-blue/10" key={postTag.tag} variant="flat">
           <span>{postTag.tag}</span>
           {showCount && <span>({postTag.count})</span>}
-        </Button>
+        </Chip>
       ))}
     </div>
   );

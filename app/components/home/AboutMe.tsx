@@ -9,7 +9,7 @@ const AboutMe = () => {
   const highlightClasses = 'text-personal-blue text-3xl sm:text-6xl';
 
   return (
-    <article className="flex min-h-[calc(100dvh-128px)] flex-col items-center ">
+    <article className="flex min-h-[calc(100svh-128px)] flex-col items-center ">
       <div className="flex max-w-4xl flex-col justify-center gap-8 p-8 ">
         <section className="flex w-full flex-col justify-start font-bold">
           <h2 className={heading2Classes}>
