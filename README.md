@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img width="1296" alt="blog banner" src="https://github.com/leey00nsu/blog.leey00nsu.site/assets/101182523/dd1dac65-4c52-452c-aae1-0c9ddd3d925a">
 
-## Getting Started
 
-First, run the development server:
+# [leey00nsu 블로그](https://blog.leey00nsu.site/)
+> Next.js + Contentlayer 블로그
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech
+- Next.js 14
+- Typescript
+- Contentlayer
+- Tailwind (+ Next UI)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Feature
+### 📝 마크다운 페이지
+- 빌드 시 mdx 파일로부터 페이지를 생성합니다.
+### ⚡️ 최적화
+- 외부 이미지에 대해 Next/Image를 지원합니다.
+### 🔍 SEO
+- 생성된 페이지를 기반으로 sitemap을 생성합니다.
+- og metadata,image(썸네일) 를 생성합니다.
+### ➕ 편의기능
+- 다크 모드를 지원합니다.
+- 페이지 검색을 지원합니다.
