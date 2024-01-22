@@ -3,7 +3,16 @@ import { FaLink } from 'react-icons/fa';
 
 const CustomLink = ({ href, children }: LinkProps) => {
   return (
-    <Link isExternal showAnchorIcon anchorIcon={<FaLink />} href={href}>
+    <Link
+      isExternal
+      style={{
+        fontSize: 'inherit',
+        lineHeight: 'inherit',
+      }}
+      showAnchorIcon
+      anchorIcon={<FaLink />}
+      href={href}
+    >
       {children}
     </Link>
   );

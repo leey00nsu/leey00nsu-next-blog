@@ -1,4 +1,4 @@
-import AboutMe from './components/home/AboutMe';
+import { AboutMe } from './components/home';
 
 export default function Home() {
   return <AboutMe />;

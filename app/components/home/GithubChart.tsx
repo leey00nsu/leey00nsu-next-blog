@@ -1,6 +1,6 @@
 import getMetadata from '@/app/libs/getMetadata';
 
-import { CustomImage } from '../blog/post-detail/custom-mdx-components';
+import { CustomImage } from '../ui/mdx-components';
 
 const GithubChart = async () => {
   const { base64, metadata } = await getMetadata(

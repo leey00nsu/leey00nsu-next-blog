@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <Navbar className="bg-background/70">
       <NavbarBrand>
-        <Link className="text-personal-blue font-bold" href="/">
+        <Link className="font-bold text-personal-blue" href="/">
           leey00nsu
         </Link>
       </NavbarBrand>
@@ -37,6 +37,17 @@ const Header = () => {
             href="/blog"
           >
             블로그
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link
+            className={tw(
+              'text-lg font-normal text-foreground',
+              pathname.startsWith('/portfolio') && 'font-bold',
+            )}
+            href="/portfolio"
+          >
+            포트폴리오
           </Link>
         </NavbarItem>
       </NavbarContent>

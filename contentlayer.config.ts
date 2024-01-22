@@ -3,12 +3,13 @@ import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+
 import imageMetadata from './app/plugins/imageMetadata';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
   contentType: 'mdx',
-  filePathPattern: `**/*.mdx`,
+  filePathPattern: `blog/**/*.mdx`,
   fields: {
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
@@ -30,9 +31,33 @@ export const Post = defineDocumentType(() => ({
   },
 }));
 
+export const AboutMe = defineDocumentType(() => ({
+  name: 'AboutMe',
+  contentType: 'mdx',
+  filePathPattern: `about-me/*.mdx`,
+  computedFields: {
+    url: {
+      type: 'string',
+      resolve: (aboutMe) => `${aboutMe._raw.sourceFileDir}`,
+    },
+  },
+}));
+
+export const Portfolio = defineDocumentType(() => ({
+  name: 'Portfolio',
+  contentType: 'mdx',
+  filePathPattern: `portfolio/*.mdx`,
+  computedFields: {
+    url: {
+      type: 'string',
+      resolve: (portfolio) => `${portfolio._raw.sourceFileDir}`,
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: 'public/posts',
-  documentTypes: [Post],
+  documentTypes: [Post, AboutMe, Portfolio],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
