@@ -40,6 +40,10 @@ export const AboutMe = defineDocumentType(() => ({
       type: 'string',
       resolve: (aboutMe) => `${aboutMe._raw.sourceFileDir}`,
     },
+    imagePath: {
+      type: 'string',
+      resolve: () => `/posts/about-me/`,
+    },
   },
 }));
 

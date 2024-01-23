@@ -49,7 +49,7 @@ function filterImageNode(node: ImageNode): boolean {
  */
 async function addMetadata(node: ImageNode): Promise<void> {
   const buffer = await fs.readFile(
-    path.join(process.cwd(), 'public', node.properties.src),
+    path.join(process.cwd(), node.properties.src),
   );
 
   // lqip 이미지 라이브러리 plaiceholder 와 lqip-modern 중 lqip-modern가 더 퀄리티기 좋음
@@ -59,6 +59,7 @@ async function addMetadata(node: ImageNode): Promise<void> {
   node.properties.width = metadata.originalWidth;
   node.properties.height = metadata.originalHeight;
   node.properties.base64 = metadata.dataURIBase64;
+  node.properties.src = node.properties.src.replace('/public', '');
 }
 
 /**

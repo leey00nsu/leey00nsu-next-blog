@@ -10,8 +10,8 @@ const GithubChart = async () => {
   return (
     <CustomImage
       alt="leey00nsu github chart"
-      width={metadata?.width}
-      height={metadata?.height}
+      width={metadata.width}
+      height={metadata.height}
       src="https://ghchart.rshah.org/086ab6/leey00nsu"
       base64={base64}
       keepBlur={false}
