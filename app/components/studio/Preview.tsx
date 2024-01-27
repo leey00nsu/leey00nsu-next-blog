@@ -47,7 +47,11 @@ const Preview = ({ source }: PreviewProps) => {
     parseMarkdown();
   }, [deferredValue]);
 
-  return <div className="prose prose-slate">{content}</div>;
+  return (
+    <div className="prose prose-slate min-h-full max-w-none rounded border-[1px] border-[#d0d7de] bg-background p-4 dark:prose-invert dark:border-background">
+      {content}
+    </div>
+  );
 };
 
 export default Preview;

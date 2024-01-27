@@ -1,5 +1,6 @@
 'use client';
 
+import MDEditor from '@uiw/react-md-editor/nohighlight';
 import { useState } from 'react';
 
 import Preview from './Preview';
@@ -9,14 +10,16 @@ const Editor = () => {
 
   return (
     <main className="min-w-screen flex min-h-screen">
-      <div className="w-1/2">
-        <textarea
-          className="h-full w-full"
+      <div className="flex-1 p-4">
+        <MDEditor
           value={source}
-          onChange={(e) => setSource(e.target.value)}
+          onChange={(val) => setSource(val!)}
+          extraCommands={[]}
+          preview="edit"
+          className="min-h-full"
         />
       </div>
-      <div className="w-1/2">
+      <div className="flex-1 p-4">
         <Preview source={source} />
       </div>
     </main>

@@ -19,6 +19,7 @@
     "@next/third-parties": "^14.1.0",
     "@nextui-org/react": "^2.2.9",
     "@uidotdev/usehooks": "^2.4.1",
+    "@uiw/react-md-editor": "^4.0.3",
     "contentlayer": "^0.3.4",
     "date-fns": "^3.2.0",
     "framer-motion": "^10.18.0",
