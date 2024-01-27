@@ -1,20 +1,20 @@
 ---
 slug: external-next-image
-title: 외부 이미지 Next/Image 적용하기
+title: 외부 이미지 next/image 적용하기
 tags:
   - Next.js
   - plaiceholder
-description: plaiceholder를 통해 외부 이미지에 Next/Image를 적용하는 과정에 대해서 설명합니다.
+description: plaiceholder를 통해 외부 이미지에 next/image를 적용하는 과정에 대해서 설명합니다.
 date: '2024-1-23'
 ---
 
-## 외부 이미지 Next/Image 적용하기
+## 외부 이미지 next/image 적용하기
 
-### Next/Image
+### next/image
 
-`Next.js`에서는 최적화를 위해서 이미지를 나타낼 때 `img` 태그 대신 `Next/Image` 컴포넌트를 사용하라는 경고를 볼 수 있습니다.
+`Next.js`에서는 최적화를 위해서 이미지를 나타낼 때 `img` 태그 대신 `next/image` 컴포넌트를 사용하라는 경고를 볼 수 있습니다.
 
-Next/Image를 사용하면 다음과 같은 장점을 쉽게 얻을 수 있습니다.
+next/image를 사용하면 다음과 같은 장점을 쉽게 얻을 수 있습니다.
 
 - `webp`와 같은 **더 작은 용량의 이미지 포맷으로 이미지 서빙**
 - `srcset`을 이용하여 **디바이스별 적절한 이미지 서빙**
@@ -22,9 +22,9 @@ Next/Image를 사용하면 다음과 같은 장점을 쉽게 얻을 수 있습�
 
 이번 포스팅에서는 placeholder에 대하여 중점적으로 다루어보겠습니다.
 
-Next/Image에서는 다음과 같이 이미지에 대해 `width`,`height` 와 같은 `메타데이터`를 자동으로 추출하고 `blurDataUrl`도 생성해주는 것을 알 수 있습니다.
+next/image에서는 다음과 같이 이미지에 대해 `width`,`height` 와 같은 `메타데이터`를 자동으로 추출하고 `blurDataUrl`도 생성해주는 것을 알 수 있습니다.
 
-```jsx
+```jsx title="next/image"
 import Image from 'next/image';
 
 import profilePic from './me.png';
@@ -57,7 +57,7 @@ export default function Page() {
 
 라이브러리를 설치하려면 이미지 전처리 라이브러리인 `sharp` 를 설치해야 합니다.
 
-```jsx
+```jsx title="sharp 설치"
 npm install sharp
 npm install plaiceholder
 ```
@@ -68,7 +68,7 @@ npm install plaiceholder
 
 또한 함수에 생성될 `lqip` 이미지의 사이즈 등 여러 속성을 전달할 수 있습니다.
 
-```jsx
+```jsx title="getMetadata.ts"
 import { getPlaiceholder } from 'plaiceholder';
 
 export default async function getMetadata(imageUrl: string) {
@@ -84,11 +84,11 @@ export default async function getMetadata(imageUrl: string) {
 }
 ```
 
-Next/Image는 blurDataUrl로 `base64`를 받으므로, base64에 대한 반환 값을 받아보겠습니다.
+next/image는 blurDataUrl로 `base64`를 받으므로, base64에 대한 반환 값을 받아보겠습니다.
 
 plaiceholder에서는 다음과 같이 base64와 메타데이터를 반환합니다.
 
-```jsx
+```jsx title="plaiceholder 반환 값"
 base64: string;
 metadata: {
     orientation?: number;
@@ -129,7 +129,7 @@ metadata: {
 
 또한, 외부 이미지를 서빙할 때 `optimized` 옵션을 적용하기 위해서는 해당 이미지 도메인을 `remotePatterns`에 등록해주어야 합니다.
 
-```jsx
+```jsx title="next.config.js"
 module.exports = {
   images: {
     remotePatterns: [
@@ -146,7 +146,7 @@ module.exports = {
 
 이제 이 함수를 호출하여 Image 컴포넌트에 넣을 수 있습니다.
 
-```jsx
+```jsx title="GithubChart.tsx"
 const GithubChart = async () => {
   const url =
     'https://cdn.pixabay.com/photo/2023/07/22/04/15/motorbike-8142649_1280.jpg';
@@ -175,7 +175,7 @@ const GithubChart = async () => {
 
 다음과 같이, 적용하지 않은 쪽은 이미지가 완전히 로딩되기 전까지 보이지 않으며 `Layout Shift`가 발생합니다.
 
-따라서, Next/Image를 유용하게 사용하기 위해서는 해당 라이브러리를 사용하는 것을 고려해볼 수 있습니다.
+따라서, next/image를 유용하게 사용하기 위해서는 해당 라이브러리를 사용하는 것을 고려해볼 수 있습니다.
 
 또한 `optimized` 옵션을 적용했을 때 **두 배 이상의 용량 차이를 보여주었습니다.**
 
