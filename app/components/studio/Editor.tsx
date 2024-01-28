@@ -10,6 +10,8 @@ import { useDropzone } from 'react-dropzone';
 
 import useFileStore from '@/app/store/fileStore';
 
+import { savePostLocal } from '@/app/libs/savePost';
+
 import Preview from './Preview';
 
 const customImageBlock = {
@@ -39,6 +41,8 @@ const customCodeBlock = {
 
 const Editor = () => {
   const addFile = useFileStore((state) => state.addFile);
+  const files = useFileStore((state) => state.files);
+
   const [source, setSource] = useState('');
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -46,7 +50,7 @@ const Editor = () => {
     if (/[가-힣\s]/.test(acceptedFiles[0].name)) return;
 
     const fileName = acceptedFiles[0].name.split('.').slice(0, -1).join('.');
-    const filePath = `/public/posts/글제목/${acceptedFiles[0].name}`;
+    const filePath = `/public/posts/blog/글제목/${acceptedFiles[0].name}`;
 
     setSource((prev) => {
       const text = `${prev}\n`;
@@ -70,52 +74,72 @@ const Editor = () => {
     },
   });
 
+  const saveHandler = () => {
+    const formData = new FormData();
+    formData.append('title', 'title-slug');
+    formData.append('content', source);
+
+    files.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    savePostLocal(formData);
+  };
+
   return (
-    <main className="min-w-screen flex min-h-screen">
-      <div className="w-1/2 p-4" {...getRootProps()}>
-        <input {...getInputProps()} />
-        <MDEditor
-          value={source}
-          onChange={(val) => setSource(val!)}
-          commands={[
-            commands.bold,
-            commands.italic,
-            commands.strikethrough,
-            commands.hr,
-            commands.divider,
-            commands.group(
-              [
-                commands.title1,
-                commands.title2,
-                commands.title3,
-                commands.title4,
-                commands.title5,
-                commands.title6,
-              ],
-              {
-                name: 'title',
-                groupName: 'title',
-                buttonProps: { 'aria-label': 'Insert title' },
-              },
-            ),
-            commands.quote,
-            commands.code,
-            customCodeBlock,
-            commands.divider,
-            commands.link,
-            customImageBlock,
-            commands.divider,
-            commands.unorderedListCommand,
-            commands.orderedListCommand,
-            commands.checkedListCommand,
-          ]}
-          extraCommands={[]}
-          preview="edit"
-          className="min-h-full w-full max-w-none"
-        />
+    <main className="min-w-screen flex min-h-screen flex-col">
+      <div>
+        <button type="button" onClick={saveHandler}>
+          저장
+        </button>
       </div>
-      <div className="w-1/2 p-4 ">
-        <Preview source={source} />
+
+      <div className="flex grow flex-row">
+        <div className="w-1/2 p-4" {...getRootProps()}>
+          <input {...getInputProps()} />
+          <MDEditor
+            value={source}
+            onChange={(val) => setSource(val!)}
+            commands={[
+              commands.bold,
+              commands.italic,
+              commands.strikethrough,
+              commands.hr,
+              commands.divider,
+              commands.group(
+                [
+                  commands.title1,
+                  commands.title2,
+                  commands.title3,
+                  commands.title4,
+                  commands.title5,
+                  commands.title6,
+                ],
+                {
+                  name: 'title',
+                  groupName: 'title',
+                  buttonProps: { 'aria-label': 'Insert title' },
+                },
+              ),
+              commands.quote,
+              commands.code,
+              customCodeBlock,
+              commands.divider,
+              commands.link,
+              customImageBlock,
+              commands.divider,
+              commands.unorderedListCommand,
+              commands.orderedListCommand,
+              commands.checkedListCommand,
+            ]}
+            extraCommands={[]}
+            preview="edit"
+            className="min-h-full w-full max-w-none"
+          />
+        </div>
+        <div className="w-1/2 p-4 ">
+          <Preview source={source} />
+        </div>
       </div>
     </main>
   );

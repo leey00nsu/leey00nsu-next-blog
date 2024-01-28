@@ -8,7 +8,7 @@ const LocalImage = ({
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const files = useFileStore((state) => state.files);
-  const [src, setSrc] = useState('');
+  const [src, setSrc] = useState(props.src);
 
   useEffect(() => {
     const fileName = props.src!.split('/').pop();
