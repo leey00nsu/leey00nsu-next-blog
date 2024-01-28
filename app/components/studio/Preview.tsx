@@ -10,7 +10,7 @@ import {
 } from 'react';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeStringify from 'rehype-stringify';
-import remarkGfm from 'remark-gfm';
+import remarkGfm from 'remark-gfm-latest';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
@@ -31,6 +31,7 @@ const Preview = ({ source }: PreviewProps) => {
   const parseMarkdown = async () => {
     const response = await unified()
       .use(remarkParse)
+      // @ts-ignore
       .use(remarkGfm)
       .use(remarkRehype)
       .use(rehypePrettyCode, {

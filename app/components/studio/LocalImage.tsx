@@ -8,7 +8,7 @@ const LocalImage = ({
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const files = useFileStore((state) => state.files);
-  const [src, setSrc] = useState(props.src);
+  const [, setSrc] = useState(props.src);
 
   useEffect(() => {
     const fileName = props.src!.split('/').pop();
@@ -21,9 +21,9 @@ const LocalImage = ({
     };
 
     reader.readAsDataURL(file);
-  }, []);
+  }, [props]);
 
-  return <img alt={props.alt} src={src} />;
+  return <img alt={props.alt} src={props.src} />;
 };
 
 export default LocalImage;
