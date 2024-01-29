@@ -3,7 +3,7 @@ import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import { unified } from 'unified';
 
-import LocalImage from '@/app/components/studio/LocalImage';
+import PreviewImage from '@/app/components/studio/PreviewImage';
 
 import { CustomLink, CustomSnipet } from '../../components/ui/mdx-components';
 
@@ -17,7 +17,7 @@ const production = {
   components: {
     a: CustomLink,
     figcaption: CustomSnipet,
-    img: LocalImage,
+    img: PreviewImage,
   },
 };
 

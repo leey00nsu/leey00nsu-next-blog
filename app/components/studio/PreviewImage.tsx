@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import useFileStore from '@/app/store/fileStore';
 
-const LocalImage = ({
+const PreviewImage = ({
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const files = useFileStore((state) => state.files);
@@ -25,9 +25,9 @@ const LocalImage = ({
     };
 
     reader.readAsDataURL(file);
-  }, [props]);
+  }, [props, files]);
 
   return <img alt={props.alt} src={src} />;
 };
 
-export default LocalImage;
+export default PreviewImage;
