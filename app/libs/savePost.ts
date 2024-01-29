@@ -60,10 +60,15 @@ const savePostRemote = async (formData: FormData) => {
       ],
     });
 
-    console.log('Commit created successfully!');
+    return {
+      success: true,
+      message: '정상적으로 커밋되었습니다.',
+    };
   } catch (error: any) {
-    console.error('Error creating commit:', error);
-    console.error('Error creating commit:', error.message);
+    return {
+      success: false,
+      message: `커밋 중 오류가 발생하였습니다. : ${error.message}`,
+    };
   }
 };
 
@@ -80,11 +85,9 @@ const savePostLocal = async (formData: FormData) => {
 
     const contentPath = path.join(dir, `${slug}.mdx`);
 
-    fs.writeFile(contentPath, content, 'utf-8', (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('The file has been saved!');
+    fs.writeFile(contentPath, content, 'utf-8', (error) => {
+      if (error) {
+        throw new Error(error.message);
       }
     });
 
@@ -92,16 +95,22 @@ const savePostLocal = async (formData: FormData) => {
       const filePath = path.join(dir, file.name);
       const fileContent = Buffer.from(await file.arrayBuffer());
 
-      fs.writeFile(filePath, fileContent, 'base64', (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('The file has been saved!');
+      fs.writeFile(filePath, fileContent, 'base64', (error) => {
+        if (error) {
+          throw new Error(error.message);
         }
       });
     }
-  } catch (e) {
-    console.log(e);
+
+    return {
+      success: true,
+      message: '정상적으로 저장되었습니다.',
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: `저장 중 오류가 발생하였습니다. : ${error.message}`,
+    };
   }
 };
 

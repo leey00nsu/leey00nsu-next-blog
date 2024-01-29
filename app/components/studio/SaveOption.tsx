@@ -1,4 +1,5 @@
 import { Button } from '@nextui-org/react';
+import toast from 'react-hot-toast';
 import { useShallow } from 'zustand/react/shallow';
 
 import useEditorStore from '@/app/store/editorStore';
@@ -36,7 +37,15 @@ date: ${date}
     return frontmatter;
   };
 
-  const saveHandler = (type: string) => {
+  const toastResponse = (response: { success: boolean; message: string }) => {
+    if (response.success) {
+      toast.success(response.message);
+    } else {
+      toast.error(response.message);
+    }
+  };
+
+  const saveHandler = async (type: string) => {
     const frontmatter = getFrontmatter();
     const content = `${frontmatter}\n${source}`;
 
@@ -49,10 +58,12 @@ date: ${date}
     });
 
     if (type === 'local') {
-      savePostLocal(formData);
+      const response = await savePostLocal(formData);
+      toastResponse(response);
     }
     if (type === 'remote') {
-      savePostRemote(formData);
+      const response = await savePostRemote(formData);
+      toastResponse(response);
     }
   };
 
