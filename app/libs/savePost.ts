@@ -62,6 +62,7 @@ const savePostRemote = async (formData: FormData) => {
 
     console.log('Commit created successfully!');
   } catch (error: any) {
+    console.error('Error creating commit:', error);
     console.error('Error creating commit:', error.message);
   }
 };
