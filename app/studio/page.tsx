@@ -1,7 +1,7 @@
-import Editor from '../components/studio/Editor';
+import Studio from '../components/studio/Studio';
 
-const Studio = () => {
-  return <Editor />;
+const StudioPage = () => {
+  return <Studio />;
 };
 
-export default Studio;
+export default StudioPage;

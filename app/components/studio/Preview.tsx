@@ -15,13 +15,12 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 
+import useEditorStore from '@/app/store/editorStore';
+
 import useProcessor from '@/app/hooks/studio/useProcessor';
 
-interface PreviewProps {
-  source: string;
-}
-
-const Preview = ({ source }: PreviewProps) => {
+const Preview = () => {
+  const source = useEditorStore((state) => state.source);
   const debouncedSearchTerm = useDebounce(source, 500);
   const deferredValue = useDeferredValue(debouncedSearchTerm);
   const [content, setContent] = useState(createElement(Fragment));
@@ -49,8 +48,10 @@ const Preview = ({ source }: PreviewProps) => {
   }, [deferredValue]);
 
   return (
-    <div className="prose prose-slate h-full break-all rounded border-[1px] border-[#d0d7de] bg-background p-4 dark:prose-invert dark:border-background">
-      {content}
+    <div className="w-1/2 p-4 ">
+      <div className="prose prose-slate h-full w-full max-w-none break-all rounded border-[1px] border-[#d0d7de] bg-background p-4 dark:prose-invert dark:border-background">
+        {content}
+      </div>
     </div>
   );
 };
