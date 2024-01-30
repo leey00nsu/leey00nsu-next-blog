@@ -7,6 +7,8 @@ import useFileStore from '@/app/store/fileStore';
 
 import { savePostLocal, savePostRemote } from '@/app/libs/savePost';
 
+import LogoutButton from '../auth/LogoutButton';
+
 const SaveOption = () => {
   const { source, slug, title, tags, description, date } = useEditorStore(
     useShallow((state) => ({
@@ -76,6 +78,7 @@ date: ${date}
       >
         파일로 저장
       </Button> */}
+      <LogoutButton />
       <Button
         color="primary"
         variant="flat"

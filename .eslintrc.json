@@ -12,6 +12,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "@typescript-eslint/require-await": "off",
     "no-await-in-loop": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-floating-promises": "off",

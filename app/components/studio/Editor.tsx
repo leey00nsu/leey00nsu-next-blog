@@ -71,7 +71,7 @@ const Editor = () => {
   });
 
   return (
-    <div className="w-1/2 p-4" {...getRootProps()}>
+    <div className="w-1/2" {...getRootProps()}>
       <input {...getInputProps()} />
       <MDEditor
         value={source}

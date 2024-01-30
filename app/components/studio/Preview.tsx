@@ -48,7 +48,7 @@ const Preview = () => {
   }, [deferredValue]);
 
   return (
-    <div className="w-1/2 p-4 ">
+    <div className="w-1/2 ">
       <div className="prose prose-slate h-full w-full max-w-none break-all rounded border-[1px] border-[#d0d7de] bg-background p-4 dark:prose-invert dark:border-background">
         {content}
       </div>

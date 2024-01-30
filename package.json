@@ -27,6 +27,7 @@
     "kbar": "^0.1.0-beta.45",
     "lqip-modern": "^2.0.0",
     "next": "14.0.4",
+    "next-auth": "^4.24.5",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
     "octokit-commit-multiple-files": "github:leey00nsu/octokit-commit-multiple-files",
