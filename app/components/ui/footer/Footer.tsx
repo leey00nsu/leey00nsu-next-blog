@@ -1,5 +1,6 @@
 import { Button } from '@nextui-org/react';
-import { FaGithub } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaGithub, FaPencilAlt } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -16,7 +17,17 @@ const Footer = () => {
           href="https://github.com/leey00nsu"
           variant="light"
         >
-          <FaGithub className="h-6 w-6" />
+          <FaGithub className="h-6 w-6 text-default-400" />
+        </Button>
+        <Button
+          isIconOnly
+          disableRipple
+          as={Link}
+          color="default"
+          href="/studio"
+          variant="light"
+        >
+          <FaPencilAlt className="h-6 w-6 text-default-400" />
         </Button>
       </div>
     </footer>
