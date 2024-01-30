@@ -20,7 +20,7 @@ const savePostRemote = async (formData: FormData) => {
 
   const owner = 'leey00nsu'; // GitHub 사용자 이름
   const repo = 'leey00nsu-next-blog'; // GitHub 레포지토리 이름
-  const branch = 'feat/studio'; // 브랜치 이름
+  const branch = 'main'; // 브랜치 이름
   const postPath = `public/posts/blog/${slug}`; // 블로그 포스트 저장 경로
 
   try {
