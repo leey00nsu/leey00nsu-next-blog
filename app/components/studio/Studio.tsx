@@ -6,6 +6,7 @@ import { LoadingSpinner } from '../ui/spinner';
 import Editor from './Editor';
 import FileList from './FileList';
 import FrontmatterForm from './FrontmatterForm';
+// import Preview from './Preview';
 import Preview from './Preview';
 import SaveOption from './SaveOption';
 
@@ -27,7 +28,7 @@ const Studio = () => {
       <SaveOption />
       <FrontmatterForm />
       <FileList />
-      <div className="flex grow flex-row gap-4 p-4">
+      <div className="flex flex-row gap-4 p-4">
         <Editor />
         <Preview />
       </div>

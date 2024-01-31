@@ -6,6 +6,7 @@ import {
   createElement,
   useDeferredValue,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -20,10 +21,23 @@ import useEditorStore from '@/app/store/editorStore';
 import useProcessor from '@/app/hooks/studio/useProcessor';
 
 const Preview = () => {
+  const [maxHeight, setMaxHeight] = useState(0);
   const source = useEditorStore((state) => state.source);
   const debouncedSearchTerm = useDebounce(source, 500);
   const deferredValue = useDeferredValue(debouncedSearchTerm);
   const [content, setContent] = useState(createElement(Fragment));
+
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  // 에디터 height를 넘지않게 설정
+  useEffect(() => {
+    const editorElement = document.querySelector('#editor');
+
+    if (!previewRef.current || !editorElement) return;
+
+    const editorHeight = editorElement.scrollHeight;
+    setMaxHeight(editorHeight);
+  }, [source]);
 
   const { process } = useProcessor();
 
@@ -48,8 +62,17 @@ const Preview = () => {
   }, [deferredValue]);
 
   return (
-    <div className="w-1/2 ">
-      <div className="prose prose-slate h-full w-full max-w-none break-all rounded border-[1px] border-[#d0d7de] bg-background p-4 dark:prose-invert dark:border-background">
+    <div
+      className="w-1/2 overflow-y-auto rounded border-[1px] border-[#d0d7de] bg-background p-4 dark:border-background"
+      style={{
+        minHeight: `${maxHeight}px`,
+        maxHeight: `${maxHeight}px`,
+      }}
+    >
+      <div
+        ref={previewRef}
+        className="prose prose-slate break-all dark:prose-invert "
+      >
         {content}
       </div>
     </div>
