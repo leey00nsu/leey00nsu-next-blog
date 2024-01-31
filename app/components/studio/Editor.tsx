@@ -68,7 +68,7 @@ const Editor = () => {
 
       addFile(acceptedFiles[0]);
     },
-    [slug],
+    [source, slug],
   );
 
   const { getRootProps, getInputProps } = useDropzone({
