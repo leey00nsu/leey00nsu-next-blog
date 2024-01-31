@@ -1,5 +1,6 @@
 'use server';
 
+import blogConfig from '@/blog.config';
 import { Octokit } from '@octokit/rest';
 import fs from 'fs';
 // @ts-ignore
@@ -18,10 +19,7 @@ const savePostRemote = async (formData: FormData) => {
   const content = formData.get('content') as string;
   const files = formData.getAll('files') as File[];
 
-  const owner = 'leey00nsu'; // GitHub 사용자 이름
-  const repo = 'leey00nsu-next-blog'; // GitHub 레포지토리 이름
-  const branch = 'main'; // 브랜치 이름
-  const postPath = `public/posts/blog/${slug}`; // 블로그 포스트 저장 경로
+  const postPath = `${blogConfig.postPath}/${slug}`;
 
   try {
     const uploadContent = {
@@ -49,12 +47,12 @@ const savePostRemote = async (formData: FormData) => {
     }
 
     await octokit.createOrUpdateFiles({
-      owner,
-      repo,
-      branch,
+      owner: blogConfig.owner,
+      repo: blogConfig.repo,
+      branch: blogConfig.branch,
       changes: [
         {
-          message: 'docs. 새 글 추가',
+          message: blogConfig.commitMessage,
           files: formattedObject,
         },
       ],
@@ -78,7 +76,7 @@ const savePostLocal = async (formData: FormData) => {
     const content = formData.get('content') as string;
     const files = formData.getAll('files') as File[];
 
-    const postPath = `public/posts/blog/${slug}`; // 블로그 포스트 저장 경로
+    const postPath = `${blogConfig.postPath}/${slug}`;
     const dir = path.join(process.cwd(), postPath);
 
     fs.mkdirSync(dir, { recursive: true });
