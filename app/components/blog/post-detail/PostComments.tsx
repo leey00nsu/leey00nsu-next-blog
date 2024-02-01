@@ -7,7 +7,7 @@ const PostComments = () => {
   const { theme } = useTheme();
   return (
     <Giscus
-      repo="leey00nsu/blog.leey00nsu.site"
+      repo="leey00nsu/leey00nsu-next-blog"
       repoId="R_kgDOLEAaVA"
       category="Announcements"
       categoryId="DIC_kwDOLEAaVM4Ccajz"
