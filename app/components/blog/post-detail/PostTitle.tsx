@@ -7,7 +7,7 @@ interface PostTitleProps {
 
 const PostTitle = ({ title, date }: PostTitleProps) => {
   return (
-    <div className="mb-8 text-center">
+    <div className="mb-4 text-center">
       <h1 className="text-3xl font-bold">{title}</h1>
       <time dateTime={date} className="block text-xs text-gray-600">
         {parseDate(date)}
