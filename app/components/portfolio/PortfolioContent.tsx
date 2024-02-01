@@ -2,8 +2,7 @@ import { allPortfolios } from '@/.contentlayer/generated';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
-import { CustomImage, CustomLink } from '../ui/mdx-components';
-import { Highlight } from '../ui/text';
+import { CustomImage, CustomLink, Highlight } from '../ui/mdx-components';
 
 // 커스텀 mdx 컴포넌트
 const mdxComponents = {

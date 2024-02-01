@@ -19,6 +19,7 @@
     "@next/third-parties": "^14.1.0",
     "@nextui-org/react": "^2.2.9",
     "@octokit/rest": "^20.0.2",
+    "@supabase/supabase-js": "^2.39.3",
     "@uidotdev/usehooks": "^2.4.1",
     "@uiw/react-md-editor": "^4.0.3",
     "contentlayer": "^0.3.4",

@@ -2,7 +2,7 @@ import { allAboutMes } from '@/.contentlayer/generated';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
-import { Highlight } from '../ui/text';
+import { Highlight } from '../ui/mdx-components';
 import GithubChart from './GithubChart';
 
 // 커스텀 mdx 컴포넌트
