@@ -12,7 +12,7 @@ const PostItem = (post: Post) => {
     <Card
       as={Link}
       href={post.url}
-      className="flex w-full flex-row p-4 transition hover:scale-105"
+      className="flex w-full flex-row p-4 transition hover:scale-105 active:scale-100"
     >
       <CardBody className="flex flex-col justify-between gap-2">
         <time dateTime={post.date} className="block text-xs text-gray-600">
@@ -24,7 +24,7 @@ const PostItem = (post: Post) => {
             {post.description}
           </h3>
         </div>
-        <PostTags postTags={parseTag([post])} />
+        <PostTags truncate postTags={parseTag([post])} />
       </CardBody>
     </Card>
   );
