@@ -1,5 +1,10 @@
 import { getPlaiceholder } from 'plaiceholder';
 
+/**
+ * image url를 받아서 이미지의 메타데이터를 생성합니다.
+ * @param imageUrl 
+ * @returns 
+ */
 export default async function getMetadata(imageUrl: string) {
   const res = await fetch(imageUrl);
 

@@ -7,6 +7,11 @@ import fs from 'fs';
 import OctokitMultipleFiles from 'octokit-commit-multiple-files';
 import path from 'path';
 
+/**
+ * 포스트를 github 레포지토리에 커밋합니다.
+ * @param formData
+ * @returns
+ */
 const savePostRemote = async (formData: FormData) => {
   // octokit 자체적으로 한 커밋에 여러 파일을 올릴 수 없기 때문에
   // octokit-commit-multiple-files 라이브러리를 사용하여 해결
@@ -70,6 +75,11 @@ const savePostRemote = async (formData: FormData) => {
   }
 };
 
+/**
+ * 포스트를 로컬에 저장합니다.
+ * @param formData
+ * @returns
+ */
 const savePostLocal = async (formData: FormData) => {
   try {
     const slug = formData.get('slug') as string;

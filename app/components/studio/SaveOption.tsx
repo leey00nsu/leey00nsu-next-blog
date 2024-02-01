@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/react/shallow';
 import useEditorStore from '@/app/store/editorStore';
 import useFileStore from '@/app/store/fileStore';
 
-import { savePostLocal, savePostRemote } from '@/app/libs/savePost';
+import { savePostLocal, savePostRemote } from '@/app/actions/savePost';
 
 import LogoutButton from '../auth/LogoutButton';
 
