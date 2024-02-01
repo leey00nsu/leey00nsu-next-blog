@@ -1,5 +1,4 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
-
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
@@ -56,6 +55,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://blog.leey00nsu.site'),
   title: 'leey00nsu 블로그',
   description: 'leey00nsu의 블로그 입니다.',
+  verification: {
+    google: 'usvYSsAq91N1AX9yxY09ip-DJQhyHytLAfnDZ_YMQnM',
+  },
 };
 
 export default function RootLayout({
