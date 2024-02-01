@@ -4,8 +4,8 @@
 
 .prose-custom {
   @apply prose-headings:m-0 prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-h3:font-semibold prose-p:m-0 prose-p:text-sm prose-a:m-0
-  prose-li:m-0 prose-li:marker:text-personal-blue prose-img:my-2 prose-hr:border-personal-blue/50 sm:prose-h1:text-4xl sm:prose-h2:text-3xl sm:prose-h3:text-xl
-  sm:prose-p:text-lg;
+  prose-li:m-0 prose-li:text-sm prose-li:marker:text-personal-blue prose-img:my-2 prose-hr:border-personal-blue/50 sm:prose-h1:text-4xl sm:prose-h2:text-3xl
+  sm:prose-h3:text-xl sm:prose-p:text-lg sm:prose-li:text-lg;
 }
 
 pre {
