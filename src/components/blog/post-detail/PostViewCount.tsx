@@ -12,7 +12,7 @@ const PostViewCount = async ({ slug }: PostViewCountProps) => {
   let viewCount = await getPostViewCount(slug);
   const isChecked = isPostChecked(slug);
 
-  if (!isChecked) {
+  if (!isChecked && process.env.NODE_ENV === 'production') {
     await updatePostViewCount(slug, viewCount + 1);
     viewCount += 1;
   }
