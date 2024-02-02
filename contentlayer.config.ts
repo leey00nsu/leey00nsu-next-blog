@@ -1,9 +1,10 @@
 //@ts-nocheck
-import imageMetadata from '@/src/plugins/imageMetadata';
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+
+import imageMetadata from './src/plugins/imageMetadata';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
