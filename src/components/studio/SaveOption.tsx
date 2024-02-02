@@ -2,7 +2,7 @@ import { Button } from '@nextui-org/react';
 import toast from 'react-hot-toast';
 import { useShallow } from 'zustand/react/shallow';
 
-import { savePostLocal, savePostRemote } from '@/src/actions/savePost';
+import { savePostLocal, savePostRemote } from '@/src/actions/studio/savePost';
 
 import useEditorStore from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
