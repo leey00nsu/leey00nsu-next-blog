@@ -6,7 +6,7 @@ import supabase from '../libs/supabase';
 
 const getPostViewCount = async (slug: string) => {
   const cookieStore = cookies();
-  let currentViewCount;
+  let currentViewCount: number;
 
   const { data: postData } = await supabase
     .from('posts')
@@ -23,7 +23,7 @@ const getPostViewCount = async (slug: string) => {
       .select()
       .single();
 
-    currentViewCount = newPostData.view;
+    currentViewCount = newPostData!.view;
   }
 
   const postViewed = cookieStore.get('postViewed');
@@ -37,7 +37,7 @@ const getPostViewCount = async (slug: string) => {
       .select()
       .single();
 
-    currentViewCount = updatedData.view;
+    currentViewCount = updatedData!.view;
   }
 
   return currentViewCount;

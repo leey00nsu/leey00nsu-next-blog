@@ -11,7 +11,7 @@ const PostViewCountCookie = ({ slug }: PostViewCountCookieProps) => {
   useEffect(() => {
     setViewCountCookie(slug);
   }, []);
-  
+
   return null;
 };
 
