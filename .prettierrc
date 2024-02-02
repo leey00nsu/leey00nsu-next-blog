@@ -8,13 +8,14 @@
 
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^@/app/constants/(.*)$",
-    "^@/app/apis/(.*)$",
-    "^@/app/store/(.*)$",
-    "^@/app/hooks/(.*)$",
-    "^@/app/pages/(.*)$",
-    "^@/app/libs/(.*)$",
-    "^@/app/components/(.*)$",
+    "^@/src/app/(.*)$",
+    "^@/src/components/(.*)$",
+    "^@/src/actions/(.*)$",
+    "^@/src/libs/(.*)$",
+    "^@/src/plugins/(.*)$",
+    "^@/src/hooks/(.*)$",
+    "^@/src/store/(.*)$",
+    "^@/src/types/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,
