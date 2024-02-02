@@ -7,6 +7,7 @@ import findSuffix from './libs/findSuffix';
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
+
   const postViewed = request.cookies.get('postViewed');
 
   const slug = findSuffix(url.pathname, '/blog');
@@ -38,5 +39,14 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/blog/:slug*',
+  matcher: [
+    '/blog/:slug*',
+    {
+      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+      ],
+    },
+  ],
 };
