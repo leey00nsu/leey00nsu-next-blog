@@ -1,6 +1,5 @@
 import { Post } from '@/.contentlayer/generated';
-import { Divider, Spinner } from '@nextui-org/react';
-import { Suspense } from 'react';
+import { Divider } from '@nextui-org/react';
 
 import parseTag from '@/src/libs/parseTag';
 
@@ -24,9 +23,7 @@ const PostDetail = ({ post }: PostDetailProps) => {
       <div className="flex w-full flex-col items-center">
         <PostTitle title={title} />
         <Date date={date} />
-        <Suspense fallback={<Spinner size="sm" color="default" />}>
-          <PostViewCount slug={slug} />
-        </Suspense>
+        <PostViewCount slug={slug} />
       </div>
       <PostTags postTags={parseTag([post])} />
       <PostContent body={body} />
