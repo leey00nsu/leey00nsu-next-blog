@@ -13,6 +13,8 @@ export async function middleware(request: NextRequest) {
   const postViewedArray = postViewed?.value.split(',') ?? [];
   const response = NextResponse.next();
 
+  if (!slug) return response;
+
   const isChecked = isPostChecked(slug);
 
   if (!isChecked && process.env.NODE_ENV === 'production') {
@@ -31,8 +33,6 @@ export async function middleware(request: NextRequest) {
       expires,
     });
   }
-
-  return response;
 }
 
 export const config = {
