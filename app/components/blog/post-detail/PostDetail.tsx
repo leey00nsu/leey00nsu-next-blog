@@ -1,6 +1,6 @@
 import { Post } from '@/.contentlayer/generated';
-import getPostViewCount from '@/app/actions/getPostViewCount';
-import { Divider } from '@nextui-org/react';
+import { Divider, Spinner } from '@nextui-org/react';
+import { Suspense } from 'react';
 
 import parseTag from '@/app/libs/parseTag';
 
@@ -16,17 +16,17 @@ interface PostDetailProps {
   post: Post;
 }
 
-const PostDetail = async ({ post }: PostDetailProps) => {
+const PostDetail = ({ post }: PostDetailProps) => {
   const { body, title, date, slug } = post;
-
-  const viewCount = await getPostViewCount(slug);
 
   return (
     <main className="mx-auto flex min-h-[calc(100svh-128px)] max-w-2xl flex-col gap-4 p-8 py-20">
       <div className="flex w-full flex-col items-center">
         <PostTitle title={title} />
         <Date date={date} />
-        <PostViewCount slug={slug} viewCount={viewCount} />
+        <Suspense fallback={<Spinner size="sm" color="default" />}>
+          <PostViewCount slug={slug} />
+        </Suspense>
       </div>
       <PostTags postTags={parseTag([post])} />
       <PostContent body={body} />

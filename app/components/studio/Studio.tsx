@@ -2,11 +2,10 @@
 
 import { signIn, useSession } from 'next-auth/react';
 
-import { LoadingSpinner } from '../ui/spinner';
+import { FullScreenSpinner } from '../ui/spinner';
 import Editor from './Editor';
 import FileList from './FileList';
 import FrontmatterForm from './FrontmatterForm';
-// import Preview from './Preview';
 import Preview from './Preview';
 import SaveOption from './SaveOption';
 
@@ -20,7 +19,7 @@ const Studio = () => {
   }
 
   if (!session) {
-    return <LoadingSpinner fullScreen />;
+    return <FullScreenSpinner />;
   }
 
   return (
