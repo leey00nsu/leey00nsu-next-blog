@@ -4,7 +4,7 @@ import { Spinner } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 
-import fetchPostViewCount from '@/src/actions/post-detail/fetchPostViewCount';
+import readPost from '@/src/actions/post-detail/readPost';
 
 interface PostViewCountProps {
   slug: string;
@@ -15,13 +15,15 @@ const PostViewCount = ({ slug }: PostViewCountProps) => {
   const [viewCount, setViewCount] = useState(0);
 
   useEffect(() => {
-    const getPostViewCount = async () => {
-      const view = await fetchPostViewCount(slug);
+    const fetchViewCount = async () => {
+      const { success, view } = await readPost(slug);
+      if (!success) return;
+
       setViewCount(view);
       setIsLoading(false);
     };
 
-    getPostViewCount();
+    fetchViewCount();
   }, []);
 
   return (

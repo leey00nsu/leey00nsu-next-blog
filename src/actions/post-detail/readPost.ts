@@ -12,11 +12,11 @@ const readPost = async (slug: string) => {
   const postViewedArray = postViewed?.value.split(',') ?? [];
 
   try {
-    const post = await getOrCreatePost(slug);
+    let post = await getOrCreatePost(slug);
     const isChecked = isPostChecked(slug);
 
     if (!isChecked && process.env.NODE_ENV === 'production') {
-      await updatePostViewCount(slug, post.view + 1);
+      post = await updatePostViewCount(slug, post.view + 1);
 
       const expires = new Date();
       expires.setDate(new Date().getDate() + 1);
@@ -30,8 +30,10 @@ const readPost = async (slug: string) => {
         expires,
       });
     }
+
+    return { success: true, view: post.view };
   } catch (error) {
-    // console.log(error);
+    return { success: false, view: 0 };
   }
 };
 
