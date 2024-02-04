@@ -1,7 +1,7 @@
-import { Studio } from '../../components/studio';
+import { Studio } from '@/src/components/studio';
 
-const StudioPage = () => {
+const Page = () => {
   return <Studio />;
 };
 
-export default StudioPage;
+export default Page;

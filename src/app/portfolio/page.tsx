@@ -1,7 +1,7 @@
-import { PortfolioContent } from '../../components/portfolio';
+import { Portfolio } from '@/src/components/portfolio';
 
-const Portfolio = () => {
-  return <PortfolioContent />;
+const Page = () => {
+  return <Portfolio />;
 };
 
-export default Portfolio;
+export default Page;

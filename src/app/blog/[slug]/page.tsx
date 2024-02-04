@@ -17,7 +17,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
   return { title: currentPost.title };
 };
 
-const Post = ({ params }: { params: { slug: string } }) => {
+const Page = ({ params }: { params: { slug: string } }) => {
   const currentPost = allPosts.find((post) => post.slug === params.slug);
 
   if (!currentPost) notFound();
@@ -25,4 +25,4 @@ const Post = ({ params }: { params: { slug: string } }) => {
   return <PostDetail post={currentPost} />;
 };
 
-export default Post;
+export default Page;

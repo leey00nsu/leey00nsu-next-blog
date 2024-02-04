@@ -1,6 +1,6 @@
-import { PostList } from '../../components/blog/post-list';
+import { PostList } from '@/src/components/blog/post-list';
 
-export default function Blog({
+export default function Page({
   searchParams,
 }: {
   searchParams: Record<string, string | string[] | undefined>;
