@@ -6,6 +6,11 @@ import updatePostViewCount from '../supabase/updatePostViewCount';
 import getOrCreatePost from './getOrCreatePost';
 import isPostChecked from './isPostChecked';
 
+/**
+ * 해당 slug의 포스트를 조회합니다.
+ * @param slug
+ * @returns
+ */
 const readPost = async (slug: string) => {
   const cookieStore = cookies();
   const postViewed = cookieStore.get('postViewed');

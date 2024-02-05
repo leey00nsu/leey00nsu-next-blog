@@ -3,6 +3,11 @@
 import createPost from '../supabase/createPost';
 import getPost from '../supabase/getPost';
 
+/**
+ * DB에서 해당 slug를 가진 포스트를 가져오거나 없으면 생성합니다.
+ * @param slug
+ * @returns
+ */
 const getOrCreatePost = async (slug: string) => {
   try {
     // 먼저 해당 slug의 포스트를 가져오기를 시도
