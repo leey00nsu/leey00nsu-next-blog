@@ -7,12 +7,15 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { savePostLocal, savePostRemote } from '@/src/actions/studio/savePost';
 
+import useModal from '@/src/hooks/modal/useModal';
+
 import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
 
 import LogoutButton from '../auth/LogoutButton';
 
 const SaveOption = () => {
+  const { addModal } = useModal();
   const { source, slug, title, tags, description, date } = useEditorStore(
     useShallow((state) => ({
       source: state.source,
@@ -64,12 +67,26 @@ date: ${date}
     });
 
     if (type === 'local') {
-      const response = await savePostLocal(formData);
-      toastResponse(response);
+      addModal({
+        type: 'confirm',
+        title: '파일로 저장',
+        content: <p>파일로 저장할까요?</p>,
+        callback: async () => {
+          const response = await savePostLocal(formData);
+          toastResponse(response);
+        },
+      });
     }
     if (type === 'remote') {
-      const response = await savePostRemote(formData);
-      toastResponse(response);
+      addModal({
+        type: 'confirm',
+        title: '업로드',
+        content: <p>업로드할까요?</p>,
+        callback: async () => {
+          const response = await savePostRemote(formData);
+          toastResponse(response);
+        },
+      });
     }
   };
 
