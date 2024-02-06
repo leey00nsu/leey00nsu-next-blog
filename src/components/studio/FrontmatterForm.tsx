@@ -1,7 +1,7 @@
 import { Input } from '@nextui-org/react';
 import { useShallow } from 'zustand/react/shallow';
 
-import useEditorStore from '@/src/store/editorStore';
+import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 
 const FrontmatterForm = () => {
   const {
@@ -29,6 +29,18 @@ const FrontmatterForm = () => {
       setDate: state.setDate,
     })),
   );
+
+  const titleValidation = Frontmatter.pick({ title: true }).safeParse({
+    title,
+  });
+  const slugValidation = Frontmatter.pick({ slug: true }).safeParse({ slug });
+  const tagsValidation = Frontmatter.pick({ tags: true }).safeParse({ tags });
+  const descriptionValidation = Frontmatter.pick({
+    description: true,
+  }).safeParse({
+    description,
+  });
+  const dateValidation = Frontmatter.pick({ date: true }).safeParse({ date });
 
   const changeSlugHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSlug(e.target.value);
@@ -60,6 +72,10 @@ const FrontmatterForm = () => {
         value={slug}
         onChange={changeSlugHandler}
         color="primary"
+        isInvalid={!slugValidation.success}
+        errorMessage={
+          !slugValidation.success && slugValidation.error.issues[0].message
+        }
       />
       <Input
         isRequired
@@ -68,6 +84,10 @@ const FrontmatterForm = () => {
         value={title}
         onChange={changeTitleHandler}
         color="primary"
+        isInvalid={!titleValidation.success}
+        errorMessage={
+          !titleValidation.success && titleValidation.error.issues[0].message
+        }
       />
       <Input
         isRequired
@@ -76,6 +96,10 @@ const FrontmatterForm = () => {
         value={tags}
         onChange={changeTagsHandler}
         color="primary"
+        isInvalid={!tagsValidation.success}
+        errorMessage={
+          !tagsValidation.success && tagsValidation.error.issues[0].message
+        }
       />
       <Input
         isRequired
@@ -84,6 +108,11 @@ const FrontmatterForm = () => {
         value={description}
         onChange={changeDescriptionHandler}
         color="primary"
+        isInvalid={!descriptionValidation.success}
+        errorMessage={
+          !descriptionValidation.success &&
+          descriptionValidation.error.issues[0].message
+        }
       />
       <Input
         isRequired
@@ -92,6 +121,10 @@ const FrontmatterForm = () => {
         value={date}
         onChange={changeDateHandler}
         color="primary"
+        isInvalid={!dateValidation.success}
+        errorMessage={
+          !dateValidation.success && dateValidation.error.issues[0].message
+        }
       />
     </div>
   );

@@ -1,10 +1,13 @@
+'use client';
+
 import { Button } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useShallow } from 'zustand/react/shallow';
 
 import { savePostLocal, savePostRemote } from '@/src/actions/studio/savePost';
 
-import useEditorStore from '@/src/store/editorStore';
+import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
 
 import LogoutButton from '../auth/LogoutButton';
@@ -21,6 +24,7 @@ const SaveOption = () => {
     })),
   );
   const files = useFileStore((state) => state.files);
+  const [isSavable, setIsSavable] = useState(false);
 
   const getFrontmatter = () => {
     const parsedTags = tags
@@ -69,6 +73,19 @@ date: ${date}
     }
   };
 
+  useEffect(() => {
+    const validation = Frontmatter.safeParse({
+      slug,
+      title,
+      tags,
+      description,
+      date,
+      files,
+    });
+
+    setIsSavable(validation.success);
+  }, [slug, title, tags, description, date, files]);
+
   return (
     <div className="flex flex-row justify-end gap-2 p-4">
       {/* <Button
@@ -80,9 +97,10 @@ date: ${date}
       </Button> */}
       <LogoutButton />
       <Button
-        color="primary"
+        color={isSavable ? 'primary' : 'default'}
         variant="flat"
         onClick={() => saveHandler('remote')}
+        disabled={!isSavable}
       >
         업로드
       </Button>
