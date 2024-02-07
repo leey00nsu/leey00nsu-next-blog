@@ -5,6 +5,7 @@ import Link from 'next/link';
 import parseTag from '@/src/libs/parseTag';
 
 import { Date } from '../../ui/text';
+import PostDropdown from './PostDropdown';
 import PostTags from './PostTags';
 
 const PostItem = (post: Post) => {
@@ -15,7 +16,10 @@ const PostItem = (post: Post) => {
       className="flex w-full flex-row p-4 transition hover:scale-105 active:scale-100"
     >
       <CardBody className="flex flex-col justify-between gap-2">
-        <Date date={post.date} />
+        <div className="flex h-8 items-center justify-between">
+          <Date date={post.date} />
+          <PostDropdown slug={post.slug} />
+        </div>
         <div>
           <h2 className="text-base sm:text-xl">{post.title}</h2>
           <h3 className="truncate text-xs text-gray-600 sm:text-sm">

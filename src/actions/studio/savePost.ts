@@ -12,7 +12,7 @@ import path from 'path';
  * @param formData
  * @returns
  */
-const savePostRemote = async (formData: FormData) => {
+const savePostRemote = async (formData: FormData, isEdit: boolean) => {
   // octokit 자체적으로 한 커밋에 여러 파일을 올릴 수 없기 때문에
   // octokit-commit-multiple-files 라이브러리를 사용하여 해결
   const OctokitPlugin = Octokit.plugin(OctokitMultipleFiles);
@@ -57,7 +57,9 @@ const savePostRemote = async (formData: FormData) => {
       branch: blogConfig.branch,
       changes: [
         {
-          message: blogConfig.commitMessage,
+          message: isEdit
+            ? blogConfig.editCommitMessage
+            : blogConfig.addCommitMessage,
           files: formattedObject,
         },
       ],

@@ -1,6 +1,8 @@
 import { Input } from '@nextui-org/react';
 import { useShallow } from 'zustand/react/shallow';
 
+import dateToString from '@/src/libs/dateToString';
+
 import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 
 const FrontmatterForm = () => {
@@ -59,7 +61,7 @@ const FrontmatterForm = () => {
   };
 
   const changeDateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const data = new Date(e.target.value).toISOString().slice(0, 10);
+    const data = dateToString(new Date(e.target.value));
     setDate(data);
   };
 

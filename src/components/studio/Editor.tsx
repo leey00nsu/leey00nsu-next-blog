@@ -1,12 +1,13 @@
 'use client';
 
+import blogConfig from '@/blog.config';
 import MDEditor, {
   TextAreaTextApi,
   TextState,
   commands,
 } from '@uiw/react-md-editor/nohighlight';
 import { useCallback, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { Accept, useDropzone } from 'react-dropzone';
 import toast from 'react-hot-toast';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -71,15 +72,17 @@ const Editor = () => {
     [source, slug],
   );
 
+  const acceptedImageTypes: Accept = {};
+
+  blogConfig.allowedImageTypes.forEach((type) => {
+    acceptedImageTypes[type] = [];
+  });
+
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     noClick: true,
     multiple: false,
-    accept: {
-      'image/jpeg': [],
-      'image/png': [],
-      'image/gif': [],
-    },
+    accept: acceptedImageTypes,
   });
 
   // 에디터 높이 자동 조절
