@@ -11,7 +11,7 @@ import Editor from './Editor';
 import FileList from './FileList';
 import FrontmatterForm from './FrontmatterForm';
 import Preview from './Preview';
-import SaveOption from './SaveOption';
+import Menu from './Menu';
 
 interface StudioProps {
   post?: Post;
@@ -43,7 +43,7 @@ const Studio = ({ post }: StudioProps) => {
 
   return (
     <main className="min-w-screen flex min-h-screen flex-col">
-      <SaveOption isEdit={isEdit}/>
+      <Menu isEdit={isEdit}/>
       <FrontmatterForm />
       <FileList />
       <div className="flex flex-row gap-4 p-4">

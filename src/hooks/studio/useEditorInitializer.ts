@@ -46,6 +46,16 @@ const useEditorInitializer = (post: Post | undefined) => {
     return files;
   };
 
+  const resetEditor = () => {
+    setSource('');
+    setSlug('title-slug-example');
+    setTitle('글 제목');
+    setTags('태그1,태그2');
+    setDescription('...에 대해 설명합니다.');
+    setDate(dateToString(new Date()));
+    setFiles([]);
+  };
+
   const initializeEditor = async () => {
     if (post) {
       setSource(post.body.raw);
@@ -57,11 +67,13 @@ const useEditorInitializer = (post: Post | undefined) => {
 
       const files = await getFiles(post.slug);
       setFiles(files);
+    } else {
+      resetEditor();
     }
     setLoading(false);
   };
 
-  return { loading, initializeEditor };
+  return { loading, initializeEditor, resetEditor };
 };
 
 export default useEditorInitializer;

@@ -10,18 +10,20 @@ import { savePostLocal, savePostRemote } from '@/src/actions/studio/savePost';
 import getFrontmatter from '@/src/libs/getFrontmatter';
 
 import useModal from '@/src/hooks/modal/useModal';
+import useEditorInitializer from '@/src/hooks/studio/useEditorInitializer';
 
 import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
 
 import LogoutButton from '../auth/LogoutButton';
 
-interface SaveOptionProps {
+interface MenuProps {
   isEdit?: boolean;
 }
 
-const SaveOption = ({ isEdit }: SaveOptionProps) => {
+const Menu = ({ isEdit }: MenuProps) => {
   const { addModal } = useModal();
+  const { resetEditor } = useEditorInitializer(undefined);
   const { source, slug, title, tags, description, date } = useEditorStore(
     useShallow((state) => ({
       source: state.source,
@@ -98,6 +100,11 @@ const SaveOption = ({ isEdit }: SaveOptionProps) => {
     }
   };
 
+  const resetHandler = () => {
+    toast.success('초기화 되었습니다.');
+    resetEditor();
+  };
+
   useEffect(() => {
     const validation = Frontmatter.safeParse({
       slug,
@@ -121,6 +128,9 @@ const SaveOption = ({ isEdit }: SaveOptionProps) => {
         파일로 저장
       </Button> */}
       <LogoutButton />
+      <Button color="primary" variant="flat" onClick={resetHandler}>
+        초기화
+      </Button>
       <Button
         color={isSavable ? 'primary' : 'default'}
         variant="flat"
@@ -133,4 +143,4 @@ const SaveOption = ({ isEdit }: SaveOptionProps) => {
   );
 };
 
-export default SaveOption;
+export default Menu;
