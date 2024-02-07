@@ -7,6 +7,8 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { savePostLocal, savePostRemote } from '@/src/actions/studio/savePost';
 
+import getFrontmatter from '@/src/libs/getFrontmatter';
+
 import useModal from '@/src/hooks/modal/useModal';
 
 import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
@@ -29,23 +31,6 @@ const SaveOption = () => {
   const files = useFileStore((state) => state.files);
   const [isSavable, setIsSavable] = useState(false);
 
-  const getFrontmatter = () => {
-    const parsedTags = tags
-      .split(',')
-      .map((tag) => `\n  - ${tag}`)
-      .join('');
-
-    const frontmatter = `---
-slug: ${slug}
-title: ${title}
-tags: ${parsedTags}
-description: ${description}
-date: ${date}
----`;
-
-    return frontmatter;
-  };
-
   const toastResponse = (response: { success: boolean; message: string }) => {
     if (response.success) {
       toast.success(response.message);
@@ -55,7 +40,13 @@ date: ${date}
   };
 
   const saveHandler = async (type: string) => {
-    const frontmatter = getFrontmatter();
+    const frontmatter = getFrontmatter({
+      slug,
+      title,
+      tags,
+      description,
+      date,
+    });
     const content = `${frontmatter}\n${source}`;
 
     const formData = new FormData();
