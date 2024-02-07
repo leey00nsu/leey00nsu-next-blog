@@ -1,6 +1,10 @@
 'use client';
 
+import { Post } from '@/.contentlayer/generated';
 import { signIn, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+
+import useEditorInitializer from '@/src/hooks/studio/useEditorInitializer';
 
 import { FullScreenSpinner } from '../ui/spinner';
 import Editor from './Editor';
@@ -9,8 +13,21 @@ import FrontmatterForm from './FrontmatterForm';
 import Preview from './Preview';
 import SaveOption from './SaveOption';
 
-const Studio = () => {
+interface StudioProps {
+  post?: Post;
+}
+
+const Studio = ({ post }: StudioProps) => {
+  const [initialized, setInitialized] = useState(false);
   const { data: session, status } = useSession();
+  const { loading, initializeEditor } = useEditorInitializer(post);
+
+  useEffect(() => {
+    if (initialized) return;
+
+    initializeEditor();
+    setInitialized(true);
+  }, [post]);
 
   if (status === 'unauthenticated') {
     signIn('github', {
@@ -18,7 +35,7 @@ const Studio = () => {
     });
   }
 
-  if (!session) {
+  if (!session || loading) {
     return <FullScreenSpinner />;
   }
 

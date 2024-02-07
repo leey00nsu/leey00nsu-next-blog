@@ -57,7 +57,7 @@ const savePostRemote = async (formData: FormData) => {
       branch: blogConfig.branch,
       changes: [
         {
-          message: blogConfig.commitMessage,
+          message: blogConfig.addCommitMessage,
           files: formattedObject,
         },
       ],
