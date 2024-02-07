@@ -16,7 +16,11 @@ import useFileStore from '@/src/store/fileStore';
 
 import LogoutButton from '../auth/LogoutButton';
 
-const SaveOption = () => {
+interface SaveOptionProps {
+  isEdit?: boolean;
+}
+
+const SaveOption = ({ isEdit }: SaveOptionProps) => {
   const { addModal } = useModal();
   const { source, slug, title, tags, description, date } = useEditorStore(
     useShallow((state) => ({
@@ -68,13 +72,26 @@ const SaveOption = () => {
         },
       });
     }
-    if (type === 'remote') {
+
+    if (type === 'remote' && !isEdit) {
       addModal({
         type: 'confirm',
         title: '업로드',
         content: <p>업로드할까요?</p>,
         callback: async () => {
-          const response = await savePostRemote(formData);
+          const response = await savePostRemote(formData, false);
+          toastResponse(response);
+        },
+      });
+    }
+
+    if (type === 'remote' && isEdit) {
+      addModal({
+        type: 'confirm',
+        title: '수정',
+        content: <p>수정할까요?</p>,
+        callback: async () => {
+          const response = await savePostRemote(formData, true);
           toastResponse(response);
         },
       });
@@ -110,7 +127,7 @@ const SaveOption = () => {
         onClick={() => saveHandler('remote')}
         disabled={!isSavable}
       >
-        업로드
+        {isEdit ? '수정' : '업로드'}
       </Button>
     </div>
   );

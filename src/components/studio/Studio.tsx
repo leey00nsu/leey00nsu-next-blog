@@ -22,6 +22,8 @@ const Studio = ({ post }: StudioProps) => {
   const { data: session, status } = useSession();
   const { loading, initializeEditor } = useEditorInitializer(post);
 
+  const isEdit = !!post;
+
   useEffect(() => {
     if (initialized) return;
 
@@ -41,7 +43,7 @@ const Studio = ({ post }: StudioProps) => {
 
   return (
     <main className="min-w-screen flex min-h-screen flex-col">
-      <SaveOption />
+      <SaveOption isEdit={isEdit}/>
       <FrontmatterForm />
       <FileList />
       <div className="flex flex-row gap-4 p-4">
