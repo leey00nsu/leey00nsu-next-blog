@@ -5,6 +5,8 @@ import { useShallow } from 'zustand/react/shallow';
 
 import getImageFileNames from '@/src/actions/studio/getImageFileNames';
 
+import dateToString from '@/src/libs/dateToString';
+
 import useEditorStore from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
 
@@ -51,13 +53,12 @@ const useEditorInitializer = (post: Post | undefined) => {
       setTitle(post.title);
       setTags(post.tags.join(','));
       setDescription(post.description);
-      setDate(post.date.slice(0, 10));
+      setDate(dateToString(new Date(post.date)));
 
       const files = await getFiles(post.slug);
-
       setFiles(files);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return { loading, initializeEditor };
