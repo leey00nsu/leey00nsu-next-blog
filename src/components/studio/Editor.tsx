@@ -62,7 +62,7 @@ const Editor = () => {
         return;
       }
 
-      const filePath = `/public/posts/blog/${slug}/${acceptedFiles[0].name}`;
+      const filePath = `${blogConfig.postPath}/${slug}/${acceptedFiles[0].name}`;
 
       const newSource = `${source}\n![${fileName}](${filePath})\n`;
       setSource(newSource);

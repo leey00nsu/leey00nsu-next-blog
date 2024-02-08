@@ -21,9 +21,6 @@ const getImageFileNames = async (slug: string) => {
     .map((file) => file.name)
     .filter((file: string) => file !== `${slug}.mdx`);
 
-  // const imageFileNames = fs
-  //   .readdirSync(dir)
-  //   .filter((file) => file !== `${slug}.mdx`);
 
   return imageFileNames;
 };

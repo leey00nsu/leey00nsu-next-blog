@@ -6,6 +6,7 @@ import { useShallow } from 'zustand/react/shallow';
 import getImageFileNames from '@/src/actions/studio/getImageFileNames';
 
 import dateToString from '@/src/libs/dateToString';
+import findSuffix from '@/src/libs/findSuffix';
 
 import useEditorStore from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
@@ -31,11 +32,14 @@ const useEditorInitializer = (post: Post | undefined) => {
     })),
   );
 
+  // 게시글에 포함되어있는 이미지 파일을 다시 File 객체로 변환
   const getFiles = async (slug: string) => {
     const files = [];
     const fileNames = await getImageFileNames(slug);
+    const postPath = findSuffix(blogConfig.postPath, 'public');
+
     for (const fileName of fileNames) {
-      const image = await fetch(`/posts/blog/${slug}/${fileName}`);
+      const image = await fetch(`${postPath}/${slug}/${fileName}`);
       const blob = await image.blob();
       if (blogConfig.allowedImageTypes.includes(blob.type)) {
         const file = new File([blob], fileName, { type: blob.type });

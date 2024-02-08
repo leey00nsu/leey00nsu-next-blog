@@ -6,7 +6,7 @@
  */
 const findSuffix = (target: string, base: string) => {
   if (target.startsWith(base)) {
-    return target.slice(base.length + 1);
+    return target.slice(base.length);
   }
 
   return '';
