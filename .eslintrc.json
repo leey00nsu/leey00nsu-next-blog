@@ -12,7 +12,8 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/no-redundant-type-constituents": "off", // broken in supabase 
+    "react/jsx-no-useless-fragment": "off",
+    "@typescript-eslint/no-redundant-type-constituents": "off", // broken in supabase
     "@typescript-eslint/require-await": "off",
     "no-await-in-loop": "off",
     "@typescript-eslint/no-explicit-any": "off",

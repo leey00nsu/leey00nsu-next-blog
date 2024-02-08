@@ -3,11 +3,11 @@
 import { Button } from '@nextui-org/react';
 import { signOut } from 'next-auth/react';
 
-interface LogoutButtonProps {
+interface SignOutButtonProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const LogoutButton = ({ size = 'md' }: LogoutButtonProps) => {
+const SignOutButton = ({ size = 'md' }: SignOutButtonProps) => {
   const signOutHandler = () => {
     signOut({
       callbackUrl: '/',
@@ -27,4 +27,4 @@ const LogoutButton = ({ size = 'md' }: LogoutButtonProps) => {
   );
 };
 
-export default LogoutButton;
+export default SignOutButton;

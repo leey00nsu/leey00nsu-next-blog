@@ -1,25 +1,8 @@
-'use client';
-
 import { Button } from '@nextui-org/react';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { FaRegSadCry } from 'react-icons/fa';
 
-import { FullScreenSpinner } from '../ui/spinner';
-
 const Error = () => {
-  const { status } = useSession();
-  const router = useRouter();
-
-  if (status === 'loading') {
-    return <FullScreenSpinner />;
-  }
-
-  if (status === 'authenticated') {
-    router.replace('/');
-  }
-
   return (
     <main className="min-w-screen flex min-h-[calc(100svh-128px)] flex-col items-center justify-center">
       <div className=" flex flex-col items-center justify-center gap-4 ">

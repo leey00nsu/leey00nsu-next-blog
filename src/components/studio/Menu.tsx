@@ -15,7 +15,7 @@ import useEditorInitializer from '@/src/hooks/studio/useEditorInitializer';
 import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
 
-import LogoutButton from '../auth/LogoutButton';
+import SignOutButton from '../auth/sign-out/SignOutButton';
 
 interface MenuProps {
   isEdit?: boolean;
@@ -127,7 +127,7 @@ const Menu = ({ isEdit }: MenuProps) => {
       >
         파일로 저장
       </Button> */}
-      <LogoutButton />
+      <SignOutButton />
       <Button color="primary" variant="flat" onClick={resetHandler}>
         초기화
       </Button>

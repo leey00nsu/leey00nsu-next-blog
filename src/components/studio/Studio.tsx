@@ -1,8 +1,6 @@
 'use client';
 
 import { Post } from '@/.contentlayer/generated';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import useEditorInitializer from '@/src/hooks/studio/useEditorInitializer';
@@ -20,10 +18,7 @@ interface StudioProps {
 
 const Studio = ({ post }: StudioProps) => {
   const [initialized, setInitialized] = useState(false);
-  const { status } = useSession();
   const { loading, initializeEditor } = useEditorInitializer(post);
-
-  const router = useRouter();
 
   const isEdit = !!post;
 
@@ -34,11 +29,7 @@ const Studio = ({ post }: StudioProps) => {
     setInitialized(true);
   }, [post]);
 
-  if (status === 'unauthenticated') {
-    router.replace('/auth/signin');
-  }
-
-  if (status === 'loading' || loading) {
+  if (loading) {
     return <FullScreenSpinner />;
   }
 

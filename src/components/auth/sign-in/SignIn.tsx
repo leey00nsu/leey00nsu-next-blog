@@ -1,7 +1,7 @@
-import LoginButton from './LoginButton';
+import LoginButton from './SignInButton';
 import UserProfile from './UserProfile';
 
-const Signin = () => {
+const SignIn = () => {
   return (
     <main className="min-w-screen flex min-h-[calc(100svh-128px)] flex-col items-center justify-center">
       <div className=" flex flex-col items-center justify-center gap-4 ">
@@ -12,4 +12,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default SignIn;
