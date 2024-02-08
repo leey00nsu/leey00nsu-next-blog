@@ -1,6 +1,6 @@
 import Error from '@/src/components/auth/Error';
 
-const Page = async () => {
+const Page = () => {
   return <Error />;
 };
 
