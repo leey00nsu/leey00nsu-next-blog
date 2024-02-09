@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react';
 import useEditorInitializer from '@/src/hooks/studio/useEditorInitializer';
 
 import { FullScreenSpinner } from '../ui/spinner';
-import Editor from './Editor';
 import FileList from './FileList';
 import FrontmatterForm from './FrontmatterForm';
 import Menu from './Menu';
-import Preview from './Preview';
+import Editor from './editor/Editor';
+import Preview from './preview/Preview';
 
 interface StudioProps {
   post?: Post;

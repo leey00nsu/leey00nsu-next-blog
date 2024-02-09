@@ -3,7 +3,7 @@ import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import { unified } from 'unified';
 
-import PreviewImage from '@/src/components/studio/PreviewImage';
+import PreviewImage from '@/src/components/studio/preview/PreviewImage';
 
 import { CustomLink, CustomSnipet } from '../../components/ui/mdx-components';
 

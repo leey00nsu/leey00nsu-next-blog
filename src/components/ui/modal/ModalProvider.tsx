@@ -5,11 +5,14 @@ import useModal from '@/src/hooks/modal/useModal';
 import { Modal } from '@/src/store/modalStore';
 
 import ConfirmModal from './ConfirmModal';
+import ImageInputModal from './ImageInputModal';
 
 const ModalRenderer = ({ modal }: { modal: Modal }) => {
   switch (modal.type) {
     case 'confirm':
       return <ConfirmModal modal={modal} />;
+    case 'image':
+      return <ImageInputModal modal={modal} />;
     default:
       return null;
   }
