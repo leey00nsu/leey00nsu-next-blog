@@ -12,6 +12,7 @@ import { Accept, useDropzone } from 'react-dropzone';
 import toast from 'react-hot-toast';
 import { useShallow } from 'zustand/react/shallow';
 
+import convertBytes from '@/src/libs/convertBytes';
 import tw from '@/src/libs/tw';
 
 import useModal from '@/src/hooks/modal/useModal';
@@ -30,8 +31,8 @@ const ImageInputModal = ({ modal }: { modal: Modal }) => {
       slug: state.slug,
     })),
   );
-  const { files, addFile } = useFileStore(
-    useShallow((state) => ({ files: state.files, addFile: state.addFile })),
+  const { files } = useFileStore(
+    useShallow((state) => ({ files: state.files })),
   );
   const { removeModal } = useModal();
 
@@ -81,8 +82,7 @@ const ImageInputModal = ({ modal }: { modal: Modal }) => {
   };
 
   const confirmHandler = () => {
-    if (modal.callback) modal.callback(filePath);
-    if (file) addFile(file);
+    if (modal.callback) modal.callback(file, filePath);
     removeModal();
   };
 
@@ -97,7 +97,7 @@ const ImageInputModal = ({ modal }: { modal: Modal }) => {
             <ModalBody>
               <div
                 className={tw(
-                  'flex h-40 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-default-300 bg-default-100 transition-all duration-300 ease-in-out focus:border-primary-500 focus:outline-none',
+                  'flex h-40 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-default-300 bg-default-100 transition-all duration-300 ease-in-out hover:border-primary-500 focus:border-primary-500 focus:outline-none',
                   isDragAccept && 'border-primary-500',
                   isDragReject && 'border-danger',
                 )}
@@ -106,11 +106,17 @@ const ImageInputModal = ({ modal }: { modal: Modal }) => {
                 <input {...getInputProps()} />
                 {!file && <p>이미지를 드래그 하거나, 클릭하여 선택하세요.</p>}
                 {file && (
-                  <img
-                    alt="preview"
-                    className="h-1/2 w-1/2 rounded-lg object-cover"
-                    src={imageUrl}
-                  />
+                  <div className="group relative h-full w-full">
+                    <img
+                      alt="preview"
+                      className="h-full w-full rounded-lg object-cover blur-0 transition-all duration-300 ease-in-out group-hover:blur-sm"
+                      src={imageUrl}
+                    />
+                    <div className="absolute left-1/2 top-1/2 flex max-w-full -translate-x-1/2 -translate-y-1/2 flex-col truncate opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100">
+                      <p>{file.name}</p>
+                      <p>{convertBytes(file.size)}</p>
+                    </div>
+                  </div>
                 )}
               </div>
             </ModalBody>
