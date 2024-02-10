@@ -47,7 +47,6 @@ const pretendard = localFont({
     },
   ],
   display: 'swap',
-  preload: true,
   variable: '--font-pretendard',
 });
 
@@ -66,10 +65,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <body
-        className={`${pretendard.variable} bg-default-100/70 font-pretendard text-foreground`}
-      >
+    <html lang="ko" suppressHydrationWarning className={pretendard.variable}>
+      <body className="bg-default-100/70 font-pretendard text-foreground">
         <Providers>
           <Header />
           {children}

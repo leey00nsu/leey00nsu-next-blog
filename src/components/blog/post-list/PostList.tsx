@@ -42,9 +42,9 @@ const PostList = ({
       <PostTags clickable showCount postTags={parseTag(allPosts)} />
       {posts.length === 0 && (
         <div className="flex w-full grow items-center justify-center">
-          <div className="prose-custom prose prose-slate">
-            <h2>해당 조건의 글이 없습니다.</h2>
-          </div>
+          <h2 className="text-lg font-bold sm:text-4xl">
+            해당 조건의 글이 없습니다.
+          </h2>
         </div>
       )}
       {posts.length > 0 && (
