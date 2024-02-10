@@ -4,6 +4,8 @@ import MDEditor, { commands } from '@uiw/react-md-editor/nohighlight';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 
+import useEditorResize from '@/src/hooks/studio/useEditorResize';
+
 import useEditorStore from '@/src/store/editorStore';
 
 import CustomCodeBlock from './CustomCodeBlock';
@@ -13,37 +15,13 @@ const Editor = () => {
   const { source, setSource } = useEditorStore(
     useShallow((state) => ({
       source: state.source,
-      slug: state.slug,
       setSource: state.setSource,
     })),
   );
+  const { resizeEditor } = useEditorResize();
 
-  // 에디터 높이 자동 조절
   useEffect(() => {
-    const editorElement = document.querySelector('#editor');
-    const editorContentElement = document.querySelector('.w-md-editor-area');
-    const textareaElement = document.querySelector('.w-md-editor-text-input');
-
-    if (!editorElement || !textareaElement || !editorContentElement) return;
-
-    const currentScrollTop = editorContentElement.scrollTop;
-
-    textareaElement.setAttribute('style', 'height: auto');
-
-    textareaElement.setAttribute(
-      'style',
-      `height: ${textareaElement.scrollHeight}px !important;
-      min-height: 400px !important;
-      -webkit-text-fill-color: inherit !important;`,
-    );
-
-    editorElement.setAttribute(
-      'style',
-      `max-height: 1000px !important;
-      height: ${textareaElement.scrollHeight + 32}px !important;`,
-    );
-
-    editorContentElement.scrollTo(0, currentScrollTop);
+    resizeEditor();
   }, [source]);
 
   return (
