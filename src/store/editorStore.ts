@@ -1,15 +1,15 @@
 import { z } from 'zod';
 import { create } from 'zustand';
 
-const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+export const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export const Frontmatter = z.object({
-  title: z.string().trim().min(1,'제목을 입력해주세요'),
+  title: z.string().trim().min(1, '제목을 입력해주세요'),
   slug: z
     .string()
     .trim()
     .min(1, 'slug를 입력해주세요')
-    .regex(slugRegex, 'slug는 소문자, 숫자, 하이픈만 사용할 수 있습니다'),
+    .regex(SLUG_REGEX, 'slug는 소문자, 숫자, 하이픈만 사용할 수 있습니다'),
   tags: z.string().trim().min(1, '태그를 입력해주세요'),
   description: z.string().trim().min(1, '설명을 입력해주세요'),
   date: z.string().trim().min(1, '날짜를 입력해주세요'),

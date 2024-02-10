@@ -7,7 +7,7 @@ import useEditorInitializer from '@/src/hooks/studio/useEditorInitializer';
 
 import { FullScreenSpinner } from '../ui/spinner';
 import FileList from './FileList';
-import FrontmatterForm from './FrontmatterForm';
+import FrontmatterForm from './frontmatter-form/FrontmatterForm';
 import Menu from './Menu';
 import Editor from './editor/Editor';
 import Preview from './preview/Preview';

@@ -24,6 +24,8 @@ const Editor = () => {
     resizeEditor();
   }, [source]);
 
+
+
   return (
     <div className="w-1/2">
       <MDEditor
