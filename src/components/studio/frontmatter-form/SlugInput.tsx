@@ -54,11 +54,21 @@ const SlugInput = () => {
   return (
     <Input
       isRequired
+      isClearable
+      classNames={{
+        inputWrapper: [
+          'bg-background',
+          'group-data-[focus=true]:bg-background',
+        ],
+      }}
       type="text"
       label="slug"
+      labelPlacement="outside"
+      placeholder='slug을 입력하세요. (예: "hello-world")'
       value={slug}
       onChange={changeSlugHandler}
-      color="primary"
+      onClear={() => setSlug('')}
+      color="default"
       isInvalid={!slugValidation.success}
       errorMessage={
         !slugValidation.success && slugValidation.error.issues[0].message

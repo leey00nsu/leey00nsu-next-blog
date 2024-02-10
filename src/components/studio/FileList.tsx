@@ -18,10 +18,10 @@ const FileList = () => {
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
       <Listbox
-        color="primary"
+        color="default"
         variant="light"
         aria-label="Listbox menu with icons"
-        className="rounded-small bg-primary-50 "
+        className="rounded-small bg-background"
       >
         <ListboxSection title="파일 목록">
           {files.map((file) => (

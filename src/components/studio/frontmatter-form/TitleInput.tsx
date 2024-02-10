@@ -23,11 +23,21 @@ const TitleInput = () => {
   return (
     <Input
       isRequired
+      isClearable
+      classNames={{
+        inputWrapper: [
+          'bg-background',
+          'group-data-[focus=true]:bg-background',
+        ],
+      }}
       type="text"
       label="제목"
+      labelPlacement="outside"
+      placeholder="제목을 입력하세요."
       value={title}
       onChange={changeTitleHandler}
-      color="primary"
+      onClear={() => setTitle('')}
+      color="default"
       isInvalid={!titleValidation.success}
       errorMessage={
         !titleValidation.success && titleValidation.error.issues[0].message

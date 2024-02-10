@@ -21,11 +21,21 @@ const TagsInput = () => {
   return (
     <Input
       isRequired
+      isClearable
+      classNames={{
+        inputWrapper: [
+          'bg-background',
+          'group-data-[focus=true]:bg-background',
+        ],
+      }}
       type="text"
       label="태그"
+      labelPlacement="outside"
+      placeholder="태그를 입력하세요. (쉼표로 구분)"
       value={tags}
       onChange={changeTagsHandler}
-      color="primary"
+      onClear={() => setTags('')}
+      color="default"
       isInvalid={!tagsValidation.success}
       errorMessage={
         !tagsValidation.success && tagsValidation.error.issues[0].message

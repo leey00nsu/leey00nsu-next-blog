@@ -25,11 +25,21 @@ const DescriptionInput = () => {
   return (
     <Input
       isRequired
+      isClearable
+      classNames={{
+        inputWrapper: [
+          'bg-background',
+          'group-data-[focus=true]:bg-background',
+        ],
+      }}
       type="text"
       label="설명"
+      labelPlacement="outside"
+      placeholder="설명을 입력하세요."
       value={description}
       onChange={changeDescriptionHandler}
-      color="primary"
+      onClear={() => setDescription('')}
+      color="default"
       isInvalid={!descriptionValidation.success}
       errorMessage={
         !descriptionValidation.success &&

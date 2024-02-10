@@ -23,11 +23,19 @@ const DateInput = () => {
   return (
     <Input
       isRequired
+      classNames={{
+        inputWrapper: [
+          'bg-background',
+          'group-data-[focus=true]:bg-background',
+        ],
+      }}
       type="date"
       label="날짜"
+      labelPlacement="outside"
+      placeholder="날짜를 입력하세요."
       value={date}
       onChange={changeDateHandler}
-      color="primary"
+      color="default"
       isInvalid={!dateValidation.success}
       errorMessage={
         !dateValidation.success && dateValidation.error.issues[0].message
