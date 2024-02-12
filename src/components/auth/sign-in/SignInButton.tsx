@@ -1,14 +1,12 @@
 'use client';
 
-import { Button } from '@nextui-org/react';
+import { ButtonProps } from '@nextui-org/react';
 import { signIn } from 'next-auth/react';
 import { FaGithub } from 'react-icons/fa';
 
-interface SignInButtonProps {
-  size?: 'sm' | 'md' | 'lg';
-}
+import { ActiveButton } from '../../ui/buttons';
 
-const SignInButton = ({ size = 'md' }: SignInButtonProps) => {
+const SignInButton = ({ ...props }: ButtonProps) => {
   const signInHandler = () => {
     signIn('github', {
       callbackUrl: '/',
@@ -16,16 +14,13 @@ const SignInButton = ({ size = 'md' }: SignInButtonProps) => {
   };
 
   return (
-    <Button
-      color="primary"
-      variant="flat"
-      size={size}
-      disableRipple
-      onClick={signInHandler}
+    <ActiveButton
+      onPress={signInHandler}
       startContent={<FaGithub />}
+      {...props}
     >
       Github 로그인
-    </Button>
+    </ActiveButton>
   );
 };
 

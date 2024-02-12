@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useShallow } from 'zustand/react/shallow';
@@ -16,6 +15,7 @@ import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
 
 import SignOutButton from '../auth/sign-out/SignOutButton';
+import { ActiveButton } from '../ui/buttons';
 
 interface MenuProps {
   isEdit?: boolean;
@@ -128,17 +128,14 @@ const Menu = ({ isEdit }: MenuProps) => {
         파일로 저장
       </Button> */}
       <SignOutButton />
-      <Button color="primary" variant="flat" onClick={resetHandler}>
-        초기화
-      </Button>
-      <Button
-        color={isSavable ? 'primary' : 'default'}
-        variant="flat"
+      <ActiveButton onPress={resetHandler}>초기화</ActiveButton>
+      <ActiveButton
+        onPress={resetHandler}
         onClick={() => saveHandler('remote')}
         disabled={!isSavable}
       >
         {isEdit ? '수정' : '업로드'}
-      </Button>
+      </ActiveButton>
     </div>
   );
 };

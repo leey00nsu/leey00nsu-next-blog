@@ -1,13 +1,11 @@
 'use client';
 
-import { Button } from '@nextui-org/react';
+import { ButtonProps } from '@nextui-org/react';
 import { signOut } from 'next-auth/react';
 
-interface SignOutButtonProps {
-  size?: 'sm' | 'md' | 'lg';
-}
+import { ActiveButton } from '../../ui/buttons';
 
-const SignOutButton = ({ size = 'md' }: SignOutButtonProps) => {
+const SignOutButton = ({ ...props }: ButtonProps) => {
   const signOutHandler = () => {
     signOut({
       callbackUrl: '/',
@@ -15,15 +13,9 @@ const SignOutButton = ({ size = 'md' }: SignOutButtonProps) => {
   };
 
   return (
-    <Button
-      color="primary"
-      disableRipple
-      size={size}
-      variant="flat"
-      onClick={signOutHandler}
-    >
+    <ActiveButton onPress={signOutHandler} {...props}>
       로그아웃
-    </Button>
+    </ActiveButton>
   );
 };
 
