@@ -3,8 +3,6 @@
 import { Pagination } from '@nextui-org/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import arrayToQueryString from '@/src/libs/arrayToQueryString';
-
 interface PostPaginationProps {
   totalPageLength: number;
   currentPage: number;
@@ -19,15 +17,10 @@ const PostPagination = ({
   const searchParams = useSearchParams();
 
   const changePageHandler = (page: number) => {
-    const tags = searchParams.getAll('tags');
+    const urlParams = new URLSearchParams(searchParams.toString());
+    urlParams.set('page', page.toString());
 
-    if (tags.length === 0) {
-      router.push(`${pathname}?page=${page}`);
-    }
-    if (tags.length > 0) {
-      const newQueryString = arrayToQueryString('tags', tags);
-      router.push(`${pathname}?page=${page}&${newQueryString}`);
-    }
+    router.push(`${pathname}?${urlParams.toString()}`);
   };
 
   return (

@@ -1,9 +1,10 @@
 /**
  * 배열을 입력받은 키의 쿼리스트링으로 변환합니다.
- * @param input
+ * @param arr
+ * @param key
  * @returns
  */
-const arrayToQueryString = (key: string, arr: string[]) => {
+const arrayToQueryString = (arr: string[], key: string) => {
   return arr.map((item) => `${key}=${item}`).join('&');
 };
 

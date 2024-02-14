@@ -3,8 +3,8 @@
 import { Chip } from '@nextui-org/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import arrayToQueryString from '@/src/libs/arrayToQueryString';
 import { PostTag } from '@/src/libs/parseTag';
+import toggleQueryString from '@/src/libs/toggleQueryString';
 import tw from '@/src/libs/tw';
 
 interface PostTagsProps {
@@ -27,18 +27,9 @@ const PostTags = ({
   const clickTagHandler = (tag: string) => {
     if (!clickable) return;
     const tags = searchParams.getAll('tags');
+    const newQueryString = toggleQueryString(tags, 'tags', tag);
 
-    if (tags.includes(tag)) {
-      const newTags = tags.filter((t) => t !== tag);
-      const newQueryString = arrayToQueryString('tags', newTags);
-
-      router.push(`${pathname}?${newQueryString}`);
-    } else {
-      const newTags = tags.concat(tag);
-      const newQueryString = arrayToQueryString('tags', newTags);
-
-      router.push(`${pathname}?${newQueryString}`);
-    }
+    router.push(`${pathname}?${newQueryString}`);
   };
 
   const isSelected = (tag: string) => {
