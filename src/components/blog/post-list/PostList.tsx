@@ -2,12 +2,11 @@ import { allPosts } from '@/.contentlayer/generated';
 import { compareDesc } from 'date-fns';
 import { redirect } from 'next/navigation';
 
-import parseTag from '@/src/libs/parseTag';
 import queryStringToArray from '@/src/libs/queryStringToArray';
 
 import PostItem from './PostItem';
 import PostPagination from './PostPagination';
-import PostTags from './PostTags';
+import PostTagsAccordion from './PostTagsAccordion';
 
 const PAGE_SIZE = 6;
 
@@ -38,8 +37,12 @@ const PostList = ({
 
   return (
     <main className="mx-auto flex min-h-[calc(100svh-128px)] max-w-5xl flex-col justify-center gap-8 p-8">
-      <h2>{posts.length}개의 글이 있습니다.</h2>
-      <PostTags clickable showCount postTags={parseTag(allPosts)} />
+      <PostTagsAccordion />
+      {posts.length > 0 && (
+        <p className="text-base font-semibold sm:text-2xl">
+          {posts.length}개의 글이 있습니다.
+        </p>
+      )}
       {posts.length === 0 && (
         <div className="flex w-full grow items-center justify-center">
           <h2 className="text-lg font-bold sm:text-4xl">

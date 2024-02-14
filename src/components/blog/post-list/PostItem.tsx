@@ -5,8 +5,8 @@ import Link from 'next/link';
 import parseTag from '@/src/libs/parseTag';
 
 import { DateText } from '../../ui/text';
+import PostTags from '../common/PostTags';
 import PostDropdown from './PostDropdown';
-import PostTags from './PostTags';
 
 const PostItem = (post: Post) => {
   return (

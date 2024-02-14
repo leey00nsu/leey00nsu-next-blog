@@ -4,7 +4,7 @@ import { Divider } from '@nextui-org/react';
 import parseTag from '@/src/libs/parseTag';
 
 import { DateText } from '../../ui/text';
-import PostTags from '../post-list/PostTags';
+import PostTags from '../common/PostTags';
 import PostComments from './PostComments';
 import PostContent from './PostContent';
 import PostTitle from './PostTitle';
