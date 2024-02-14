@@ -30,7 +30,7 @@
     "next-auth": "^4.24.5",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
-    "octokit-commit-multiple-files": "github:leey00nsu/octokit-commit-multiple-files",
+    "octokit-commit-multiple-files": "^5.0.1",
     "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
