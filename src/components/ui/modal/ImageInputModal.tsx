@@ -112,7 +112,7 @@ const ImageInputModal = ({ modal }: { modal: Modal }) => {
                       className="h-full w-full rounded-lg object-cover blur-0 transition-all duration-300 ease-in-out group-hover:blur-sm"
                       src={imageUrl}
                     />
-                    <div className="absolute left-1/2 top-1/2 flex max-w-full -translate-x-1/2 -translate-y-1/2 flex-col truncate opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100">
+                    <div className="absolute left-1/2 top-1/2 flex max-w-full -translate-x-1/2 -translate-y-1/2 flex-col truncate text-black opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100">
                       <p>{file.name}</p>
                       <p>{convertBytes(file.size)}</p>
                     </div>
