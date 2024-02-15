@@ -22,7 +22,7 @@ const SlugInput = () => {
 
     // 이미지 경로 정규식
     const imagePathRegex = new RegExp(
-      `\\!\\[([A-Za-z0-9\\-_]+)\\]\\((${blogConfig.postPath}/)(.*?)\\/(.*?)\\)`,
+      `\\!\\[([A-Za-z0-9\\-_]+)\\]\\((/${blogConfig.postPath}/)(.*?)\\/(.*?)\\)`,
     );
 
     const imagePaths = newSource.match(new RegExp(imagePathRegex, 'g'));

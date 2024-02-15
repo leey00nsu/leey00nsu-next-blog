@@ -55,7 +55,7 @@ const ImageInputModal = ({ modal }: { modal: Modal }) => {
         return;
       }
 
-      const fileUrl = `${blogConfig.postPath}/${slug}/${acceptedFiles[0].name}`;
+      const fileUrl = `/${blogConfig.postPath}/${slug}/${acceptedFiles[0].name}`;
       const newFilePath = `![${fileName}](${fileUrl})\n`;
 
       setFilePath(newFilePath);

@@ -4,6 +4,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
+import getThumbnailImage from './src/libs/getThumbnailImage';
 import imageMetadata from './src/plugins/imageMetadata';
 
 export const Post = defineDocumentType(() => ({
@@ -27,6 +28,10 @@ export const Post = defineDocumentType(() => ({
     url: {
       type: 'string',
       resolve: (post) => `${post._raw.sourceFileDir}`,
+    },
+    thumbnail: {
+      type: 'json',
+      resolve: (post) => getThumbnailImage(post),
     },
   },
 }));

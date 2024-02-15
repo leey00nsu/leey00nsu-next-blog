@@ -14,8 +14,13 @@ const CustomImage = ({
   src,
   base64,
   keepBlur = true,
+  dropShadow = true,
   ...props
-}: ImageProps & { base64?: string; keepBlur?: boolean }) => {
+}: ImageProps & {
+  base64?: string;
+  keepBlur?: boolean;
+  dropShadow?: boolean;
+}) => {
   const [isMounted, setIsMounted] = useState(false);
 
   let numberWidth = Number(width);
@@ -29,7 +34,12 @@ const CustomImage = ({
   }
 
   return (
-    <span className="relative inline-block drop-shadow-xl will-change-[filter] dark:drop-shadow-none">
+    <span
+      className={tw(
+        'relative inline-block will-change-[filter]',
+        dropShadow && 'drop-shadow-xl dark:drop-shadow-none',
+      )}
+    >
       {/* blur image */}
       <Image
         alt={alt ?? ''}

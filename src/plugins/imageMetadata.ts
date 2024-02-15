@@ -52,7 +52,7 @@ async function addMetadata(node: ImageNode): Promise<void> {
     path.join(process.cwd(), node.properties.src),
   );
 
-  // lqip 이미지 라이브러리 plaiceholder 와 lqip-modern 중 lqip-modern가 더 퀄리티기 좋음
+  // lqip 이미지 라이브러리 plaiceholder 와 lqip-modern 중 lqip-modern이 더 퀄리티가 좋음
   // const { base64, metadata } = await getPlaiceholder(buffer, { size: 10 });
   const { metadata } = await lqip(buffer);
 
