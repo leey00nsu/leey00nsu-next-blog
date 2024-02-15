@@ -42,6 +42,7 @@ const CustomImage = ({
     >
       {/* blur image */}
       <Image
+        key={base64}
         alt={alt ?? ''}
         width={numberWidth}
         height={numberHeight}
@@ -57,6 +58,7 @@ const CustomImage = ({
       />
 
       <Image
+        key={src as string}
         alt={alt ?? ''}
         width={numberWidth}
         height={numberHeight}

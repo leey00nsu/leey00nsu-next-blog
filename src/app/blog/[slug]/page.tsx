@@ -3,8 +3,6 @@ import { notFound } from 'next/navigation';
 
 import { PostDetail } from '@/src/components/blog/post-detail';
 
-export const dynamic = 'auto';
-
 export const generateStaticParams = () => {
   return allPosts.map((post) => ({ slug: post.slug }));
 };
