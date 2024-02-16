@@ -129,7 +129,10 @@ const Menu = ({ isEdit }: MenuProps) => {
       </Button> */}
       <SignOutButton />
       <ActiveButton onPress={resetHandler}>초기화</ActiveButton>
-      <ActiveButton onPress={() => saveHandler('remote')} disabled={!isSavable}>
+      <ActiveButton
+        onPress={() => saveHandler('remote')}
+        isDisabled={!isSavable}
+      >
         {isEdit ? '수정' : '업로드'}
       </ActiveButton>
     </div>
