@@ -64,7 +64,7 @@ const CustomImage = ({
         height={numberHeight}
         src={src}
         onLoad={() => setIsMounted(true)}
-        className={tw('m-0', !isMounted ? 'opacity-0' : 'fade-in')}
+        className={tw('m-0', isMounted ? 'fade-in' : 'opacity-0')}
         {...props}
       />
     </span>

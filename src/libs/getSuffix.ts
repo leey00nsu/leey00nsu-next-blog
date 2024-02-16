@@ -4,7 +4,7 @@
  * @param base
  * @returns
  */
-const findSuffix = (target: string, base: string) => {
+const getSuffix = (target: string, base: string) => {
   if (target.startsWith(base)) {
     return target.slice(base.length);
   }
@@ -12,4 +12,4 @@ const findSuffix = (target: string, base: string) => {
   return '';
 };
 
-export default findSuffix;
+export default getSuffix;

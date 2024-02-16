@@ -6,7 +6,7 @@ import { useShallow } from 'zustand/react/shallow';
 import getImageFileNames from '@/src/actions/studio/getImageFileNames';
 
 import dateToString from '@/src/libs/dateToString';
-import findSuffix from '@/src/libs/findSuffix';
+import getSuffix from '@/src/libs/getSuffix';
 
 import useEditorStore from '@/src/store/editorStore';
 import useFileStore from '@/src/store/fileStore';
@@ -36,7 +36,7 @@ const useEditorInitializer = (post: Post | undefined) => {
   const getFiles = async (slug: string) => {
     const files = [];
     const fileNames = await getImageFileNames(slug);
-    const postPath = findSuffix(blogConfig.postPath, 'public');
+    const postPath = getSuffix(blogConfig.postPath, 'public');
 
     for (const fileName of fileNames) {
       const image = await fetch(`${postPath}/${slug}/${fileName}`);
@@ -52,10 +52,10 @@ const useEditorInitializer = (post: Post | undefined) => {
 
   const resetEditor = () => {
     setSource('');
-    setSlug('title-slug-example');
-    setTitle('글 제목');
-    setTags('태그1,태그2');
-    setDescription('...에 대해 설명합니다.');
+    setSlug('');
+    setTitle('');
+    setTags('');
+    setDescription('');
     setDate(dateToString(new Date()));
     setFiles([]);
   };

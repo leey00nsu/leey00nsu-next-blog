@@ -4,7 +4,7 @@ import lqip from 'lqip-modern';
 import path from 'path';
 
 import blogConfig from '../../blog.config';
-import findSuffix from './findSuffix';
+import getSuffix from './getSuffix';
 
 /**
  * Post에서 썸네일을 추출합니다.
@@ -39,7 +39,7 @@ const getThumbnailImage = async (post: Post) => {
   const { metadata } = await lqip(buffer);
 
   return {
-    src: findSuffix(filePath, '/public'),
+    src: getSuffix(filePath, '/public'),
     alt,
     width: metadata.originalWidth,
     height: metadata.originalHeight,

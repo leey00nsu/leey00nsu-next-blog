@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { create } from 'zustand';
 
+import dateToString from '../libs/dateToString';
+
 export const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export const Frontmatter = z.object({
@@ -32,11 +34,11 @@ interface EditorStore {
 
 const useEditorStore = create<EditorStore>((set) => ({
   source: '',
-  slug: 'title-slug-example',
-  title: '글 제목',
-  tags: '태그1,태그2',
-  description: '...에 대해 설명합니다.',
-  date: new Date().toISOString().slice(0, 10),
+  slug: '',
+  title: '',
+  tags: '',
+  description: '',
+  date: dateToString(new Date()),
   setSource: (source) => set(() => ({ source })),
   setSlug: (slug) => set(() => ({ slug })),
   setTitle: (title) => set(() => ({ title })),
