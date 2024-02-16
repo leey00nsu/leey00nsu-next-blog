@@ -47,7 +47,7 @@ const CustomImage = ({
         width={numberWidth}
         height={numberHeight}
         className={tw(
-          'absolute inset-0 m-0 blur-md dark:blur-none',
+          'absolute inset-0 m-0 opacity-100  blur-md dark:blur-none',
           isMounted && !keepBlur && 'fade-out opacity-0',
         )}
         style={{
@@ -64,7 +64,7 @@ const CustomImage = ({
         height={numberHeight}
         src={src}
         onLoad={() => setIsMounted(true)}
-        className={tw('m-0', isMounted ? 'fade-in' : 'opacity-0')}
+        className={tw('m-0 ', isMounted ? 'fade-in' : 'opacity-0')}
         {...props}
       />
     </span>
