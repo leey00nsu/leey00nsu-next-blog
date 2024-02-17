@@ -54,7 +54,7 @@ const useEditorInitializer = (post: Post | undefined) => {
     setSource('');
     setSlug('');
     setTitle('');
-    setTags('');
+    setTags([]);
     setDescription('');
     setDate(dateToString(new Date()));
     setFiles([]);
@@ -65,7 +65,7 @@ const useEditorInitializer = (post: Post | undefined) => {
       setSource(post.body.raw);
       setSlug(post.slug);
       setTitle(post.title);
-      setTags(post.tags.join(','));
+      setTags(post.tags);
       setDescription(post.description);
       setDate(dateToString(new Date(post.date)));
 

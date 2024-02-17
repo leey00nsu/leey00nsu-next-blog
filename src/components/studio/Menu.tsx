@@ -120,13 +120,12 @@ const Menu = ({ isEdit }: MenuProps) => {
 
   return (
     <div className="flex flex-row justify-end gap-2 p-4">
-      {/* <Button
-        color="primary"
-        variant="flat"
-        onClick={() => saveHandler('local')}
+      {/* <ActiveButton
+        onPress={() => saveHandler('local')}
+        isDisabled={!isSavable}
       >
         파일로 저장
-      </Button> */}
+      </ActiveButton> */}
       <SignOutButton />
       <ActiveButton onPress={resetHandler}>초기화</ActiveButton>
       <ActiveButton

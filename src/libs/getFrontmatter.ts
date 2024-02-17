@@ -1,7 +1,7 @@
 interface GetFrontmatterProps {
   slug: string;
   title: string;
-  tags: string;
+  tags: string[];
   description: string;
   date: string;
 }
@@ -19,10 +19,7 @@ const getFrontmatter = ({
   description,
   date,
 }: GetFrontmatterProps) => {
-  const parsedTags = tags
-    .split(',')
-    .map((tag) => `\n  - ${tag}`)
-    .join('');
+  const parsedTags = tags.map((tag) => `\n  - ${tag}`).join('');
 
   const frontmatter = `---
 slug: ${slug}

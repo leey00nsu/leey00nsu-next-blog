@@ -12,7 +12,7 @@ export const Frontmatter = z.object({
     .trim()
     .min(1, 'slug를 입력해주세요')
     .regex(SLUG_REGEX, 'slug는 소문자, 숫자, 하이픈만 사용할 수 있습니다'),
-  tags: z.string().trim().min(1, '태그를 입력해주세요'),
+  tags: z.array(z.string()).min(1, '태그를 입력해주세요'),
   description: z.string().trim().min(1, '설명을 입력해주세요'),
   date: z.string().trim().min(1, '날짜를 입력해주세요'),
 });
@@ -21,13 +21,13 @@ interface EditorStore {
   source: string;
   slug: string;
   title: string;
-  tags: string;
+  tags: string[];
   description: string;
   date: string;
   setSource: (source: string) => void;
   setSlug: (slug: string) => void;
   setTitle: (title: string) => void;
-  setTags: (tags: string) => void;
+  setTags: (tags: string[]) => void;
   setDescription: (description: string) => void;
   setDate: (date: string) => void;
 }
@@ -36,7 +36,7 @@ const useEditorStore = create<EditorStore>((set) => ({
   source: '',
   slug: '',
   title: '',
-  tags: '',
+  tags: [],
   description: '',
   date: dateToString(new Date()),
   setSource: (source) => set(() => ({ source })),
