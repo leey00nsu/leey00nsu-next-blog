@@ -2,6 +2,8 @@
 
 import { allPosts } from '@/.contentlayer/generated';
 import { Accordion, AccordionItem } from '@nextui-org/react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { FaHashtag } from 'react-icons/fa';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -18,6 +20,15 @@ const PostTagsAccordion = () => {
       setSelectedKeys: state.setSelectedKeys,
     })),
   );
+
+  const tags = useSearchParams().getAll('tags');
+
+  // 태그가 선택되었을 때, 태그 아코디언을 펼침
+  useEffect(() => {
+    if (tags.length > 0 && selectedKeys.size === 0) {
+      setSelectedKeys(new Set(['태그']));
+    }
+  }, []);
 
   return (
     <Accordion
