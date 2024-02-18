@@ -1,7 +1,7 @@
 'use client';
 
 import { Chip } from '@nextui-org/react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { PostTag } from '@/src/libs/parseTag';
 import toggleQueryString from '@/src/libs/toggleQueryString';
@@ -21,7 +21,6 @@ const PostTags = ({
   clickable,
 }: PostTagsProps) => {
   const searchParams = useSearchParams();
-  const pathname = usePathname();
   const router = useRouter();
 
   const clickTagHandler = (tag: string) => {
@@ -29,7 +28,7 @@ const PostTags = ({
     const tags = searchParams.getAll('tags');
     const newQueryString = toggleQueryString(tags, 'tags', tag);
 
-    router.push(`${pathname}?${newQueryString}`);
+    router.push(`/blog?${newQueryString}`);
   };
 
   const isSelected = (tag: string) => {
@@ -43,6 +42,7 @@ const PostTags = ({
     >
       {postTags.map((postTag) => (
         <Chip
+          as={clickable ? 'button' : 'div'}
           onClick={() => clickTagHandler(postTag.tag)}
           className={tw(
             clickable && 'cursor-pointer',

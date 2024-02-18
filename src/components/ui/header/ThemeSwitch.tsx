@@ -41,7 +41,7 @@ export default function ThemeSwitch() {
       isSelected={theme === 'dark'}
       size="lg"
       color="default"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       thumbIcon={<ThemeIcon theme={theme} />}
     />
   );

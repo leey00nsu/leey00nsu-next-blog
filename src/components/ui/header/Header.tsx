@@ -59,7 +59,7 @@ const Header = () => {
             color="default"
             href="https://github.com/leey00nsu"
             variant="light"
-            onClick={() => query.toggle()}
+            onPress={() => query.toggle()}
           >
             <FaSearch className="h-6 w-6" />
           </Button>

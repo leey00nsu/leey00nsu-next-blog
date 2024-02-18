@@ -12,6 +12,8 @@ import PostThumbnail from './PostThumbnail';
 const PostItem = (post: Post) => {
   return (
     <Card
+      isPressable
+      disableRipple
       as={Link}
       href={post.url}
       shadow="sm"

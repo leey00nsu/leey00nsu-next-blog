@@ -25,7 +25,7 @@ const PostDetail = ({ post }: PostDetailProps) => {
         <DateText date={date} />
         <PostViewCount slug={slug} />
       </div>
-      <PostTags postTags={parseTag([post])} />
+      <PostTags clickable postTags={parseTag([post])} />
       <PostContent body={body} />
       <Divider className="my-20" />
       <PostComments />
