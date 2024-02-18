@@ -10,7 +10,12 @@ const PostThumbnail = ({ thumbnail }: PostThumbnailProps) => {
   return (
     <div className="flex aspect-square max-h-[300px] w-full items-center justify-center overflow-hidden">
       {thumbnail.src && (
-        <CustomImage dropShadow={false} keepBlur={false} {...thumbnail} />
+        <CustomImage
+          zoomable={false}
+          dropShadow={false}
+          keepBlur={false}
+          {...thumbnail}
+        />
       )}
       {!thumbnail.src && (
         <div className="relative flex h-full w-full items-center justify-center bg-neutral-100 font-bold text-neutral-800">

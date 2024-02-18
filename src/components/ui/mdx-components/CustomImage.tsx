@@ -5,6 +5,8 @@ import { useState } from 'react';
 
 import tw from '@/src/libs/tw';
 
+import { Zoomable } from '../zoom';
+
 const MAX_HEIGHT = 600;
 
 const CustomImage = ({
@@ -15,11 +17,13 @@ const CustomImage = ({
   base64,
   keepBlur = true,
   dropShadow = true,
+  zoomable = true,
   ...props
 }: ImageProps & {
   base64?: string;
   keepBlur?: boolean;
   dropShadow?: boolean;
+  zoomable?: boolean;
 }) => {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -57,16 +61,37 @@ const CustomImage = ({
         priority
       />
 
-      <Image
-        key={src as string}
-        alt={alt ?? ''}
-        width={numberWidth}
-        height={numberHeight}
-        src={src}
-        onLoad={() => setIsMounted(true)}
-        className={tw('m-0 ', isMounted ? 'fade-in' : 'opacity-0')}
-        {...props}
-      />
+      {/* original image */}
+      {zoomable && (
+        <Zoomable
+          zoomImg={{
+            src: src as string, // 줌 되었을 때 보여줄 이미지
+          }}
+        >
+          <Image
+            key={src as string}
+            alt={alt ?? ''}
+            width={numberWidth}
+            height={numberHeight}
+            src={src}
+            onLoad={() => setIsMounted(true)}
+            className={tw('m-0', isMounted ? 'fade-in' : 'opacity-0')}
+            {...props}
+          />
+        </Zoomable>
+      )}
+      {!zoomable && (
+        <Image
+          key={src as string}
+          alt={alt ?? ''}
+          width={numberWidth}
+          height={numberHeight}
+          src={src}
+          onLoad={() => setIsMounted(true)}
+          className={tw('m-0 ', isMounted ? 'fade-in' : 'opacity-0')}
+          {...props}
+        />
+      )}
     </span>
   );
 };

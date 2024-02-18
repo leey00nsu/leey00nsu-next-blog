@@ -15,6 +15,7 @@ const GithubChart = async () => {
       src="https://ghchart.rshah.org/086ab6/leey00nsu"
       base64={base64}
       keepBlur={false}
+      zoomable={false}
       unoptimized
     />
   );
