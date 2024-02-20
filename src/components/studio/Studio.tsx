@@ -36,7 +36,7 @@ const Studio = ({ post }: StudioProps) => {
   return (
     <main className="min-w-screen flex min-h-screen flex-col">
       <Menu isEdit={isEdit} />
-      <FrontmatterForm />
+      <FrontmatterForm isEdit={isEdit} />
       <FileList />
       <div className="flex flex-row gap-4 p-4">
         <Editor />

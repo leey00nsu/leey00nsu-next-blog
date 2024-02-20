@@ -1,10 +1,15 @@
 import blogConfig from '@/blog.config';
 import { Input } from '@nextui-org/react';
+import { useParams } from 'next/navigation';
 import { useShallow } from 'zustand/react/shallow';
 
 import useEditorStore, { Frontmatter } from '@/src/store/editorStore';
 
-const SlugInput = () => {
+interface SlugInputProps {
+  isEdit?: boolean;
+}
+
+const SlugInput = ({ isEdit }: SlugInputProps) => {
   const { source, slug, setSource, setSlug } = useEditorStore(
     useShallow((state) => ({
       source: state.source,
@@ -13,6 +18,7 @@ const SlugInput = () => {
       setSlug: state.setSlug,
     })),
   );
+  const originalSlug = useParams().slug;
 
   // 소스 이미지 경로의 slug를 현재 slug로 변경
   const syncImagePathSlug = (newSlug: string) => {
@@ -49,7 +55,9 @@ const SlugInput = () => {
     setSlug(newSlug);
   };
 
-  const slugValidation = Frontmatter.pick({ slug: true }).safeParse({ slug });
+  const slugValidation = Frontmatter.pick({ slugObject: true }).safeParse({
+    slugObject: { slug, originalSlug, isEdit },
+  });
 
   return (
     <Input

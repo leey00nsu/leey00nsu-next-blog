@@ -4,10 +4,14 @@ import SlugInput from './SlugInput';
 import TagsInput from './TagsInput';
 import TitleInput from './TitleInput';
 
-const FrontmatterForm = () => {
+interface FrontmatterFormProps {
+  isEdit: boolean;
+}
+
+const FrontmatterForm = ({isEdit} : FrontmatterFormProps) => {
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
-      <SlugInput />
+      <SlugInput isEdit={isEdit} />
       <TitleInput />
       <TagsInput />
       <DescriptionInput />
