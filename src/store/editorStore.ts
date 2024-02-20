@@ -1,3 +1,4 @@
+import { allPosts } from '@/.contentlayer/generated';
 import { z } from 'zod';
 import { create } from 'zustand';
 
@@ -11,7 +12,11 @@ export const Frontmatter = z.object({
     .string()
     .trim()
     .min(1, 'slug를 입력해주세요')
-    .regex(SLUG_REGEX, 'slug는 소문자, 숫자, 하이픈만 사용할 수 있습니다'),
+    .regex(SLUG_REGEX, 'slug는 소문자, 숫자, 하이픈만 사용할 수 있습니다')
+    .refine((slug) => {
+      const allSlugs = allPosts.map((post) => post.slug);
+      return !allSlugs.includes(slug);
+    }, '이미 존재하는 slug입니다'),
   tags: z.array(z.string()).min(1, '태그를 입력해주세요'),
   description: z.string().trim().min(1, '설명을 입력해주세요'),
   date: z.string().trim().min(1, '날짜를 입력해주세요'),
