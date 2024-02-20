@@ -1,0 +1,11 @@
+.toc-list-item {
+  color: hsl(var(--nextui-default-400)) !important;
+}
+
+.is-active-li {
+  color: hsl(var(--nextui-default-600)) !important;
+}
+
+.is-collapsible {
+  padding-left: 0.5rem;
+}

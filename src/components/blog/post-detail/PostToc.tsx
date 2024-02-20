@@ -1,5 +1,6 @@
 'use client';
 
+import '@/src/styles/toc.css';
 import { useEffect } from 'react';
 import tocbot from 'tocbot';
 

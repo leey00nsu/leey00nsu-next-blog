@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".contentlayer/generated"
-  ],
+, "src/actions/save-pdf.js"  ],
   "exclude": ["node_modules"]
 }

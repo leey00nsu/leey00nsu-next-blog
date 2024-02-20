@@ -2,7 +2,12 @@ import { MDX } from 'contentlayer/core';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
-import { CustomImage, CustomLink, CustomSnipet } from '../../ui/mdx-components';
+import {
+  CustomImage,
+  CustomLink,
+  CustomSnipet,
+  MDXWrapper,
+} from '../../ui/mdx-components';
 
 interface PostContentProps {
   body: MDX;
@@ -19,9 +24,9 @@ const PostContent = ({ body }: PostContentProps) => {
   const MDXContent = useMDXComponent(body.code);
 
   return (
-    <div className="toc-content prose prose-slate dark:prose-invert">
+    <MDXWrapper className="toc-content">
       <MDXContent components={mdxComponents as MDXComponents} />
-    </div>
+    </MDXWrapper>
   );
 };
 

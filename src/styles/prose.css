@@ -1,0 +1,53 @@
+.prose-custom {
+  @apply prose-headings:m-0 prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-h3:font-semibold prose-p:m-0 prose-p:text-sm prose-a:m-0
+  prose-li:m-0 prose-li:text-sm prose-li:marker:text-personal-blue prose-img:my-2 prose-hr:border-personal-blue/50 sm:prose-h1:text-4xl sm:prose-h2:text-3xl
+  sm:prose-h3:text-xl sm:prose-p:text-lg sm:prose-li:text-lg;
+}
+
+.prose pre {
+  overflow-x: auto;
+  padding: 1rem 0;
+  @apply rounded-b-md rounded-t-none !important;
+}
+
+.prose pre [data-line] {
+  padding: 0 1rem;
+}
+
+.prose figcaption {
+  padding: 1rem;
+  background-color: #303446 !important;
+  @apply rounded-t-md border-b-2 border-[#383d52] !important;
+}
+
+.prose code:not([data-language]) {
+  background-color: hsl(var(--nextui-default-200));
+  color: hsl(var(--nextui-danger-500)) !important;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  @apply font-pretendard;
+}
+
+.prose blockquote p::after {
+  content: '' !important;
+}
+
+.prose blockquote p::before {
+  content: '' !important;
+}
+
+.prose code::after {
+  content: '' !important;
+}
+
+.prose code::before {
+  content: '' !important;
+}
+
+.prose code span[data-highlighted-line] {
+  @apply !bg-[#ebf3ff];
+}
+
+.prose code span[data-highlighted-line] span {
+  @apply !text-[#303446];
+}

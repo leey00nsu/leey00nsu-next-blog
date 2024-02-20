@@ -8,11 +8,11 @@ interface HighlightProps {
 }
 
 const Highlight = ({ children, className }: HighlightProps) => {
-  const highlightClasses = 'text-personal-blue text-3xl sm:text-6xl';
-
-  const classes = tw(highlightClasses, className);
-
-  return <span className={classes}>{children}</span>;
+  return (
+    <span className={tw('text-3xl text-personal-blue sm:text-6xl', className)}>
+      {children}
+    </span>
+  );
 };
 
 export default Highlight;
