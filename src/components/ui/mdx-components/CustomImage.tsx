@@ -57,7 +57,10 @@ const CustomImage = ({
         style={{
           aspectRatio: `${numberWidth} / ${numberHeight}`,
         }}
-        onLoad={() => setIsMounted(false)}
+        onLoad={() => {
+          if (props.unoptimized) return; // svg 이미지는 블러를 초기화하지 않는다.
+          setIsMounted(false);
+        }}
         src={base64!}
         priority
       />
@@ -91,7 +94,9 @@ const CustomImage = ({
           width={numberWidth}
           height={numberHeight}
           src={src}
-          onLoad={() => setIsMounted(true)}
+          onLoad={() => {
+            setIsMounted(true);
+          }}
           className={tw(
             'm-0',
             isMounted ? 'opacity-100 transition-opacity' : 'opacity-0',
