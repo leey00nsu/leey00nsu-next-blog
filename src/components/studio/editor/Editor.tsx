@@ -1,5 +1,6 @@
 'use client';
 
+import '@/src/styles/editor.css';
 import MDEditor, { commands } from '@uiw/react-md-editor/nohighlight';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';

@@ -1,0 +1,9 @@
+.w-md-editor-toolbar {
+  position: sticky;
+  top: var(--navbar-height);
+  z-index: 10;
+}
+
+.w-md-editor-bar {
+  display: none;
+}

@@ -4,7 +4,7 @@ import { FaGithub, FaPencilAlt } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="flex h-[64px] w-full items-center justify-center bg-background/70">
+    <footer className="flex h-[var(--footer-height)] w-full items-center justify-center bg-background/70">
       <div className="flex max-w-2xl items-center justify-center gap-2">
         <p className="font-extralight text-default-400">
           © 2024 leey00nsu blog
