@@ -10,6 +10,7 @@ import path from 'path';
 /**
  * 포스트를 github 레포지토리에 커밋합니다.
  * @param formData
+ * @param isEdit
  * @returns
  */
 const savePostRemote = async (formData: FormData, isEdit: boolean) => {
@@ -55,6 +56,7 @@ const savePostRemote = async (formData: FormData, isEdit: boolean) => {
       owner: blogConfig.owner,
       repo: blogConfig.repo,
       branch: blogConfig.branch,
+      createBranch: true,
       changes: [
         {
           message: isEdit

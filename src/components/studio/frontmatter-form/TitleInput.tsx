@@ -23,7 +23,6 @@ const TitleInput = () => {
   return (
     <Input
       isRequired
-      isClearable
       classNames={{
         inputWrapper: [
           'bg-background',

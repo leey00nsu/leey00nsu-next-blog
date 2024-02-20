@@ -62,7 +62,7 @@ const SlugInput = ({ isEdit }: SlugInputProps) => {
   return (
     <Input
       isRequired
-      isClearable
+      isDisabled={isEdit}
       classNames={{
         inputWrapper: [
           'bg-background',
@@ -75,7 +75,7 @@ const SlugInput = ({ isEdit }: SlugInputProps) => {
       placeholder='slug을 입력하세요. (예: "hello-world")'
       value={slug}
       onChange={changeSlugHandler}
-      onClear={() => setSlug('')}
+      onClear={isEdit ? undefined : () => setSlug('')}
       color="default"
       isInvalid={!slugValidation.success}
       errorMessage={

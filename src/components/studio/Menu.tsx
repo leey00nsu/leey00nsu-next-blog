@@ -1,5 +1,6 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useShallow } from 'zustand/react/shallow';
@@ -36,6 +37,7 @@ const Menu = ({ isEdit }: MenuProps) => {
   );
   const files = useFileStore((state) => state.files);
   const [isSavable, setIsSavable] = useState(false);
+  const originalSlug = useParams().slug;
 
   const toastResponse = (response: { success: boolean; message: string }) => {
     if (response.success) {
@@ -107,7 +109,7 @@ const Menu = ({ isEdit }: MenuProps) => {
 
   useEffect(() => {
     const validation = Frontmatter.safeParse({
-      slug,
+      slugObject: { slug, originalSlug, isEdit },
       title,
       tags,
       description,
