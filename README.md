@@ -22,13 +22,13 @@
 
 ### ✍ 에디터
 
-- 블로그 템플릿을 적용한 에디터를 제공합니다.
+- 블로그 템플릿을 적용한 에디터를 제공합니다. ([플레이그라운드](https://blog.leey00nsu.site/playground))
 - Github Oauth 인증을 통해 에디터 접근 권한을 제어합니다.
 - 자동으로 Github 레포지토리에 새로운 글을 저장합니다.
 
 ### ⚡️ 최적화
 
-- 외부 이미지에 대해 Next/Image를 지원합니다.
+- 이미지 메타데이터를 자동으로 생성하여 CLS(Cumulative Layout Shift)를 방지합니다.
 
 ### 🔍 SEO
 
