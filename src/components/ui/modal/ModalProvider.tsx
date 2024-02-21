@@ -6,6 +6,7 @@ import { Modal } from '@/src/store/modalStore';
 
 import ConfirmModal from './ConfirmModal';
 import ImageInputModal from './ImageInputModal';
+import LoadingModal from './LoadingModal';
 
 const ModalRenderer = ({ modal }: { modal: Modal }) => {
   switch (modal.type) {
@@ -13,6 +14,8 @@ const ModalRenderer = ({ modal }: { modal: Modal }) => {
       return <ConfirmModal modal={modal} />;
     case 'image':
       return <ImageInputModal modal={modal} />;
+    case 'loading':
+      return <LoadingModal modal={modal} />;
     default:
       return null;
   }

@@ -47,7 +47,7 @@ const Menu = ({ isEdit }: MenuProps) => {
     }
   };
 
-  const saveHandler = async (type: string) => {
+  const generateFormData = () => {
     const frontmatter = getFrontmatter({
       slug,
       title,
@@ -65,41 +65,70 @@ const Menu = ({ isEdit }: MenuProps) => {
       formData.append('files', file);
     });
 
-    if (type === 'local') {
-      addModal({
-        type: 'confirm',
-        title: '파일로 저장',
-        content: <p>파일로 저장할까요?</p>,
-        callback: async () => {
-          const response = await savePostLocal(formData);
-          toastResponse(response);
-        },
-      });
-    }
+    return formData;
+  };
 
-    if (type === 'remote' && !isEdit) {
-      addModal({
-        type: 'confirm',
-        title: '업로드',
-        content: <p>업로드할까요?</p>,
-        callback: async () => {
-          const response = await savePostRemote(formData, false);
-          toastResponse(response);
-        },
-      });
-    }
+  const saveLocalHandler = async () => {
+    const formData = generateFormData();
 
-    if (type === 'remote' && isEdit) {
-      addModal({
-        type: 'confirm',
-        title: '수정',
-        content: <p>수정할까요?</p>,
-        callback: async () => {
-          const response = await savePostRemote(formData, true);
-          toastResponse(response);
-        },
-      });
-    }
+    addModal({
+      type: 'confirm',
+      title: '파일로 저장',
+      content: <p>파일로 저장할까요?</p>,
+      callback: () => {
+        addModal({
+          type: 'loading',
+          title: '파일로 저장 중...',
+          content: <></>,
+          callback: async () => {
+            const response = await savePostLocal(formData);
+            toastResponse(response);
+          },
+        });
+      },
+    });
+  };
+
+  const uploadHandler = async () => {
+    const formData = generateFormData();
+
+    addModal({
+      type: 'confirm',
+      title: '업로드',
+      content: <p>업로드할까요?</p>,
+      callback: () => {
+        addModal({
+          type: 'loading',
+          title: '업로드 중...',
+          content: <></>,
+          callback: async () => {
+            const response = await savePostRemote(formData, false);
+            toastResponse(response);
+          },
+        });
+      },
+    });
+  };
+
+  const editHandler = async () => {
+    const formData = generateFormData();
+
+    addModal({
+      type: 'confirm',
+      title: '수정',
+      content: <p>수정할까요?</p>,
+      callback: () => {
+        addModal({
+          type: 'loading',
+          title: '수정 중...',
+          content: <></>,
+          callback: async () => {
+            const response = await savePostRemote(formData, true);
+            toastResponse(response);
+          },
+        });
+      },
+    });
   };
 
   const resetHandler = () => {
@@ -122,20 +151,23 @@ const Menu = ({ isEdit }: MenuProps) => {
 
   return (
     <div className="flex flex-row justify-end gap-2 p-4">
-      {/* <ActiveButton
-        onPress={() => saveHandler('local')}
-        isDisabled={!isSavable}
-      >
-        파일로 저장
-      </ActiveButton> */}
       <SignOutButton />
       <ActiveButton onPress={resetHandler}>초기화</ActiveButton>
-      <ActiveButton
-        onPress={() => saveHandler('remote')}
-        isDisabled={!isSavable}
-      >
-        {isEdit ? '수정' : '업로드'}
-      </ActiveButton>
+      {process.env.NODE_ENV === 'development' && (
+        <ActiveButton onPress={saveLocalHandler} isDisabled={!isSavable}>
+          파일로 저장
+        </ActiveButton>
+      )}
+      {isEdit && (
+        <ActiveButton onPress={editHandler} isDisabled={!isSavable}>
+          수정
+        </ActiveButton>
+      )}
+      {!isEdit && (
+        <ActiveButton onPress={uploadHandler} isDisabled={!isSavable}>
+          업로드
+        </ActiveButton>
+      )}
     </div>
   );
 };

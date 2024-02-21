@@ -15,7 +15,7 @@ export const Frontmatter = z.object({
         .trim()
         .min(1, 'slug를 입력해주세요')
         .regex(SLUG_REGEX, 'slug는 소문자, 숫자, 하이픈만 사용할 수 있습니다'),
-      originalSlug: z.string(),
+      originalSlug: z.string().optional(),
       isEdit: z.boolean().optional(),
     })
     .refine((data) => {
