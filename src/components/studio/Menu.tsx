@@ -20,9 +20,10 @@ import { ActiveButton } from '../ui/buttons';
 
 interface MenuProps {
   isEdit?: boolean;
+  isPlayground?: boolean;
 }
 
-const Menu = ({ isEdit }: MenuProps) => {
+const Menu = ({ isEdit, isPlayground }: MenuProps) => {
   const { addModal } = useModal();
   const { resetEditor } = useEditorInitializer(undefined);
   const { source, slug, title, tags, description, date } = useEditorStore(
@@ -148,6 +149,14 @@ const Menu = ({ isEdit }: MenuProps) => {
 
     setIsSavable(validation.success);
   }, [slug, title, tags, description, date, files]);
+
+  if (isPlayground) {
+    return (
+      <div className="flex flex-row justify-end gap-2 p-4">
+        <ActiveButton onPress={resetHandler}>초기화</ActiveButton>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-row justify-end gap-2 p-4">

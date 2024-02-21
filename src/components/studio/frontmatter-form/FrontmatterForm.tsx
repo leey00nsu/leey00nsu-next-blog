@@ -5,7 +5,7 @@ import TagsInput from './TagsInput';
 import TitleInput from './TitleInput';
 
 interface FrontmatterFormProps {
-  isEdit: boolean;
+  isEdit?: boolean;
 }
 
 const FrontmatterForm = ({isEdit} : FrontmatterFormProps) => {
