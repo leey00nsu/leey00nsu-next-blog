@@ -34,7 +34,7 @@ const PostList = ({
   }
 
   return (
-    <main className="mx-auto flex min-h-[calc(100svh-var(--navbar-height)-var(--footer-height))] max-w-5xl flex-col justify-center gap-8 p-8">
+    <main className="mx-auto flex min-h-[calc(100svh-var(--navbar-height)-var(--footer-height))]  max-w-5xl flex-col justify-center gap-8 p-8">
       <PostTagsAccordion />
       {filteredPosts.length > 0 && (
         <p className="text-base font-semibold sm:text-2xl">
@@ -50,7 +50,7 @@ const PostList = ({
       )}
       {filteredPosts.length > 0 && (
         <>
-          <section className="grid grow grid-cols-1 gap-4 sm:grid-cols-2">
+          <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {paginatedPosts.map((post) => (
               <PostItem key={post.slug} {...post} />
             ))}

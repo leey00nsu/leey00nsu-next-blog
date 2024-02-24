@@ -19,7 +19,7 @@ const PostDetail = ({ post }: PostDetailProps) => {
   const { body, title, date, slug } = post;
 
   return (
-    <main className="mx-auto flex min-h-[calc(100svh-128px)] max-w-2xl flex-col gap-4 p-8 py-20">
+    <main className="mx-auto flex min-h-[calc(100svh-var(--navbar-height)-var(--footer-height))] max-w-2xl flex-col gap-4 p-8 py-20">
       <div className="flex w-full flex-col items-center">
         <PostTitle title={title} />
         <DateText date={date} />
