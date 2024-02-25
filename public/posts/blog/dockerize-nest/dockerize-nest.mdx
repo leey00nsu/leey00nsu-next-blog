@@ -1,0 +1,66 @@
+---
+slug: dockerize-nest
+title: NestJS 도커라이징 하기
+tags: 
+  - NestJS
+  - docker
+description: NestJS를 도커에 올리기위한 방법에 대해 설명합니다.
+date: 2024-02-25
+---
+## NestJS 도커라이징 하기
+
+기존에 만든 nest 프로젝트를 `도커`로 띄우기 위해 `도커 이미지`로 만들어야 합니다.
+
+우선 도커를 설치해야 하는데 리눅스 기반에서는 [도커 엔진](https://docs.docker.com/engine/)을 설치하면 도커가 포함되어 있습니다.
+
+만약 윈도우 또는 맥 환경이라면 `도커 데스크탑`을 설치하면 GUI 환경에서 손쉽게 도커를 다룰 수 있습니다.
+
+도커를 설치한 후 , 도커라이징할 프로젝트의 루트폴더에 가서 도커 설정 파일을 생성해줍니다.
+
+- `DockerFile` : 도커 이미지에 대한 설정파일
+- `.dockerignore` : 이미지에 제외할 파일 목록
+
+.dockerignore에는 git 관련 파일, 환경변수 파일, node_modules, Dockerfile 자체를 제외해줍니다.
+
+저는 다음과 같이 Dockerfile을 설정하였습니다.
+
+```docker title="DockerFile"
+FROM node:20-alpine
+RUN mkdir -p /var/app
+WORKDIR /var/app
+COPY . .
+RUN npm install
+RUN npm run build
+EXPOSE 3000
+CMD ["npm","start"]
+```
+
+과정을 간단하게 설명하자면 다음과 같습니다.
+
+1. node-20-alphine(최소화된 버전) 버전을 사용합니다.
+2. /var/app 이라는 폴더를 만든 후 , 그 안에 현재 루트폴더의 내용을 복사합니다.
+3. 그 후 npm install을 하여 명시된 디펜던시를 설치하고 빌드합니다.
+4. 도커 컨테이너가 사용할 포트를 3000으로 설정합니다.
+5. 서버를 실행합니다. 
+
+이제 도커 이미지를 빌드해봅시다.
+
+```bash title="도커 이미지 빌드"
+docker build -t (이미지명) .
+```
+
+빌드가 완료되었다면 다음 명령어로 현재 로컬에 저장된 도커 이미지를 확인할 수 있습니다.
+
+```bash title="도커 이미지 확인"
+docker images
+```
+
+이 도커 이미지를 컨테이너에 띄우기 위해서는 다음과 같이 실행하면 됩니다.
+
+(여기서는 호스트의 3000번 포트를 컨테이너의 3000번과 연결시켰습니다.)
+
+```bash title="도커 컨테이너 실행"
+docker run -p 3000:3000 도커이미지ID
+```
+
+다른 [다양한 명령어들](https://docs.docker.com/engine/reference/commandline/run/)이 존재하니 필요에 따라 적용하면 됩니다.
