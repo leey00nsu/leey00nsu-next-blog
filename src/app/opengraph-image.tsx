@@ -21,18 +21,9 @@ export default async function Image() {
           fontFamily: 'PretendardSemiBold',
         }}
       >
-        <p tw=" text-7xl ">&quot;</p>
-        <p
-          tw=" text-5xl max-w-[1000px] p-2"
-          style={{
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          leey00nsu Blog
+        <p tw=" text-5xl max-w-[1000px] p-2 text-[#086ab6] text-center">
+          leey00nsu
         </p>
-        <p tw=" text-7xl ">&quot;</p>
       </div>
     ),
     {
