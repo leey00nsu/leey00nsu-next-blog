@@ -4,6 +4,10 @@
   sm:prose-h3:text-xl sm:prose-p:text-lg sm:prose-li:text-lg;
 }
 
+.prose p {
+  @apply break-keep;
+}
+
 .prose pre {
   overflow-x: auto;
   padding: 1rem 0;
