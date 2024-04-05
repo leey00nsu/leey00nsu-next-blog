@@ -7,8 +7,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return {
       url: `${blogConfig.domain}/${doc.url}`,
       lastModified: doc.type === 'Post' ? new Date(doc.date) : new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
     };
   });
 
@@ -16,8 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: blogConfig.domain,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
     },
     ...sitemaps,
   ];
