@@ -1,6 +1,6 @@
 const blogConfig = {
   githubEmail: 'dbstndla1212@naver.com', // Oauth 인증 GitHub 이메일
-  domain: 'https://blog.leey00nsu.site', // 블로그 도메인
+  domain: 'https://blog.leey00nsu.com', // 블로그 도메인
   owner: 'leey00nsu', // GitHub 사용자 이름
   repo: 'leey00nsu-next-blog', // GitHub 레포지토리 이름
   branch: 'main', // 브랜치 이름

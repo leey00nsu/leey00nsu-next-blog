@@ -1,6 +1,6 @@
 <img width="1296" alt="blog banner" src="https://github.com/leey00nsu/blog.leey00nsu.site/assets/101182523/dd1dac65-4c52-452c-aae1-0c9ddd3d925a">
 
-# [leey00nsu 블로그](https://blog.leey00nsu.site/)
+# [leey00nsu 블로그](https://blog.leey00nsu.com/)
 
 > Next.js + Contentlayer 블로그
 
@@ -22,7 +22,7 @@
 
 ### ✍ 에디터
 
-- 블로그 템플릿을 적용한 에디터를 제공합니다. ([플레이그라운드](https://blog.leey00nsu.site/playground))
+- 블로그 템플릿을 적용한 에디터를 제공합니다. ([플레이그라운드](https://blog.leey00nsu.com/playground))
 - Github Oauth 인증을 통해 에디터 접근 권한을 제어합니다.
 - 자동으로 Github 레포지토리에 새로운 글을 저장합니다.
 
